@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd2e4cb07efde504b990b1b3957d22b9, type: 3}
+  m_Name: CbShelf_Data
+  m_EditorClassIdentifier: 
+  UIName: Shelf
+  Prefab: {fileID: 0}
+  InventoryIcon: {fileID: 0}
+  IsSelectable: 1
+  IsHangable: 1
+  IsPlaceable: 0
+  IsCustomisable: 0
+  IsFixed: 0
+  HasFocusSet: 0
+  AvailableInInventory: 1
+  MinimumSelectionHeight: 1
+  ParentObjects: []
