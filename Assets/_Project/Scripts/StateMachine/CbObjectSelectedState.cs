@@ -1,49 +1,82 @@
+using System;
+using System.Xml.Linq;
 using UnityEngine;
-using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectState>
 {
-    [SerializeField, ReadOnly, Tooltip("Rigidbody to update")]
-    private Rigidbody _cbObjectRb;
+    private CbObjectStateMachine _stateMachine;
 
-    [SerializeField, ReadOnly, Tooltip("Reference to the layer controller to allow us to update CbObject layers")]
-    private CbObjectLayerController _cbObjectLayerController;
-
-    [SerializeField, ReadOnly, Tooltip("Reference to the audio controller to allow us to trigger audio")]
-    private CbObjectAudioController _cbObjectAudioController;
-
-    public CbObjectSelectedState(CbObjectStateMachine.CbObjectState key, Rigidbody cbObjectRb, CbObjectLayerController layerController) : base(key)
+    public CbObjectSelectedState(CbObjectStateMachine.CbObjectState key, CbObjectStateMachine stateMachine) : base(key)
     {
-        _cbObjectRb = cbObjectRb;
-        _cbObjectLayerController = layerController;
+        _stateMachine = stateMachine;
     }
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
+        _stateMachine.OnPointerUpEvent += OnPointerUp;
+        Cursor.visible = false;
+
         // TODO: Set the bounds we're currently in
         //CurrentBounds = GameManager.GetObjectMovementBounds();
 
-        _cbObjectRb.useGravity = false;
-        _cbObjectRb.isKinematic = true;
-        _cbObjectRb.constraints = RigidbodyConstraints.None;
+        ConfigureRigidbody();
 
         // Set layer to Object for raycasting
-        _cbObjectLayerController.SetLayers(CbObjectLayerController.LayerState.CbObject);
+        _stateMachine.SetLayers(CbObjectLayerController.LayerState.CbObject);
 
+        // Switch on required components
+        _stateMachine.UpdateRotationComponent(isActive: true);
+        _stateMachine.UpdateMovementComponent(isActive: true);
+
+        _stateMachine.ResetRotation();
+
+        PlayStateChangeAudio(lastState);
+    }
+
+    private void OnPointerUp(PointerEventData data)
+    {
+        // if rotating, ignore this
+        if (_stateMachine.IsRotating()) return;
+        
+        // if over a snappoint, then attach
+        if (_stateMachine.GetActiveSnapPoint() != null)
+        {
+            _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Placed);
+            return;
+        }
+        
+        _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
+    }
+
+    private void PlayStateChangeAudio(CbObjectStateMachine.CbObjectState lastState)
+    {
         // If previous state was hanging, this has been detatched. Play an audio cue.
         if (lastState == CbObjectStateMachine.CbObjectState.Placed)
         {
-            _cbObjectAudioController.PlayOneShot("Detatch Audio (Placed -> Selected)");
+            _stateMachine.PlayOneShotAudio("Detatch Audio (Placed -> Selected)");
         }
 
         if (lastState == CbObjectStateMachine.CbObjectState.Free)
         {
-            _cbObjectAudioController.PlayOneShot("Select Audio (Free -> Selected)");
+            _stateMachine.PlayOneShotAudio("Select Audio (Free -> Selected)");
         }
+    }
+
+    private void ConfigureRigidbody()
+    {
+        Rigidbody rb = _stateMachine.CbObjectRigidBody;
+
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     public override void ExitState()
     {
+        _stateMachine.OnPointerUpEvent -= OnPointerUp;
+        Cursor.visible = true;
     }
 
     public override void UpdateState()

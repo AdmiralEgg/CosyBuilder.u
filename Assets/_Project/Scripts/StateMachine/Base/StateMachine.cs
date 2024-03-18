@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,8 +9,12 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
     protected BaseState<EState> LastState;
     protected BaseState<EState> QueuedState;
 
+    private Dictionary<EState, BaseState<EState>> _stateLookup = new Dictionary<EState, BaseState<EState>>();
+
     [SerializeField, ReadOnly]
     private string _currentState, _lastState, _queuedState;
+
+    public Action<EState> OnStateChange;
 
     private void Start()
     {
@@ -28,6 +33,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
             CurrentState.ExitState();
             CurrentState = QueuedState;
             CurrentState.EnterState(lastState: QueuedState.StateKey);
+            OnStateChange?.Invoke(CurrentState.StateKey);
         }
 
         _currentState = CurrentState.StateKey.ToString();
@@ -39,9 +45,20 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
         }
     }
 
-    public void QueueNextState(BaseState<EState> stateToQueue)
+    public void QueueNextState(EState stateToQueue)
     {
-        QueuedState = stateToQueue;
+        Debug.Log("Queue State: " + stateToQueue);
+        QueuedState = _stateLookup[stateToQueue];
+    }
+
+    public void AddStateToLookup(EState stateIdentifier, BaseState<EState> stateInstance)
+    {
+        _stateLookup.Add(stateIdentifier, stateInstance);
+    }
+
+    public BaseState<EState> LookupState(EState stateIdentifier)
+    {
+        return _stateLookup[stateIdentifier];
     }
 
     public void RevertToPreviousState()

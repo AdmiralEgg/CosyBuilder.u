@@ -28,6 +28,11 @@ public class CbObjectData : MonoBehaviour
         get { return _placedPosition; }
     }
 
+    public float MinSelectionHeight
+    {
+        get { return _minSelectionHeight; }
+    }
+
     private void Start()
     {
         // TODO: Fix this horror

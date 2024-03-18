@@ -160,11 +160,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cbObjectData: {fileID: 11400000, guid: 5a7dbaa1c62ab2040b66a2cf326822d6, type: 2}
   _nameInUI: 
-  _isSelectable: 0
-  _isHangable: 0
   _isPlaceable: 0
   _isCustomisable: 0
-  _isFixed: 0
+  _isFocusable: 0
+  _placedPosition: 0
   _minSelectionHeight: 0
 --- !u!114 &7783906082998034205
 MonoBehaviour:
@@ -209,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e720e7e732f20419d8ee2f973c164a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPlacableOnSnapPoint: 0
+  _isInsideSnapPointRadius: 0
 --- !u!114 &6321023531820525802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7d1b9db55427544994dbfada3eb22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outlineSize: 0.2
+  _outlineSizeFree: 2
+  _outlineSizeSelected: 3
+  _outlineSizePlaced: 3
+  _outlineColorFree: {r: 0, g: 0, b: 0, a: 0}
+  _outlineColorSelected: {r: 0, g: 0, b: 0, a: 0}
+  _outlineColorPlaced: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7517918875082950870
 MonoBehaviour:
   m_ObjectHideFlags: 0

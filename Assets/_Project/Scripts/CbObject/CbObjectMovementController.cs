@@ -1,80 +1,127 @@
+using MoreMountains.Tools;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CbObjectMovementController : MonoBehaviour, IPointerMoveHandler
+public class CbObjectMovementController : MonoBehaviour
 {
-    CbObjectStateMachine _stateMachine;
-    
-    private void Awake()
+    CbObjectData _objectData;
+
+    [SerializeField, MMReadOnly, Tooltip("This object can be placed on a SnapPoint")]
+    private bool _isPlacableOnSnapPoint = false;
+
+    [SerializeField, MMReadOnly]
+    private bool _isInsideFreeSnapPoint = false;
+
+    public bool IsInsideFreeSnapPoint
     {
-        _stateMachine = GetComponent<CbObjectStateMachine>();
+        get { return _isInsideFreeSnapPoint; }
     }
 
-    public void OnPointerMove(PointerEventData eventData)
+    [SerializeField, MMReadOnly]
+    private SnapPoint _activeSnapPoint;
+
+    public SnapPoint ActiveSnapPoint
     {
-        if (_stateMachine.GetCurrentState() != CbObjectStateMachine.CbObjectState.Selected) return;
-       
-        Debug.Log("Cursor has moved while the object is selected, follow the cursor!");
+        get { return _activeSnapPoint; }
+        set { _activeSnapPoint = value; }
+    }
+
+    private void Awake()
+    {
+        _objectData = GetComponent<CbObjectData>();
+        
+        if (_objectData.PlacedPosition == ObjectData.PlacedPosition.SnapPoint) 
+        {
+            _isPlacableOnSnapPoint = true;
+        }
     }
 
     private void Update()
     {
-        /*
-        // If selected, follow the cursor
-        RaycastHit hit = CursorData.GetRaycastHitExcludeObjects();
+        //CbObjectBoundsCheck();
 
-        // we've hit nothing, return
-        if (hit.collider == null) return;
-
-        bool canMove = false;
-        // Check we're within bounds.
-        // If the cursor is NOT hitting our bounds, don't move.
-        CursorData.GetRaycastBoundsHits().ForEach(hit =>
+        if (_isPlacableOnSnapPoint == true)
         {
-            if (hit.collider.gameObject == CurrentBounds)
-            {
-                canMove = true;
-            }
-        });
-
-        // If we've hit a wall, but the object isn't hangable, don't move
-        if (hit.collider.tag == "Wall" && _isHangable == false)
-        {
-            canMove = false;
+            SnapPointRadiusCheck();
+            RotateOnWallCollision();
         }
-
-        if (canMove == false)
+        
+        if (_isInsideFreeSnapPoint == false)
         {
-            //Debug.Log("Movement checks failed, object will not move.");
+            MoveObject();
+        }
+    }
+
+    /// <summary>
+    /// Checks whether the cursor is inside a SnapPoint collider, and the SnapPoint collider is not InUse.
+    /// If it is, snap the object to the SnapPoint position.
+    /// </summary>
+    private void SnapPointRadiusCheck()
+    {
+        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.WithinSnapPoint);
+
+        if (hit.collider == null)
+        {
+            _isInsideFreeSnapPoint = false;
+            _activeSnapPoint = null;
             return;
         }
 
-        // If touching a wall or snappoint (both have the 'wall' tag), rotate the hangable object
-        if (hit.collider.tag == "Wall" && _isHangable == true)
+        SnapPoint snapPoint = hit.collider.GetComponent<SnapPoint>();
+
+        if (snapPoint.InUse == true)
         {
-            this.transform.rotation = Quaternion.LookRotation(hit.collider.gameObject.transform.forward);
+            _isInsideFreeSnapPoint = false;
+            _activeSnapPoint = null;
+            return;
         }
 
-        // If inside a snap point, with an object that can hang
-        if (hit.collider.name == "SnapPoint" && _isHangable == true && hit.collider.GetComponent<SnapPoint>().InUse == false)
+        _activeSnapPoint = snapPoint;
+        this.transform.position = hit.collider.transform.position;
+        _isInsideFreeSnapPoint = true;
+    }
+
+    private void RotateOnWallCollision()
+    {
+        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+
+        if (hit.collider == null) return;
+        if (hit.collider.tag != "Wall") return;
+
+        // Hit a wall and object can be placed on a snappoint, so rotate object
+        this.transform.rotation = Quaternion.LookRotation(hit.collider.gameObject.transform.forward);
+    }
+
+    private void MoveObject()
+    {
+        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+
+        // We've hit nothing, don't move
+        if (hit.collider == null) return;
+
+        // TODO: Change this so it takes into account the position of the mesh and we don't have to define minselectionheight
+        // Follow the cursor, don't go below the min height
+        if (hit.point.y < _objectData.MinSelectionHeight)
         {
-            this.transform.position = hit.collider.transform.position;
+            this.transform.position = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
         }
         else
         {
-        
-            // TODO: Change this so it takes into account the position of the mesh and we don't have to define minselectionheight
-            // Follow the cursor, don't go below the min height
-            if (hit.point.y < _minSelectionHeight)
-            {
-                this.transform.position = new Vector3(hit.point.x, _minSelectionHeight, hit.point.z);
-            }
-            else
-            {
-                this.transform.position = hit.point;
-            }
+            this.transform.position = hit.point;
         }
-        */
     }
 
+    private static void CbObjectBoundsCheck()
+    {
+        //// Check we're within bounds.
+        //// If the cursor is NOT hitting our bounds, don't move.
+        //CursorData.GetRaycastBoundsHits().ForEach(hit =>
+        //{
+        //    if (hit.collider.gameObject == CurrentBounds)
+        //    {
+        //        canMove = true;
+        //    }
+        //});
+    }
 }

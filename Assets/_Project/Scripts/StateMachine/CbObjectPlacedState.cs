@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
 {
@@ -13,42 +15,70 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
     private CbObjectData _parentObject;
 
     [SerializeField, ReadOnly, Tooltip("If placed on a snappoint, a ref to the snappoint.")]
-    private GameObject _parentSnapPoint;
+    private SnapPoint _parentSnapPoint;
 
-    [Header("Object Configuration References")]
-    [SerializeField, ReadOnly, Tooltip("Rigidbody to update")]
-    private Rigidbody _cbObjectRb;
+    private CbObjectStateMachine _stateMachine;
 
-    [SerializeField, ReadOnly, Tooltip("Reference to the layer controller to allow us to update CbObject layers")]
-    private CbObjectLayerController _cbObjectLayerController;
-
-    public CbObjectPlacedState(CbObjectStateMachine.CbObjectState key, Rigidbody cbObjectRb, CbObjectLayerController layerController) : base(key)
+    public CbObjectPlacedState(CbObjectStateMachine.CbObjectState key, CbObjectStateMachine stateMachine) : base(key)
     {
-        _cbObjectRb = cbObjectRb;
-        _cbObjectLayerController = layerController;
+        _stateMachine = stateMachine;
     }
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
+        // Check if we're inside a snappoint, and link the snappoint and set the state
+        if (_placedPosition == PlacedPosition.Wall) 
+        {
+            _parentSnapPoint = _stateMachine.GetActiveSnapPoint();
+            _parentSnapPoint.InUse = true;
+        }
+
         // TODO: How do we determine where this has been placed?
         //_placedPosition = PlacedPosition.Floor;
-        
-        _cbObjectRb.useGravity = false;
-        _cbObjectRb.isKinematic = true;
-        _cbObjectRb.constraints =
+
+        _stateMachine.OnPointerDownEvent += OnPointerDown;
+        _stateMachine.OnScrollEvent += OnScroll;
+
+        Rigidbody rb = _stateMachine.CbObjectRigidBody;
+
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.constraints =
             RigidbodyConstraints.FreezePosition |
             RigidbodyConstraints.FreezeRotationX |
             RigidbodyConstraints.FreezeRotationY |
             RigidbodyConstraints.FreezeRotationZ;
 
-        _cbObjectLayerController.SetLayers(CbObjectLayerController.LayerState.CbObjectStatic);
+        _stateMachine.SetLayers(CbObjectLayerController.LayerState.CbObjectStatic);
+
+        // Switch on required components
+        _stateMachine.UpdateRotationComponent(isActive: false);
+        _stateMachine.UpdateMovementComponent(isActive: false);
     }
 
     public override void ExitState()
     {
+        if (_placedPosition == PlacedPosition.Wall)
+        {
+            _parentSnapPoint.InUse = false;
+            _parentSnapPoint = null;
+        }
+        
+        _stateMachine.OnPointerDownEvent -= OnPointerDown;
+        _stateMachine.OnScrollEvent -= OnScroll;
     }
 
     public override void UpdateState()
     {
+    }
+
+    private void OnPointerDown(PointerEventData data)
+    {
+        Debug.Log("Clicked while in placed state. If held for long enough, detatch.");
+    }
+
+    private void OnScroll(PointerEventData data)
+    {
+        Debug.Log("Scrolling while in placed state - check Focusable");
     }
 }

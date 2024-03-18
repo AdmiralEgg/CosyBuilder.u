@@ -1,30 +1,37 @@
+using System;
 using UnityEngine;
-using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
 
 public class CbObjectFreeState : BaseState<CbObjectStateMachine.CbObjectState>
 {
-    [SerializeField, ReadOnly, Tooltip("Rigidbody to update")]
-    private Rigidbody _cbObjectRb;
+    [Tooltip("Access to the state machine")]
+    private CbObjectStateMachine _stateMachine;
 
-    [SerializeField, ReadOnly, Tooltip("Reference to the layer controller to allow us to update CbObject layers")]
-    private CbObjectLayerController _cbObjectLayerController;
-
-    public CbObjectFreeState(CbObjectStateMachine.CbObjectState key, Rigidbody rb, CbObjectLayerController layerController) : base(key)
+    public CbObjectFreeState(CbObjectStateMachine.CbObjectState key, CbObjectStateMachine stateMachine) : base(key)
     {
-        _cbObjectRb = rb;
-        _cbObjectLayerController = layerController;
+        _stateMachine = stateMachine;
     }
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
         //CurrentBounds = GameManager.GetObjectMovementBounds();
+        _stateMachine.OnPointerUpEvent += OnPointerUp;
 
-        _cbObjectRb.useGravity = true;
-        _cbObjectRb.isKinematic = false;
-        _cbObjectRb.constraints = RigidbodyConstraints.None;
+        Rigidbody rb = _stateMachine.CbObjectRigidBody;
 
-        _cbObjectLayerController.SetLayers(CbObjectLayerController.LayerState.CbObject);
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.None;
+
+        _stateMachine.SetLayers(CbObjectLayerController.LayerState.CbObject);
+
+        _stateMachine.UpdateRotationComponent(isActive: false);
+        _stateMachine.UpdateMovementComponent(isActive: false);
+    }
+
+    private void OnPointerUp(PointerEventData data)
+    {
+        _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Selected);
     }
 
     public override void ExitState()

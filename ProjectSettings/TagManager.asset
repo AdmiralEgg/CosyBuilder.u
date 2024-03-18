@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Roof
+  - Door
+  - Floor
+  - Window
+  - Pillar
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -13,11 +19,11 @@ TagManager:
   - UI
   - CbObject
   - CbObjectStatic
-  - 
-  - 
-  - 
-  - 
-  - 
+  - CbObjectBounds
+  - CbObjectSpawnPlane
+  - Interactable
+  - SnapPoint
+  - StaticScene
   - 
   - 
   - 

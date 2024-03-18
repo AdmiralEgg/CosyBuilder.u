@@ -22,46 +22,46 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         _outline.enabled = false;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void OnEnable()
     {
-        Debug.Log($"Enter - check state and highlight appropriately. State is: {_stateMachine.GetCurrentState()}");
-
-        switch (_stateMachine.GetCurrentState())
-        {
-            case CbObjectStateMachine.CbObjectState.Free:
-                SetOutlineStateFree();
-                break;
-            case CbObjectStateMachine.CbObjectState.Selected:
-                SetOutlineStateSelected();
-                break;
-            case CbObjectStateMachine.CbObjectState.Placed:
-                SetOutlineStatePlaced();
-                break;
-        }
-
-        _outline.enabled = true;
+        _stateMachine.OnStateChange += UpdateOutlineState;
     }
 
+    private void OnDisable()
+    {
+        _stateMachine.OnStateChange -= UpdateOutlineState;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UpdateOutlineState(_stateMachine.GetCurrentState());
+        _outline.enabled = true;
+    }
     public void OnPointerExit(PointerEventData eventData)
     {
+        // If we're in the selected state, don't turn off the outline
+        if (_stateMachine.GetCurrentState() == CbObjectStateMachine.CbObjectState.Selected) return;
+        
         _outline.enabled = false;
     }
 
-    private void SetOutlineStateFree()
+    private void UpdateOutlineState(CbObjectStateMachine.CbObjectState newState)
     {
-        _outline.OutlineWidth = _outlineSizeFree;
-        _outline.OutlineColor = _outlineColorFree;
+        switch (newState)
+        {
+            case CbObjectStateMachine.CbObjectState.Free:
+                _outline.OutlineWidth = _outlineSizeFree;
+                _outline.OutlineColor = _outlineColorFree;
+                break;
+            case CbObjectStateMachine.CbObjectState.Selected:
+                _outline.OutlineWidth = _outlineSizeSelected;
+                _outline.OutlineColor = _outlineColorSelected;
+                break;
+            case CbObjectStateMachine.CbObjectState.Placed:
+                _outline.OutlineWidth = _outlineSizePlaced;
+                _outline.OutlineColor = _outlineColorPlaced;
+                break;
+        }
     }
 
-    private void SetOutlineStateSelected()
-    {
-        _outline.OutlineWidth = _outlineSizeSelected;
-        _outline.OutlineColor = _outlineColorSelected;
-    }
-
-    private void SetOutlineStatePlaced()
-    {
-        _outline.OutlineWidth = _outlineSizePlaced;
-        _outline.OutlineColor = _outlineColorPlaced;
-    }
 }
