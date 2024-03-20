@@ -8,7 +8,7 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     float _outlineSizeFree = 2f, _outlineSizeSelected = 3f, _outlineSizePlaced = 3f;
 
     [SerializeField]
-    Color _outlineColorFree, _outlineColorSelected, _outlineColorPlaced, _outlineColorDetatchReady;
+    Color _outlineColorFree, _outlineColorSelected, _outlineColorPlaced, _outlineColorDetatchStarted, _outlineColorDetatchCompleted;
 
     Outline _outline;
     CbObjectStateMachine _stateMachine;
@@ -28,13 +28,15 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     private void OnEnable()
     {
         _stateMachine.OnStateChange += UpdateOutlineState;
-        _placedSubStateMachine.OnDetatchCompleted += SetDetatchOutline;
+        _placedSubStateMachine.OnSetDetatchStartedOutline += SetDetatchStartedOutline;
+        _placedSubStateMachine.OnSetDetatchCompletedOutline += SetDetatchCompletedOutline;
     }
 
     private void OnDisable()
     {
         _stateMachine.OnStateChange -= UpdateOutlineState;
-        _placedSubStateMachine.OnDetatchCompleted -= SetDetatchOutline;
+        _placedSubStateMachine.OnSetDetatchStartedOutline -= SetDetatchStartedOutline;
+        _placedSubStateMachine.OnSetDetatchCompletedOutline -= SetDetatchCompletedOutline;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -68,11 +70,16 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
                 break;
         }
     }
-
-    private void SetDetatchOutline()
+    private void SetDetatchStartedOutline()
     {
         _outline.OutlineWidth = _outlineSizeFree;
-        _outline.OutlineColor = _outlineColorDetatchReady;
+        _outline.OutlineColor = _outlineColorDetatchStarted;
+    }
+
+    private void SetDetatchCompletedOutline()
+    {
+        _outline.OutlineWidth = _outlineSizeFree;
+        _outline.OutlineColor = _outlineColorDetatchCompleted;
     }
 
     public void HideOutline(bool setHidden)

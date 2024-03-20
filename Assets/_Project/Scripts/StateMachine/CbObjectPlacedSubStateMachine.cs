@@ -22,7 +22,7 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     private CbObjectPlacedDetatchingSubState _detatchingSubState;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
-    public Action OnDetatchCompleted;
+    public Action OnSetDetatchStartedOutline, OnSetDetatchCompletedOutline;
 
     private void Awake()
     {
@@ -61,8 +61,13 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
         _parentStateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Selected);
     }
 
-    public void ReadyToDetatch()
+    public void SetDetatchStartedOutline()
     {
-        OnDetatchCompleted?.Invoke();
+        OnSetDetatchStartedOutline?.Invoke();
+    }
+
+    public void SetDetatchCompletedOutline()
+    {
+        OnSetDetatchCompletedOutline?.Invoke();
     }
 }

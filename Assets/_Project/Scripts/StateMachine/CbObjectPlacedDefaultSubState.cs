@@ -63,6 +63,7 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
             time += Time.deltaTime;
         }
 
+        _subStateMachine.SetDetatchStartedOutline();
         _subStateMachine.QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Detatching);
     }
 

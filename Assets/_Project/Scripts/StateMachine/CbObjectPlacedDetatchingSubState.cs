@@ -75,7 +75,7 @@ public class CbObjectPlacedDetatchingSubState : BaseState<CbObjectPlacedSubState
             time += Time.deltaTime;
         }
 
-        _subStateMachine.ReadyToDetatch();
+        _subStateMachine.SetDetatchCompletedOutline();
         _readyToDetatch = true;
     }
 
