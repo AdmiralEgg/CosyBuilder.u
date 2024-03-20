@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +8,12 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
 {
     [SerializeField]
     private CbObjectState _initialState;
-    
+
+    [SerializeField, Tooltip("Time for a hold to register.")]
+    private float _detatchHoldTime = 1f;
+
+    private Coroutine _detatchHoldCounter;
+
     public enum CbObjectState { Free, Selected, Placed }
 
     private CbObjectFreeState _cbObjectFreeState;
@@ -28,6 +34,7 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     private CbObjectData _cbObjectData;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
+    public Action OnDetatch;
 
     private void Awake()
     {
@@ -53,6 +60,24 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     public void OnPointerDown(PointerEventData eventData)
     {
         OnPointerDownEvent?.Invoke(eventData);
+        _detatchHoldCounter = StartCoroutine(DetatchHoldCounter());
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        OnPointerUpEvent?.Invoke(eventData);
+        StopCoroutine(_detatchHoldCounter);
+    }
+
+    public IEnumerator DetatchHoldCounter()
+    {  
+        // small wait
+        yield return new WaitForSeconds(0.2f);
+
+        // then camera zooms slightly
+        // then start animating
+
+        yield return new WaitForSeconds(_detatchHoldTime);
+        OnDetatch?.Invoke();
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -70,10 +95,6 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
         _cbObjectLayerController.SetLayers(newLayer);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        OnPointerUpEvent?.Invoke(eventData);
-    }
 
     public void PlayOneShotAudio(string audio)
     {

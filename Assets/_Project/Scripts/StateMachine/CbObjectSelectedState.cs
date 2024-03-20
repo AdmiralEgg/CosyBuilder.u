@@ -17,7 +17,7 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
     {
         PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed += OnDropOrPlace;
 
-        //Cursor.visible = false;
+        Cursor.visible = false;
 
         // TODO: Set the bounds we're currently in
         //CurrentBounds = GameManager.GetObjectMovementBounds();
@@ -77,7 +77,7 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
     public override void ExitState()
     {
         PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed -= OnDropOrPlace;
-        //Cursor.visible = true;
+        Cursor.visible = true;
     }
 
     public override void UpdateState()

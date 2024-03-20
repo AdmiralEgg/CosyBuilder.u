@@ -36,6 +36,7 @@ public class CbObjectFreeState : BaseState<CbObjectStateMachine.CbObjectState>
 
     public override void ExitState()
     {
+        _stateMachine.OnPointerUpEvent -= OnPointerUp;
     }
 
     public override void UpdateState()

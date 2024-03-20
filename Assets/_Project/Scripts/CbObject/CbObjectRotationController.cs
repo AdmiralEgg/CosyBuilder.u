@@ -57,6 +57,8 @@ public class CbObjectRotationController : MonoBehaviour
     private void OnEnable()
     {
         PlayerInput.GetPlayerByIndex(0).actions["QuickRotateObject"].performed += OnQuickRotate;
+
+        // TODO: Move back to IScrollHander (or a custom version of this) if possible. See note on 19/03.
         PlayerInput.GetPlayerByIndex(0).actions["RotateObject"].performed += OnRotate;
     }
 

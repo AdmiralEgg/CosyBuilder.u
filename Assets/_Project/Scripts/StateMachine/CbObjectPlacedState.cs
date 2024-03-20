@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,8 +13,8 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
     [SerializeField, ReadOnly, Tooltip("If placed on an object, a ref to the parent object.")]
     private CbObjectData _parentObject;
 
-    [SerializeField, ReadOnly, Tooltip("If placed on a snappoint, a ref to the snappoint.")]
-    private SnapPoint _parentSnapPoint;
+    [SerializeReference, ReadOnly]
+    private bool _detatchOnPointerUp = false;
 
     private CbObjectStateMachine _stateMachine;
 
@@ -29,14 +28,14 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
         // Check if we're inside a snappoint, and link the snappoint and set the state
         if (_placedPosition == PlacedPosition.Wall) 
         {
-            _parentSnapPoint = _stateMachine.GetActiveSnapPoint();
-            _parentSnapPoint.InUse = true;
+            _stateMachine.GetActiveSnapPoint().InUse = true;
         }
 
         // TODO: How do we determine where this has been placed?
         //_placedPosition = PlacedPosition.Floor;
 
-        _stateMachine.OnPointerDownEvent += OnPointerDown;
+        _stateMachine.OnPointerUpEvent += OnPointerUp;
+        _stateMachine.OnDetatch += OnDetatch;
         _stateMachine.OnScrollEvent += OnScroll;
 
         Rigidbody rb = _stateMachine.CbObjectRigidBody;
@@ -60,11 +59,13 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
     {
         if (_placedPosition == PlacedPosition.Wall)
         {
-            _parentSnapPoint.InUse = false;
-            _parentSnapPoint = null;
+            _stateMachine.GetActiveSnapPoint().InUse = false;
         }
-        
-        _stateMachine.OnPointerDownEvent -= OnPointerDown;
+
+        _detatchOnPointerUp = false;
+
+        _stateMachine.OnDetatch -= OnDetatch;
+        _stateMachine.OnPointerUpEvent -= OnPointerUp;
         _stateMachine.OnScrollEvent -= OnScroll;
     }
 
@@ -72,13 +73,30 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
     {
     }
 
-    private void OnPointerDown(PointerEventData data)
+    private void OnDetatch()
     {
-        Debug.Log("Clicked while in placed state. If held for long enough, detatch.");
+        // how do we play an animation while detatching? 
+        _stateMachine.PlayOneShotAudio("Ready to detatch");
+        _detatchOnPointerUp = true;
+    }
+
+    private void OnPointerUp(PointerEventData data)
+    {
+        Debug.Log("If we're about to detatch, play a sound and queue selected state");
+        
+        if (_detatchOnPointerUp)
+        {
+            _stateMachine.PlayOneShotAudio("Detatching on next frame");
+            _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Selected);
+        }
     }
 
     private void OnScroll(PointerEventData data)
     {
         Debug.Log("Scrolling while in placed state - check Focusable");
+
+        // check object is focusable
+
+        // start zooming the camera, if a zoom threshold hits then switch to the VCam
     }
 }
