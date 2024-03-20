@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 1142113484764427676}
   - component: {fileID: 2024062253969382736}
   - component: {fileID: 7783906082998034205}
+  - component: {fileID: 7986559922460006389}
   - component: {fileID: 2365739767916148635}
   - component: {fileID: 5357792115507384844}
   - component: {fileID: 6321023531820525802}
@@ -739,6 +740,23 @@ MonoBehaviour:
   _lastState: 
   _queuedState: 
   _initialState: 0
+--- !u!114 &7986559922460006389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8621155214587277750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a85738e469f8924cb81bc368bdab8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentState: 
+  _lastState: 
+  _queuedState: 
+  _detatchHoldTime: 1
+  _initialPlacedSubState: 0
 --- !u!114 &2365739767916148635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,7 +784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e720e7e732f20419d8ee2f973c164a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPlacableOnSnapPoint: 0
   _isInsideFreeSnapPoint: 0
   _activeSnapPoint: {fileID: 0}
 --- !u!114 &6321023531820525802
@@ -781,11 +798,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a81cc77a0f63242bb79f5a95e2ab6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxRotationAsPercentageOfScreenWidth: 0.2
-  _maxRotationAsPercentageOfScreenHeight: 0.2
-  _baseRotationSpeed: 0
-  _isRotating: 0
   _rotationIndicator: {fileID: 3157293613292005047}
+  _currentRotationDebug: {x: 0, y: 0, z: 0, w: 0}
+  _isRotating: 0
+  _targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  _rotationSpeedMultiplyer: 8
+  _activeSnapRotationType: 0
+  _targetSnapRotation: {x: 0, y: 0, z: 0, w: 0}
+  _snapRotationDuration: 0.75
+  _quickRotationDuration: 0.2
 --- !u!114 &3410720724832602390
 MonoBehaviour:
   m_ObjectHideFlags: 0

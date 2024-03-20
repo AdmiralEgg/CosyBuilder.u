@@ -4,15 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectState>, IPointerDownHandler, IPointerUpHandler, IScrollHandler
+public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectState>, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     private CbObjectState _initialState;
-
-    [SerializeField, Tooltip("Time for a hold to register.")]
-    private float _detatchHoldTime = 1f;
-
-    private Coroutine _detatchHoldCounter;
 
     public enum CbObjectState { Free, Selected, Placed }
 
@@ -31,10 +26,10 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     private CbObjectRotationController _cbObjectRotationController;
     private CbObjectMovementController _cbObjectMovementController;
     private CbObjectAudioController _cbObjectAudioController;
+    private CbObjectPlacedSubStateMachine _cbObjectPlacedSubStateMachine;
     private CbObjectData _cbObjectData;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
-    public Action OnDetatch;
 
     private void Awake()
     {
@@ -44,10 +39,13 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
         _cbObjectRotationController = GetComponent<CbObjectRotationController>();
         _cbObjectMovementController = GetComponent<CbObjectMovementController>();
         _cbObjectAudioController = GetComponent<CbObjectAudioController>();
+        _cbObjectPlacedSubStateMachine = GetComponent<CbObjectPlacedSubStateMachine>();
+
+        _cbObjectPlacedSubStateMachine.enabled = false;
 
         _cbObjectFreeState = new CbObjectFreeState(CbObjectState.Free, this);
         _cbObjectSelectedState = new CbObjectSelectedState(CbObjectState.Selected, this);
-        _cbObjectPlacedState = new CbObjectPlacedState(CbObjectState.Placed, this);
+        _cbObjectPlacedState = new CbObjectPlacedState(CbObjectState.Placed, this, _cbObjectPlacedSubStateMachine);
 
         AddStateToLookup(CbObjectState.Free, _cbObjectFreeState);
         AddStateToLookup(CbObjectState.Selected, _cbObjectSelectedState);
@@ -60,24 +58,11 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     public void OnPointerDown(PointerEventData eventData)
     {
         OnPointerDownEvent?.Invoke(eventData);
-        _detatchHoldCounter = StartCoroutine(DetatchHoldCounter());
     }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         OnPointerUpEvent?.Invoke(eventData);
-        StopCoroutine(_detatchHoldCounter);
-    }
-
-    public IEnumerator DetatchHoldCounter()
-    {  
-        // small wait
-        yield return new WaitForSeconds(0.2f);
-
-        // then camera zooms slightly
-        // then start animating
-
-        yield return new WaitForSeconds(_detatchHoldTime);
-        OnDetatch?.Invoke();
     }
 
     public void OnScroll(PointerEventData eventData)
@@ -94,7 +79,6 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     {
         _cbObjectLayerController.SetLayers(newLayer);
     }
-
 
     public void PlayOneShotAudio(string audio)
     {

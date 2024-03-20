@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class CbObjectRotationController : MonoBehaviour
 {
+    public enum SnapRotationType { None, Quick, Reset, Wall }
+    
     [SerializeField]
     private GameObject _rotationIndicator;
 
@@ -31,12 +33,15 @@ public class CbObjectRotationController : MonoBehaviour
 
     [Header("Cb controlled rotation")]
     [SerializeField, ReadOnly]
-    private bool _isSnapRotating = false;
+    private SnapRotationType _activeSnapRotationType = SnapRotationType.None;
 
     public bool IsSnapRotating
     {
-        get { return _isSnapRotating; }
-        set { _isSnapRotating = value; }
+        get 
+        {
+            if (_activeSnapRotationType == SnapRotationType.None) return false;
+            return true;
+        }
     }
 
     [SerializeField, ReadOnly]
@@ -47,7 +52,8 @@ public class CbObjectRotationController : MonoBehaviour
     [SerializeField]
     private float _quickRotationDuration = 0.2f;
 
-    CbObjectAudioController _audioController;
+    private CbObjectAudioController _audioController;
+    private Coroutine _snapRotateCoroutine;
 
     private void Awake()
     {
@@ -84,7 +90,7 @@ public class CbObjectRotationController : MonoBehaviour
             rotationAmount = Mathf.RoundToInt(transform.eulerAngles.y) + 90;
         }
 
-        SnapRotation(Quaternion.AngleAxis(rotationAmount, Vector3.up), _quickRotationDuration);
+        SnapRotation(Quaternion.AngleAxis(rotationAmount, Vector3.up), _quickRotationDuration, SnapRotationType.Quick);
 
         _audioController.PlayOneShot("play a sound to indicate a quick rotation");
     }
@@ -159,35 +165,30 @@ public class CbObjectRotationController : MonoBehaviour
         Debug.Log("Resetting rotation");
         //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-        SnapRotation(Quaternion.Euler(0, transform.eulerAngles.y, 0), _snapRotationDuration);
+        SnapRotation(Quaternion.Euler(0, transform.eulerAngles.y, 0), _snapRotationDuration, SnapRotationType.Reset);
     }
 
     /// <summary>
     /// Quick rotation on reset or snap to wall. Ignores all other rotation requests.
     /// </summary>
-    public void SnapRotation(Quaternion targetRotation, float rotationDuration)
+    public void SnapRotation(Quaternion targetRotation, float rotationDuration, SnapRotationType rotationType)
     {
         if (IsSnapRotating == true) return;
         if (transform.rotation == targetRotation) return;
 
-        Debug.Log("Target rotation" + targetRotation);
-
         // Cancel active rotation
         IsRotating = false;
         _targetRotation = transform.rotation;
+        _activeSnapRotationType = rotationType;
 
-        IsSnapRotating = true;
         _audioController.PlayOneShot("play a sound to indicate a CB controlled fast rotation");
-        StartCoroutine(RunSnapRotate(targetRotation, rotationDuration));
+        _snapRotateCoroutine = StartCoroutine(RunSnapRotate(targetRotation, rotationDuration));
     }
 
     public IEnumerator RunSnapRotate(Quaternion targetRotation, float rotationDuration)
     {
-        Debug.Log("Snap rotating");
-
         float timeElapsed = 0;
 
-        //transform.rotation = targetRotation;
         while (timeElapsed < rotationDuration)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timeElapsed / rotationDuration);
@@ -196,7 +197,7 @@ public class CbObjectRotationController : MonoBehaviour
         }
         
         transform.rotation = targetRotation;
-        IsSnapRotating = false;
+        _activeSnapRotationType = SnapRotationType.None;
     }
 
     private void RotateOnWallCollision()
@@ -206,6 +207,13 @@ public class CbObjectRotationController : MonoBehaviour
         if (hit.collider == null) return;
         if (hit.collider.tag != "Wall") return;
 
-        SnapRotation(Quaternion.LookRotation(hit.collider.gameObject.transform.forward), _snapRotationDuration);
+        // stop any snapping in progress and prioritise the wall snap
+        if (_activeSnapRotationType == SnapRotationType.Reset)
+        {
+            StopCoroutine(_snapRotateCoroutine);
+            _activeSnapRotationType = SnapRotationType.None;
+        }
+
+        SnapRotation(Quaternion.LookRotation(hit.collider.gameObject.transform.forward), _snapRotationDuration, SnapRotationType.Wall);
     }
 }
