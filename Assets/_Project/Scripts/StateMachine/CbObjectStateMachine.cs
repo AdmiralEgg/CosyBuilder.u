@@ -102,7 +102,7 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
 
     public void ResetRotation()
     {
-        _cbObjectRotationController.ResetRotation();
+        _cbObjectRotationController.ResetToDefaultRotation();
     }
 
     public bool IsRotating()

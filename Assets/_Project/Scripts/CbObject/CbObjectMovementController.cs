@@ -6,9 +6,7 @@ using UnityEngine.EventSystems;
 public class CbObjectMovementController : MonoBehaviour
 {
     CbObjectData _objectData;
-
-    [SerializeField, MMReadOnly, Tooltip("This object can be placed on a SnapPoint")]
-    private bool _isPlacableOnSnapPoint = false;
+    CbObjectRotationController _objectRotationController;
 
     [SerializeField, MMReadOnly]
     private bool _isInsideFreeSnapPoint = false;
@@ -30,21 +28,18 @@ public class CbObjectMovementController : MonoBehaviour
     private void Awake()
     {
         _objectData = GetComponent<CbObjectData>();
-        
-        if (_objectData.PlacedPosition == ObjectData.PlacedPosition.SnapPoint) 
-        {
-            _isPlacableOnSnapPoint = true;
-        }
+        _objectRotationController = GetComponent<CbObjectRotationController>();
     }
 
     private void Update()
     {
         //CbObjectBoundsCheck();
 
-        if (_isPlacableOnSnapPoint == true)
+        // Rotation Check?
+
+        if (_objectData.PlacedPosition == ObjectData.PlacedPosition.SnapPoint)
         {
             SnapPointRadiusCheck();
-            RotateOnWallCollision();
         }
         
         if (_isInsideFreeSnapPoint == false)
@@ -80,17 +75,6 @@ public class CbObjectMovementController : MonoBehaviour
         _activeSnapPoint = snapPoint;
         this.transform.position = hit.collider.transform.position;
         _isInsideFreeSnapPoint = true;
-    }
-
-    private void RotateOnWallCollision()
-    {
-        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
-
-        if (hit.collider == null) return;
-        if (hit.collider.tag != "Wall") return;
-
-        // Hit a wall and object can be placed on a snappoint, so rotate object
-        this.transform.rotation = Quaternion.LookRotation(hit.collider.gameObject.transform.forward);
     }
 
     private void MoveObject()

@@ -9,6 +9,6 @@ public class CbObjectAudioController : MonoBehaviour
 
     public void PlayOneShot(string soundName)
     {
-        Debug.Log($"Trigger sound {soundName} to play (not implemented).");
+        //Debug.Log($"Trigger sound {soundName} to play (not implemented).");
     }
 }

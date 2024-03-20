@@ -15,8 +15,9 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
-        _stateMachine.OnPointerUpEvent += OnPointerUp;
-        Cursor.visible = false;
+        PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed += OnDropOrPlace;
+
+        //Cursor.visible = false;
 
         // TODO: Set the bounds we're currently in
         //CurrentBounds = GameManager.GetObjectMovementBounds();
@@ -35,14 +36,14 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
         PlayStateChangeAudio(lastState);
     }
 
-    private void OnPointerUp(PointerEventData data)
+    private void OnDropOrPlace(InputAction.CallbackContext data)
     {
-        // if rotating, ignore this
-        if (_stateMachine.IsRotating()) return;
+        Debug.Log("Drop or place...");
         
         // if over a snappoint, then attach
         if (_stateMachine.GetActiveSnapPoint() != null)
         {
+            Debug.Log("Switch to Placed state");
             _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Placed);
             return;
         }
@@ -75,8 +76,8 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
 
     public override void ExitState()
     {
-        _stateMachine.OnPointerUpEvent -= OnPointerUp;
-        Cursor.visible = true;
+        PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed -= OnDropOrPlace;
+        //Cursor.visible = true;
     }
 
     public override void UpdateState()

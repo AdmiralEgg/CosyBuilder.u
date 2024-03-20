@@ -64,4 +64,13 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         }
     }
 
+    public void HideOutline(bool setHidden)
+    {
+        if (setHidden)
+        {
+            _outline.OutlineWidth = 0;
+        }
+        
+        _outline.enabled = true;
+    }
 }

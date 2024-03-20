@@ -15,12 +15,10 @@ MonoBehaviour:
   UIName: Shelf
   Prefab: {fileID: 0}
   InventoryIcon: {fileID: 0}
-  IsSelectable: 1
-  IsHangable: 1
-  IsPlaceable: 0
+  IsPlaceable: 1
+  PlacablePosition: 0
   IsCustomisable: 0
-  IsFixed: 0
   HasFocusSet: 0
   AvailableInInventory: 1
-  MinimumSelectionHeight: 1
+  MinimumSelectionHeight: 2.5
   ParentObjects: []
