@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
 {
@@ -27,19 +26,19 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
-        // Check if we're inside a snappoint, and link the snappoint and set the state
-        if (_placedPosition == PlacedPosition.Wall) 
-        {
-            _stateMachine.GetActiveSnapPoint().InUse = true;
-        }
-
-        _subStateMachine.enabled = true;
-
-        _stateMachine.SetLayers(CbObjectLayerController.LayerState.CbObjectStatic);
-
         // Switch on required components
         _stateMachine.UpdateRotationComponent(isActive: false);
         _stateMachine.UpdateMovementComponent(isActive: false);
+
+        _subStateMachine.enabled = true;
+
+        // Check if we're inside a snappoint, and link the snappoint and set the state
+        if (_placedPosition == PlacedPosition.Wall)
+        {
+            _stateMachine.AffixObjectToSnapPoint(true);
+        }
+
+        _stateMachine.SetLayers(CbObjectLayerController.LayerState.CbObjectStatic);
     }
 
     public override void ExitState()

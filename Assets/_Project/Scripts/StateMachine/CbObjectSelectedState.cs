@@ -44,6 +44,7 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
         if (_stateMachine.GetActiveSnapPoint() != null)
         {
             Debug.Log("Switch to Placed state");
+            
             _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Placed);
             return;
         }

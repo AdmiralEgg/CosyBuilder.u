@@ -336,6 +336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inUse: 0
   _snapRadius: 0.4
+  _indicatorColor: {r: 1, g: 1, b: 1, a: 0.4}
+  _snapIndicatorRadius: 0.1
 --- !u!4 &313565660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1142113484764427676, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
@@ -1182,8 +1184,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 0.8}
-  m_Center: {x: -1.5, y: 1.5, z: -0.099999994}
+  m_Size: {x: 3, y: 3, z: 0.5084677}
+  m_Center: {x: -1.5, y: 1.5, z: -0.24576616}
 --- !u!1 &1210001461
 GameObject:
   m_ObjectHideFlags: 0

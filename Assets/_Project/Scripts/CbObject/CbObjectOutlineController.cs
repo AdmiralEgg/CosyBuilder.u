@@ -27,14 +27,14 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
     private void OnEnable()
     {
-        _stateMachine.OnStateChange += UpdateOutlineState;
+        CbObjectStateMachine.OnStateChange += UpdateOutlineState;
         _placedSubStateMachine.OnSetDetatchStartedOutline += SetDetatchStartedOutline;
         _placedSubStateMachine.OnSetDetatchCompletedOutline += SetDetatchCompletedOutline;
     }
 
     private void OnDisable()
     {
-        _stateMachine.OnStateChange -= UpdateOutlineState;
+        CbObjectStateMachine.OnStateChange -= UpdateOutlineState;
         _placedSubStateMachine.OnSetDetatchStartedOutline -= SetDetatchStartedOutline;
         _placedSubStateMachine.OnSetDetatchCompletedOutline -= SetDetatchCompletedOutline;
     }

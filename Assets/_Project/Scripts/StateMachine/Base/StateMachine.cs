@@ -14,7 +14,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
     [SerializeField, ReadOnly]
     private string _currentState, _lastState, _queuedState;
 
-    public Action<EState> OnStateChange;
+    public static Action<EState> OnStateChange;
 
     private bool _queuedStateThisFrame;
 

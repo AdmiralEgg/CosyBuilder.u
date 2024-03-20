@@ -100,9 +100,15 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
         return _cbObjectMovementController.ActiveSnapPoint;
     }
 
-    public void SetSnapPointInUseFlag(bool inUse)
+    public void AffixObjectToSnapPoint(bool affix)
     {
-        _cbObjectMovementController.ActiveSnapPoint.InUse = inUse;
+        if (affix == true)
+        {
+            Debug.Log("moving object to snappoint position");
+            this.transform.position = GetActiveSnapPoint().transform.position;
+        }
+        
+        _cbObjectMovementController.ActiveSnapPoint.InUse = affix;
     }
 
     public void ResetRotation()

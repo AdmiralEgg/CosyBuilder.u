@@ -1,6 +1,9 @@
+using Shapes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SnapPoint : MonoBehaviour
@@ -17,6 +20,16 @@ public class SnapPoint : MonoBehaviour
         set { _inUse = value; }
     }
 
+    [Header("Snap Radius Config")]
+    [SerializeField]
+    private Color _indicatorColor;
+
+    [SerializeField]
+    private float _snapIndicatorRadius;
+
+    private Sphere _snapPointIndicator;
+
+
     void Awake()
     {
         _inUse = false;
@@ -24,6 +37,27 @@ public class SnapPoint : MonoBehaviour
         // Create a sphere collider
         var sphereCollider = this.gameObject.AddComponent<SphereCollider>();
         sphereCollider.radius = _snapRadius;
+
+        _snapPointIndicator = this.gameObject.AddComponent<Sphere>();
+        _snapPointIndicator.Radius = _snapIndicatorRadius;
+        _snapPointIndicator.Color = _indicatorColor;
+        _snapPointIndicator.enabled = false;
+
+
+        // subscribe to CbObject state changes
+        CbObjectStateMachine.OnStateChange += Foo;
+    }
+
+    private void Foo(CbObjectStateMachine.CbObjectState state)
+    {
+        if (state == CbObjectStateMachine.CbObjectState.Selected)
+        {
+            ShowSnapPoint(true);
+        }
+        else
+        {
+            ShowSnapPoint(false);
+        }
     }
 
     private void OnDrawGizmos()
@@ -38,8 +72,10 @@ public class SnapPoint : MonoBehaviour
         Gizmos.DrawRay(r);
     }
 
-    public Vector3 GetSnapDirection()
+    // Light that gets brighter as the cursor approaches
+
+    private void ShowSnapPoint(bool show)
     {
-        return this.transform.parent.transform.forward;
+        _snapPointIndicator.enabled = show;
     }
 }
