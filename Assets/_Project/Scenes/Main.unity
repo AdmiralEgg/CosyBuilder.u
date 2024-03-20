@@ -1837,6 +1837,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3410720724832602390, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: _outlineColorDetatchReady.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410720724832602390, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: _outlineColorDetatchReady.b
+      value: 0.08593297
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410720724832602390, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: _outlineColorDetatchReady.g
+      value: 0.6320754
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410720724832602390, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: _outlineColorDetatchReady.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7986559922460006389, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
       propertyPath: <DetatchHoldStartTime>k__BackingField
       value: 0.2

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,15 +8,17 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     float _outlineSizeFree = 2f, _outlineSizeSelected = 3f, _outlineSizePlaced = 3f;
 
     [SerializeField]
-    Color _outlineColorFree, _outlineColorSelected, _outlineColorPlaced;
+    Color _outlineColorFree, _outlineColorSelected, _outlineColorPlaced, _outlineColorDetatchReady;
 
     Outline _outline;
     CbObjectStateMachine _stateMachine;
+    CbObjectPlacedSubStateMachine _placedSubStateMachine;
 
     private void Awake()
     {
         _stateMachine = GetComponent<CbObjectStateMachine>();
-        
+        _placedSubStateMachine = GetComponent<CbObjectPlacedSubStateMachine>();
+
         // Add an outline component
         _outline = gameObject.AddComponent<Outline>();
         _outline.OutlineMode = Outline.Mode.OutlineAll;
@@ -25,11 +28,13 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     private void OnEnable()
     {
         _stateMachine.OnStateChange += UpdateOutlineState;
+        _placedSubStateMachine.OnDetatchCompleted += SetDetatchOutline;
     }
 
     private void OnDisable()
     {
         _stateMachine.OnStateChange -= UpdateOutlineState;
+        _placedSubStateMachine.OnDetatchCompleted -= SetDetatchOutline;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -62,6 +67,12 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
                 _outline.OutlineColor = _outlineColorPlaced;
                 break;
         }
+    }
+
+    private void SetDetatchOutline()
+    {
+        _outline.OutlineWidth = _outlineSizeFree;
+        _outline.OutlineColor = _outlineColorDetatchReady;
     }
 
     public void HideOutline(bool setHidden)

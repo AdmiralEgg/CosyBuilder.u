@@ -47,13 +47,14 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         _ctSource = new CancellationTokenSource();
         CancellationToken ct = _ctSource.Token;
         
-        await WaitForHold(ct, _subStateMachine.DetatchHoldStartTime);
+        await WaitForDetatchStart(ct, _subStateMachine.DetatchHoldStartTime);
     }
 
-    private async Task WaitForHold(CancellationToken token, float waitTime)
+    private async Task WaitForDetatchStart(CancellationToken token, float waitTime)
     {
         float time = 0;
 
+        // TODO: Focus camera on object, and slow zoom
         while (time < waitTime)
         {
             if (token.IsCancellationRequested == true) return;

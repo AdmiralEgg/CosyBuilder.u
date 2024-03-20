@@ -42,7 +42,7 @@ public class CbObjectPlacedDetatchingSubState : BaseState<CbObjectPlacedSubState
         _ctSource = new CancellationTokenSource();
         CancellationToken ct = _ctSource.Token;
 
-        await WaitForHold(ct, _subStateMachine.DetatchHoldAnimationTime);
+        await WaitForDetatchReady(ct, _subStateMachine.DetatchHoldAnimationTime);
     }
 
     private void StopDetaching(PointerEventData data)
@@ -59,11 +59,9 @@ public class CbObjectPlacedDetatchingSubState : BaseState<CbObjectPlacedSubState
         _subStateMachine.RevertToPreviousState();
     }
 
-    private async Task WaitForHold(CancellationToken token, float waitTime)
+    private async Task WaitForDetatchReady(CancellationToken token, float waitTime)
     {
         float time = 0;
-
-        // zoom in camera?
 
         while (time < waitTime)
         {
@@ -77,6 +75,7 @@ public class CbObjectPlacedDetatchingSubState : BaseState<CbObjectPlacedSubState
             time += Time.deltaTime;
         }
 
+        _subStateMachine.ReadyToDetatch();
         _readyToDetatch = true;
     }
 
