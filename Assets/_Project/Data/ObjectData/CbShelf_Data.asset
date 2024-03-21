@@ -15,8 +15,7 @@ MonoBehaviour:
   UIName: Shelf
   Prefab: {fileID: 0}
   InventoryIcon: {fileID: 0}
-  IsPlaceable: 1
-  PlacablePosition: 0
+  PlacablePosition: 1
   IsCustomisable: 0
   HasFocusSet: 0
   AvailableInInventory: 1

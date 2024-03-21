@@ -16,14 +16,12 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     private CbObjectPlacedState _cbObjectPlacedState;
 
     private CbObjectData _cbObjectData;
-
     public CbObjectData CbObjectData
     {
         get { return _cbObjectData; }
     }
 
     private Rigidbody _cbObjectRigidBody;
-
     public Rigidbody CbObjectRigidBody
     {
         get { return _cbObjectRigidBody; }

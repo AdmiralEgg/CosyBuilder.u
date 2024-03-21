@@ -66,6 +66,9 @@ public class CbObjectRotationController : MonoBehaviour
 
         // TODO: Move back to IScrollHander (or a custom version of this) if possible. See note on 19/03.
         PlayerInput.GetPlayerByIndex(0).actions["RotateObject"].performed += OnRotate;
+
+        // reset rotation
+        _targetRotation = transform.rotation;
     }
 
     private void OnDisable()
