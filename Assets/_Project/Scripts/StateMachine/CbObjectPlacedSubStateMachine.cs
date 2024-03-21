@@ -2,16 +2,29 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubStateMachine.CbObjectPlacedSubState>, IPointerDownHandler, IPointerUpHandler, IScrollHandler
+public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubStateMachine.CbObjectPlacedSubState>, IPointerDownHandler, IPointerUpHandler, IScrollHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public enum CbObjectPlacedSubState { Default, Detatching }
 
     [field: SerializeField, Range(0.2f, 0.5f), Tooltip("Time for a hold to register.")]
-    public float DetatchHoldStartTime { get; private set; }
+    private float _detatchHoldStartTime = 0.2f;
+
+    public float DetatchHoldStartTime
+    {   
+        get { return _detatchHoldStartTime; }
+        private set { _detatchHoldStartTime = value; } 
+    }
 
     [field: SerializeField, Range(0.5f, 1f), Tooltip("Time for detatch animation to complete.")]
-    public float DetatchHoldAnimationTime { get; private set; }
+    private float _detatchHoldAnimationTime = 0.5f;
+
+    public float DetatchHoldAnimationTime 
+    {
+        get { return _detatchHoldAnimationTime; }
+        private set { _detatchHoldAnimationTime = value; }
+    }
 
     [SerializeField]
     private CbObjectPlacedSubState _initialPlacedSubState;
@@ -22,7 +35,7 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     private CbObjectPlacedDetatchingSubState _detatchingSubState;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
-    public Action OnSetDetatchStartedOutline, OnSetDetatchCompletedOutline;
+    public Action OnSetDetatchStartedOutlineEvent, OnSetDetatchCompletedOutlineEvent, OnPointerEnterEvent, OnPointerExitEvent;
 
     private void Awake()
     {
@@ -63,11 +76,22 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
 
     public void SetDetatchStartedOutline()
     {
-        OnSetDetatchStartedOutline?.Invoke();
+        OnSetDetatchStartedOutlineEvent?.Invoke();
     }
 
     public void SetDetatchCompletedOutline()
     {
-        OnSetDetatchCompletedOutline?.Invoke();
+        OnSetDetatchCompletedOutlineEvent?.Invoke();
+    }
+
+    // Subscribe the UI element to this
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        OnPointerEnterEvent?.Invoke();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        OnPointerExitEvent?.Invoke();
     }
 }

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMachine.CbObjectPlacedSubState>
 {
@@ -12,6 +13,8 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
     private Rigidbody _cbObjectRb;
 
     private CancellationTokenSource _ctSource;
+
+    private bool _isPointerHovering;
 
     public CbObjectPlacedDefaultSubState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState key, CbObjectPlacedSubStateMachine stateMachine, Rigidbody cbObjectRb) : base(key)
     {
@@ -21,6 +24,10 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
 
     public override void EnterState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState lastState)
     {
+        _isPointerHovering = false;
+
+        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed += SwitchToFocusView;
+
         _cbObjectRb.useGravity = false;
         _cbObjectRb.isKinematic = true;
 
@@ -34,6 +41,26 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         _subStateMachine.OnScrollEvent += OnScroll;
         _subStateMachine.OnPointerDownEvent += OnPointerDown;
         _subStateMachine.OnPointerUpEvent += OnPointerUp;
+        _subStateMachine.OnPointerEnterEvent += OnPointerEnter;
+        _subStateMachine.OnPointerExitEvent += OnPointerExit;
+    }
+
+    private void SwitchToFocusView(InputAction.CallbackContext context)
+    {
+        if (_isPointerHovering)
+        {
+            UnityEngine.Debug.Log("Immediate switch to Focus view");
+        }
+    }
+
+    private void OnPointerEnter()
+    {
+        _isPointerHovering = true;
+    }
+
+    private void OnPointerExit()
+    {
+        _isPointerHovering = false;
     }
 
     private void OnPointerUp(PointerEventData data)
@@ -73,6 +100,8 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         _subStateMachine.OnScrollEvent -= OnScroll;
         _subStateMachine.OnPointerDownEvent -= OnPointerDown;
         _subStateMachine.OnPointerUpEvent -= OnPointerUp;
+        _subStateMachine.OnPointerEnterEvent -= OnPointerEnter;
+        _subStateMachine.OnPointerExitEvent -= OnPointerExit;
     }
 
     public override void UpdateState() { }

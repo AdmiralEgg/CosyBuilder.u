@@ -6,16 +6,36 @@ public class CbObjectData : MonoBehaviour
     [SerializeField, Required]
     private ObjectData _cbObjectData;
 
-    // TODO: Add getters and setters to make these available if required
     [Header("Scriptable Object Data")]
     [SerializeField, ReadOnly]
-    private string _nameInUI;
+    private string _nameInUI = "Default";
+
+    public string NameInUI
+    {
+        get { return _nameInUI; }
+        private set { _nameInUI = value; }
+    }
+
     [SerializeField, ReadOnly]
-    private bool _isPlaceable, _isCustomisable, _isFocusable;
+    private ObjectData.PlacedPosition _placedPosition = ObjectData.PlacedPosition.SnapPoint;
+
+    public ObjectData.PlacedPosition PlacedPosition
+    {
+        get { return _placedPosition; }
+        private set { _placedPosition = value; }
+    }
+
     [SerializeField, ReadOnly]
-    private ObjectData.PlacedPosition _placedPosition;
+    private bool _isCustomisable = false;
+
+    public bool IsCustomisable
+    {
+        get { return _isCustomisable; }
+        private set { _isCustomisable = value; }
+    }
+
     [SerializeField, ReadOnly]
-    private float _minSelectionHeight;
+    private bool _isFocusable = false;
 
     public bool IsFocusable
     {
@@ -23,29 +43,24 @@ public class CbObjectData : MonoBehaviour
         private set { _isFocusable = value; }
     }
 
-    public ObjectData.PlacedPosition PlacedPosition
-    { 
-        get { return _placedPosition; }
-    }
+    [SerializeField, ReadOnly]
+    private float _minSelectionHeight = 0.5f;
 
     public float MinSelectionHeight
     {
         get { return _minSelectionHeight; }
+        private set { _minSelectionHeight = value; }
     }
 
     private void Start()
     {
-        // TODO: Fix this horror
         if (_cbObjectData != null)
         {
-            _nameInUI = _cbObjectData.UIName;
-            _isPlaceable = _cbObjectData.IsPlaceable;
-            _placedPosition = _cbObjectData.PlacablePosition;
-            _isCustomisable = _cbObjectData.IsCustomisable;
-            _minSelectionHeight = _cbObjectData.MinimumSelectionHeight;
+            NameInUI = _cbObjectData.UIName;
+            PlacedPosition = _cbObjectData.PlacablePosition;
+            IsCustomisable = _cbObjectData.IsCustomisable;
+            MinSelectionHeight = _cbObjectData.MinimumSelectionHeight;
+            IsFocusable = _cbObjectData.HasFocusSet;
         }
-
-        // TODO: Check for Focus Cameras. For now, set to True.
-        IsFocusable = true;
     }
 }

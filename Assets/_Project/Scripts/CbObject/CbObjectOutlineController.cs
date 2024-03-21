@@ -5,10 +5,18 @@ using UnityEngine.EventSystems;
 public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
-    float _outlineSizeFree = 2f, _outlineSizeSelected = 3f, _outlineSizePlaced = 3f;
+    float _outlineSizeFree = 3f, _outlineSizeSelected = 4f, _outlineSizePlaced = 6f;
 
     [SerializeField]
-    Color _outlineColorFree, _outlineColorSelected, _outlineColorPlaced, _outlineColorDetatchStarted, _outlineColorDetatchCompleted;
+    Color _outlineColorFree = new Color(0.7f, 0.7f, 0.7f, 0.5f);
+    [SerializeField]
+    Color _outlineColorSelected = new Color(1f, 1f, 1f, 0.8f);
+    [SerializeField]
+    Color _outlineColorPlaced = new Color(0.73f, 0f, 0f, 0.7f);
+    [SerializeField]
+    Color _outlineColorDetatchStarted = new Color(0.9f, 0.33f, 0f, 0.5f);
+    [SerializeField]
+    Color _outlineColorDetatchCompleted = new Color(0.1f, 0.66f, 0f, 0.5f);
 
     Outline _outline;
     CbObjectStateMachine _stateMachine;
@@ -28,15 +36,15 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     private void OnEnable()
     {
         CbObjectStateMachine.OnStateChange += UpdateOutlineState;
-        _placedSubStateMachine.OnSetDetatchStartedOutline += SetDetatchStartedOutline;
-        _placedSubStateMachine.OnSetDetatchCompletedOutline += SetDetatchCompletedOutline;
+        _placedSubStateMachine.OnSetDetatchStartedOutlineEvent += SetDetatchStartedOutline;
+        _placedSubStateMachine.OnSetDetatchCompletedOutlineEvent += SetDetatchCompletedOutline;
     }
 
     private void OnDisable()
     {
         CbObjectStateMachine.OnStateChange -= UpdateOutlineState;
-        _placedSubStateMachine.OnSetDetatchStartedOutline -= SetDetatchStartedOutline;
-        _placedSubStateMachine.OnSetDetatchCompletedOutline -= SetDetatchCompletedOutline;
+        _placedSubStateMachine.OnSetDetatchStartedOutlineEvent -= SetDetatchStartedOutline;
+        _placedSubStateMachine.OnSetDetatchCompletedOutlineEvent -= SetDetatchCompletedOutline;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

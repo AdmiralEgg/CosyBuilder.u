@@ -29,7 +29,7 @@ public class CbObjectRotationController : MonoBehaviour
     private Quaternion _targetRotation;
 
     [SerializeField]
-    private float _rotationSpeedMultiplyer = 1.2f;
+    private float _rotationSpeedMultiplyer = 8f;
 
     [Header("Cb controlled rotation")]
     [SerializeField, ReadOnly]
@@ -48,7 +48,7 @@ public class CbObjectRotationController : MonoBehaviour
     private Quaternion _targetSnapRotation;
 
     [SerializeField]
-    private float _snapRotationDuration = 1.5f;
+    private float _snapRotationDuration = 0.75f;
     [SerializeField]
     private float _quickRotationDuration = 0.2f;
 
