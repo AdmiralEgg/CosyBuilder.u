@@ -45,10 +45,10 @@ public class SnapPoint : MonoBehaviour
 
 
         // subscribe to CbObject state changes
-        CbObjectStateMachine.OnStateChange += Foo;
+        CbObjectStateMachine.OnStateChange += OnCbObjectStateChange;
     }
 
-    private void Foo(CbObjectStateMachine.CbObjectState state)
+    private void OnCbObjectStateChange(CbObjectStateMachine.CbObjectState state)
     {
         if (state == CbObjectStateMachine.CbObjectState.Selected)
         {

@@ -16,6 +16,7 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
         PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed += OnDropOrPlace;
+        TempSelectedStateManager.SetSelectedObject(_stateMachine.CbObjectData);
 
         Cursor.visible = false;
 
@@ -77,6 +78,7 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
 
     public override void ExitState()
     {
+        TempSelectedStateManager.SetSelectedObject(null);
         PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed -= OnDropOrPlace;
         Cursor.visible = true;
     }

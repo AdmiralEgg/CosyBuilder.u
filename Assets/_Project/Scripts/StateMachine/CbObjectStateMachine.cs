@@ -15,6 +15,13 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     private CbObjectSelectedState _cbObjectSelectedState;
     private CbObjectPlacedState _cbObjectPlacedState;
 
+    private CbObjectData _cbObjectData;
+
+    public CbObjectData CbObjectData
+    {
+        get { return _cbObjectData; }
+    }
+
     private Rigidbody _cbObjectRigidBody;
 
     public Rigidbody CbObjectRigidBody
@@ -27,7 +34,7 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     private CbObjectMovementController _cbObjectMovementController;
     private CbObjectAudioController _cbObjectAudioController;
     private CbObjectPlacedSubStateMachine _cbObjectPlacedSubStateMachine;
-    private CbObjectData _cbObjectData;
+    private CbObjectOutlineController _cbObjectOutlineController;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
 
@@ -40,6 +47,7 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
         _cbObjectMovementController = GetComponent<CbObjectMovementController>();
         _cbObjectAudioController = GetComponent<CbObjectAudioController>();
         _cbObjectPlacedSubStateMachine = GetComponent<CbObjectPlacedSubStateMachine>();
+        _cbObjectOutlineController = GetComponent<CbObjectOutlineController>();
 
         _cbObjectPlacedSubStateMachine.enabled = false;
 

@@ -22,6 +22,9 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     CbObjectStateMachine _stateMachine;
     CbObjectPlacedSubStateMachine _placedSubStateMachine;
 
+    [SerializeField]
+    private CbObjectStateMachine.CbObjectState _lastKnownState;
+
     private void Awake()
     {
         _stateMachine = GetComponent<CbObjectStateMachine>();
@@ -35,21 +38,21 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
     private void OnEnable()
     {
-        CbObjectStateMachine.OnStateChange += UpdateOutlineState;
         _placedSubStateMachine.OnSetDetatchStartedOutlineEvent += SetDetatchStartedOutline;
         _placedSubStateMachine.OnSetDetatchCompletedOutlineEvent += SetDetatchCompletedOutline;
     }
 
     private void OnDisable()
     {
-        CbObjectStateMachine.OnStateChange -= UpdateOutlineState;
         _placedSubStateMachine.OnSetDetatchStartedOutlineEvent -= SetDetatchStartedOutline;
         _placedSubStateMachine.OnSetDetatchCompletedOutlineEvent -= SetDetatchCompletedOutline;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UpdateOutlineState(_stateMachine.GetCurrentState());
+        // TODO: Check whether a CbObject is already selected!
+        if (TempSelectedStateManager.IsObjectSelected() == true) return;
+
         _outline.enabled = true;
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -60,24 +63,39 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         _outline.enabled = false;
     }
 
-    private void UpdateOutlineState(CbObjectStateMachine.CbObjectState newState)
+    private void UpdateOutlineState()
     {
-        switch (newState)
+        // check the state of the CbObject. Swap outline if state has changed
+        CbObjectStateMachine.CbObjectState currentState = _stateMachine.GetCurrentState();
+
+        if (_lastKnownState == currentState) return;
+
+        switch (currentState)
         {
             case CbObjectStateMachine.CbObjectState.Free:
                 _outline.OutlineWidth = _outlineSizeFree;
                 _outline.OutlineColor = _outlineColorFree;
+                _outline.enabled = false;
                 break;
             case CbObjectStateMachine.CbObjectState.Selected:
                 _outline.OutlineWidth = _outlineSizeSelected;
                 _outline.OutlineColor = _outlineColorSelected;
+                _outline.enabled = true;
                 break;
             case CbObjectStateMachine.CbObjectState.Placed:
                 _outline.OutlineWidth = _outlineSizePlaced;
                 _outline.OutlineColor = _outlineColorPlaced;
                 break;
         }
+
+        _lastKnownState = currentState;
     }
+
+    private void LateUpdate()
+    {
+        UpdateOutlineState();
+    }
+
     private void SetDetatchStartedOutline()
     {
         _outline.OutlineWidth = _outlineSizeFree;

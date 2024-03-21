@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cbBook_Mat
-  m_Shader: {fileID: -6465566751694194690, guid: dab9ff9ddf8990a499338769948d131f, type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: dab9ff9ddf8990a499338769948d131f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 70d8b46c68d9ea24084ca4fa0a7eaad9, type: 3}
+  m_Parent: {fileID: -876546973899608171, guid: 70d8b46c68d9ea24084ca4fa0a7eaad9, type: 3}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
