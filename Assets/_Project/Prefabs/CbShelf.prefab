@@ -454,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3353466722991221795}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05879868, y: 0.9340962, z: -0.18229501, w: 0.3012898}
+  m_LocalRotation: {x: 0.05034388, y: 0.9440378, z: -0.17141151, w: 0.27726564}
   m_LocalPosition: {x: -1.8, y: 1.25, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -935,7 +935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8157770757940567500}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.04557519, y: 0.9495645, z: -0.1645409, w: -0.26301414}
+  m_LocalRotation: {x: -0.05034388, y: 0.9440378, z: -0.17141151, w: -0.27726564}
   m_LocalPosition: {x: 1.8, y: 1.25, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -992,6 +992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1142113484764427676}
   - component: {fileID: 2024062253969382736}
+  - component: {fileID: 3179575321190829594}
   - component: {fileID: 7783906082998034205}
   - component: {fileID: 7986559922460006389}
   - component: {fileID: 2365739767916148635}
@@ -1041,11 +1042,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cbObjectData: {fileID: 11400000, guid: 5a7dbaa1c62ab2040b66a2cf326822d6, type: 2}
   _nameInUI: 
-  _isPlaceable: 0
-  _isCustomisable: 0
-  _isFocusable: 0
   _placedPosition: 0
+  _isCustomisable: 0
   _minSelectionHeight: 0
+  _isFocusable: 0
+  _focusCameraType: 0
+--- !u!114 &3179575321190829594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8621155214587277750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c95de33aafbfde4399033d9c9beb59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _focusCameraList: []
+  _focusCameraDictionaryWithParentGameObjects:
+    _serializedList: []
 --- !u!114 &7783906082998034205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,8 +1093,8 @@ MonoBehaviour:
   _currentState: 
   _lastState: 
   _queuedState: 
-  <DetatchHoldStartTime>k__BackingField: 0
-  <DetatchHoldAnimationTime>k__BackingField: 0
+  _detatchHoldStartTime: 0.2
+  _detatchHoldAnimationTime: 0.5
   _initialPlacedSubState: 0
 --- !u!114 &2365739767916148635
 MonoBehaviour:
@@ -1150,6 +1166,7 @@ MonoBehaviour:
   _outlineColorPlaced: {r: 0.7264151, g: 0, b: 0, a: 0.69803923}
   _outlineColorDetatchStarted: {r: 0, g: 0, b: 0, a: 0}
   _outlineColorDetatchCompleted: {r: 0, g: 0, b: 0, a: 0}
+  _lastKnownState: 0
 --- !u!114 &7517918875082950870
 MonoBehaviour:
   m_ObjectHideFlags: 0

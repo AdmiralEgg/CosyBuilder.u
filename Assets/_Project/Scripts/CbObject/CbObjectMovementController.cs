@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class CbObjectMovementController : MonoBehaviour
 {
     CbObjectData _objectData;
-    CbObjectRotationController _objectRotationController;
 
     [SerializeField, MMReadOnly]
     private bool _isInsideFreeSnapPoint = false;
@@ -28,15 +27,11 @@ public class CbObjectMovementController : MonoBehaviour
     private void Awake()
     {
         _objectData = GetComponent<CbObjectData>();
-        _objectRotationController = GetComponent<CbObjectRotationController>();
     }
 
     private void Update()
     {
         //CbObjectBoundsCheck();
-
-        // Rotation Check?
-
         if (_objectData.PlacedPosition == ObjectData.PlacedPosition.SnapPoint)
         {
             SnapPointRadiusCheck();
@@ -74,9 +69,9 @@ public class CbObjectMovementController : MonoBehaviour
 
         _activeSnapPoint = snapPoint;
 
-        // TODO: We want a hover over the snappoint before placing down
         this.transform.position = hit.collider.transform.position;
 
+        // TODO: We want a hover over the snappoint before placing down
         //this.transform.position = new Vector3
         //(
         //    hit.collider.transform.position.x,
@@ -95,7 +90,6 @@ public class CbObjectMovementController : MonoBehaviour
         if (hit.collider == null) return;
 
         // TODO: Change this so it takes into account the position of the mesh and we don't have to define minselectionheight
-
         // Follow the cursor, don't go below the min height
         if (hit.point.y < _objectData.MinSelectionHeight)
         {

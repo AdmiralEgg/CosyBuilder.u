@@ -1,5 +1,9 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Cinemachine;
+using Sirenix.Utilities;
+using System.Collections.Generic;
+using static DictionarySerialization;
 
 public class CbObjectData : MonoBehaviour
 {
@@ -35,15 +39,6 @@ public class CbObjectData : MonoBehaviour
     }
 
     [SerializeField, ReadOnly]
-    private bool _isFocusable = false;
-
-    public bool IsFocusable
-    {
-        get { return _isFocusable; }
-        private set { _isFocusable = value; }
-    }
-
-    [SerializeField, ReadOnly]
     private float _minSelectionHeight = 0.5f;
 
     public float MinSelectionHeight
@@ -52,15 +47,37 @@ public class CbObjectData : MonoBehaviour
         private set { _minSelectionHeight = value; }
     }
 
-    private void Start()
+    [Header("Focus Data")]
+    [SerializeField, ReadOnly]
+    private bool _isFocusable = false;
+
+    public bool IsFocusable
     {
-        if (_cbObjectData != null)
-        {
-            NameInUI = _cbObjectData.UIName;
-            PlacedPosition = _cbObjectData.PlacablePosition;
-            IsCustomisable = _cbObjectData.IsCustomisable;
-            MinSelectionHeight = _cbObjectData.MinimumSelectionHeight;
-            IsFocusable = _cbObjectData.HasFocusSet;
-        }
+        get { return _isFocusable; }
+        set { _isFocusable = value; }
+    }
+
+    [SerializeField, ReadOnly]
+    private ObjectData.FocusCameraType _focusCameraType;
+    public ObjectData.FocusCameraType FocusCameraType
+    {
+        get { return _focusCameraType; }
+        private set { _focusCameraType = value; }
+    }
+
+    private void Awake()
+    {
+        InitializeObjectData();
+    }
+
+    private void InitializeObjectData()
+    {
+        if (_cbObjectData == null) return;
+
+        NameInUI = _cbObjectData.UIName;
+        PlacedPosition = _cbObjectData.PlacablePosition;
+        IsCustomisable = _cbObjectData.IsCustomisable;
+        MinSelectionHeight = _cbObjectData.MinimumSelectionHeight;
+        FocusCameraType = _cbObjectData.FocusType;
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   InventoryIcon: {fileID: 0}
   PlacablePosition: 1
   IsCustomisable: 0
-  HasFocusSet: 0
+  FocusType: 1
   AvailableInInventory: 1
   MinimumSelectionHeight: 0.5
   ParentObjects: []

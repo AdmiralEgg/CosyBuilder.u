@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubStateMachine.CbObjectPlacedSubState>, IPointerDownHandler, IPointerUpHandler, IScrollHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public enum CbObjectPlacedSubState { Default, Detatching }
+    public enum CbObjectPlacedSubState { Default, Detatching, Focused }
 
     [field: SerializeField, Range(0.2f, 0.5f), Tooltip("Time for a hold to register.")]
     private float _detatchHoldStartTime = 0.2f;
@@ -33,6 +33,7 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
 
     private CbObjectPlacedDefaultSubState _defaultSubState;
     private CbObjectPlacedDetatchingSubState _detatchingSubState;
+    private CbObjectPlacedFocusedSubState _focusedSubState;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
     public Action OnSetDetatchStartedOutlineEvent, OnSetDetatchCompletedOutlineEvent, OnPointerEnterEvent, OnPointerExitEvent;
@@ -45,16 +46,24 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
         // create substates
         _defaultSubState = new CbObjectPlacedDefaultSubState(CbObjectPlacedSubState.Default, this, _cbObjectRigidBody);
         _detatchingSubState = new CbObjectPlacedDetatchingSubState(CbObjectPlacedSubState.Detatching, this, _cbObjectRigidBody);
+        _focusedSubState = new CbObjectPlacedFocusedSubState(CbObjectPlacedSubState.Focused, this, _cbObjectRigidBody);
 
         AddStateToLookup(CbObjectPlacedSubState.Default, _defaultSubState);
         AddStateToLookup(CbObjectPlacedSubState.Detatching, _detatchingSubState);
+        AddStateToLookup(CbObjectPlacedSubState.Focused, _focusedSubState);
 
         CurrentState = LookupState(_initialPlacedSubState);
         QueuedState = LookupState(_initialPlacedSubState);
     }
 
+    public CbObjectData GetObjectData()
+    {
+        return _parentStateMachine.CbObjectData;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
+        // TODO: This event will be sent to all state machines?!
         OnPointerDownEvent?.Invoke(eventData);
     }
 

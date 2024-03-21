@@ -26,8 +26,6 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
     {
         _isPointerHovering = false;
 
-        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed += SwitchToFocusView;
-
         _cbObjectRb.useGravity = false;
         _cbObjectRb.isKinematic = true;
 
@@ -37,6 +35,8 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
             RigidbodyConstraints.FreezeRotationX |
             RigidbodyConstraints.FreezeRotationY |
             RigidbodyConstraints.FreezeRotationZ;
+        
+        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed += SwitchToFocusView;
 
         _subStateMachine.OnScrollEvent += OnScroll;
         _subStateMachine.OnPointerDownEvent += OnPointerDown;
@@ -50,6 +50,7 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         if (_isPointerHovering)
         {
             UnityEngine.Debug.Log("Immediate switch to Focus view");
+            _subStateMachine.QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused);
         }
     }
 
@@ -96,7 +97,7 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
 
     public override void ExitState() 
     {
-        _ctSource.Dispose();
+        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed -= SwitchToFocusView;
         _subStateMachine.OnScrollEvent -= OnScroll;
         _subStateMachine.OnPointerDownEvent -= OnPointerDown;
         _subStateMachine.OnPointerUpEvent -= OnPointerUp;
@@ -108,9 +109,15 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
 
     private void OnScroll(PointerEventData data)
     {
-        UnityEngine.Debug.Log("Scrolling while in placed state - check Focusable");
+        // Check scroll up
+        if (data.scrollDelta.y <= 0) return;
 
         // check object is focusable
+        if (_subStateMachine.GetObjectData().IsFocusable == false) return;
+
+        UnityEngine.Debug.Log("Focus!");
+
         // start zooming the camera, if a zoom threshold hits then switch to the VCam
+        _subStateMachine.QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused);
     }
 }

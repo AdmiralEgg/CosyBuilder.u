@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectData : ScriptableObject
 {
     public enum PlacedPosition { None, SnapPoint, Floor }
+    public enum FocusCameraType { None, Default, Set, Orbital }
     
     [Required, Tooltip("Name of the object as it appears in the UI")]
     public string UIName = "Default";
@@ -21,7 +22,8 @@ public class ObjectData : ScriptableObject
     [Tooltip("Can the object be visually changed using the UI?")]
     public bool IsCustomisable = false;
 
-    public bool HasFocusSet = false;
+    [Tooltip("If the object has a focus camera, what type of camera is it.")]
+    public FocusCameraType FocusType = ObjectData.FocusCameraType.None;
 
     [Tooltip("If fixed, the object can't be selected")]
     public bool AvailableInInventory = true;

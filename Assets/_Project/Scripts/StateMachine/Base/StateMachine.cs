@@ -6,13 +6,13 @@ using UnityEngine;
 public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
 {
     protected BaseState<EState> CurrentState;
-    protected BaseState<EState> LastState;
     protected BaseState<EState> QueuedState;
+    protected BaseState<EState> LastState;
 
     private Dictionary<EState, BaseState<EState>> _stateLookup = new Dictionary<EState, BaseState<EState>>();
 
     [SerializeField, ReadOnly]
-    private string _currentState, _lastState, _queuedState;
+    private string _currentState, _queuedState, _lastState;
 
     public static Action<EState> OnStateChange;
 

@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1817280578581908843}
   - component: {fileID: 5709982319695740864}
+  - component: {fileID: 5108721167038257740}
   - component: {fileID: 7269547700019493628}
   - component: {fileID: 3567852309842419850}
   - component: {fileID: 3700988703429803408}
@@ -160,11 +161,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cbObjectData: {fileID: 11400000, guid: f78e16b06f8ed1d42a7db3418f83d266, type: 2}
   _nameInUI: 
-  _isPlaceable: 0
-  _isCustomisable: 0
-  _isFocusable: 0
   _placedPosition: 0
+  _isCustomisable: 0
   _minSelectionHeight: 0
+  _isFocusable: 0
+  _focusCameraType: 0
+--- !u!114 &5108721167038257740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8966535618353275937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c95de33aafbfde4399033d9c9beb59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _focusCameraList: []
+  _focusCameraDictionaryWithParentGameObjects:
+    _serializedList: []
 --- !u!114 &7269547700019493628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +297,7 @@ MonoBehaviour:
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
   _outlineColorDetatchStarted: {r: 0.9, g: 0.33, b: 0, a: 0.5}
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
+  _lastKnownState: 0
 --- !u!54 &5454152671239004877
 Rigidbody:
   m_ObjectHideFlags: 0

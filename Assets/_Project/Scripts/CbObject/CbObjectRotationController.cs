@@ -53,11 +53,13 @@ public class CbObjectRotationController : MonoBehaviour
     private float _quickRotationDuration = 0.2f;
 
     private CbObjectAudioController _audioController;
+    private CbObjectData _cbObjectData;
     private Coroutine _snapRotateCoroutine;
 
     private void Awake()
     {
         _audioController = GetComponent<CbObjectAudioController>();
+        _cbObjectData = GetComponent<CbObjectData>();
     }
 
     private void OnEnable()
@@ -138,7 +140,11 @@ public class CbObjectRotationController : MonoBehaviour
         // update value for debug
         _currentRotationDebug = transform.rotation;
 
-        RotateOnWallCollision();
+        // if we're a SnapPoint placed type
+        if (_cbObjectData.PlacedPosition == ObjectData.PlacedPosition.SnapPoint)
+        {
+            RotateOnWallCollision();
+        }
     }
 
     private void LateUpdate()

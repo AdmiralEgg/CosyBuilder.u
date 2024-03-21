@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6421966941190963339}
   - component: {fileID: 2524749760989859196}
+  - component: {fileID: 5373443174110706908}
   - component: {fileID: 5257918399875651680}
   - component: {fileID: 4379505700911955378}
   - component: {fileID: 5557655811284894815}
@@ -57,8 +58,24 @@ MonoBehaviour:
   _nameInUI: Default
   _placedPosition: 0
   _isCustomisable: 0
-  _isFocusable: 0
   _minSelectionHeight: 1
+  _isFocusable: 0
+  _focusCameraType: 0
+--- !u!114 &5373443174110706908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223018777079849592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c95de33aafbfde4399033d9c9beb59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _focusCameraList: []
+  _focusCameraDictionaryWithParentGameObjects:
+    _serializedList: []
 --- !u!114 &5257918399875651680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +180,7 @@ MonoBehaviour:
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
   _outlineColorDetatchStarted: {r: 0.9, g: 0.33, b: 0, a: 0.5}
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
+  _lastKnownState: 0
 --- !u!114 &2228807508288427765
 MonoBehaviour:
   m_ObjectHideFlags: 0
