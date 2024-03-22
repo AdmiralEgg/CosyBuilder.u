@@ -115,8 +115,6 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         // check object is focusable
         if (_subStateMachine.GetObjectData().IsFocusable == false) return;
 
-        UnityEngine.Debug.Log("Focus!");
-
         // start zooming the camera, if a zoom threshold hits then switch to the VCam
         _subStateMachine.QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused);
     }

@@ -1,10 +1,19 @@
-using System;
+using ImGuiNET;
 using UnityEngine;
 
 public class GameModeStateMachine : StateMachine<GameModeStateMachine.GameModeState>
 {
     [SerializeField]
     private GameModeState _initialState;
+
+    [SerializeField]
+    private CbObjectPlacedSubStateMachine _currentFocus = null;
+
+    public CbObjectPlacedSubStateMachine CurrentFocus
+    {
+        get { return _currentFocus; }
+        set { _currentFocus = value; }
+    }
 
     public enum GameModeState { Build, Focus, Photo }
 
@@ -24,5 +33,17 @@ public class GameModeStateMachine : StateMachine<GameModeStateMachine.GameModeSt
 
         CurrentState = LookupState(_initialState);
         QueuedState = LookupState(_initialState);
+    }
+
+    private void OnEnable() => ImGuiUn.Layout += OnImGuiLayout;
+    private void OnDisable() => ImGuiUn.Layout -= OnImGuiLayout;
+
+    private void OnImGuiLayout()
+    {
+        if (ImGui.CollapsingHeader($"GameModeState", ImGuiTreeNodeFlags.DefaultOpen))
+        {
+            ImGui.Text($"Current State: {CurrentState}");
+            ImGui.Text($"Last State: {LastState}");
+        }
     }
 }

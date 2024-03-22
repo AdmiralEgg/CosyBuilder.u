@@ -10,19 +10,23 @@ public class GameModeBuildState : BaseState<GameModeStateMachine.GameModeState>
     }
 
     public override void EnterState(GameModeStateMachine.GameModeState lastState)
-    {
+    {        
         // List for events from the PlacedFocusedSubState
         CbObjectPlacedFocusedSubState.CbObjectFocused += OnObjectFocusEvent;
 
-        // Subscribe to the photo mode switch button
+        // TODO: Subscribe to the photo mode switch button
     }
 
-    private void OnObjectFocusEvent(CbObjectData data)
+    private void OnObjectFocusEvent(CbObjectPlacedSubStateMachine objectStateMachine)
     {
+        _stateMachine.CurrentFocus = objectStateMachine;
         _stateMachine.QueueNextState(GameModeStateMachine.GameModeState.Focus);
     }
 
-    public override void ExitState() { }
+    public override void ExitState() 
+    {
+        CbObjectPlacedFocusedSubState.CbObjectFocused -= OnObjectFocusEvent;
+    }
 
     public override void UpdateState() { }
 }

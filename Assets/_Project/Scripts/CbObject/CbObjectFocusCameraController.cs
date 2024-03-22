@@ -82,6 +82,14 @@ public class CbObjectFocusCameraController : MonoBehaviour
         enabledCamera.gameObject.SetActive(true);
     }
 
+    public void DisableFocusCamera()
+    {
+        foreach (GameObject cameraGameObject in _focusCameraList)
+        {
+            cameraGameObject.SetActive(false);
+        }
+    }
+
     public CinemachineVirtualCamera GetBestDefaultFocusCamera()
     {
         float maxRaycastDistance = 20f;

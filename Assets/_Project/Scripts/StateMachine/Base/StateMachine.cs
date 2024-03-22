@@ -60,7 +60,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
     {
         if (_queuedStateThisFrame == true) return;
         
-        Debug.Log("Queue State: " + stateToQueue);
+        Debug.Log($"Queued State [{this.gameObject.name}]: " + stateToQueue);
         QueuedState = _stateLookup[stateToQueue];
         _queuedStateThisFrame = true;
     }

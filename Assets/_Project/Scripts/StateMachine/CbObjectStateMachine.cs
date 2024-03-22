@@ -1,3 +1,4 @@
+using ImGuiNET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,6 +61,9 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
         CurrentState = LookupState(_initialState);
         QueuedState = LookupState(_initialState);
     }
+
+    private void OnEnable() => ImGuiUn.Layout += OnImGuiLayout;
+    private void OnDisable() => ImGuiUn.Layout -= OnImGuiLayout;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -125,5 +129,13 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     public bool IsRotating()
     {
         return _cbObjectRotationController.IsRotating;
+    }
+
+    private void OnImGuiLayout()
+    {
+        if (ImGui.CollapsingHeader($"ObjectState[{this.gameObject.name}]"))
+        {
+            ImGui.Text($"CurrentState: {CurrentState}");
+        }
     }
 }
