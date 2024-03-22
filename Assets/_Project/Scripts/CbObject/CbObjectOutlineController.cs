@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Sirenix.OdinInspector;
 
 public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
-    float _outlineSizeFree = 3f, _outlineSizeSelected = 4f, _outlineSizePlaced = 6f;
+    float _outlineSizeFree = 0.15f, _outlineSizeSelected = 0.2f, _outlineSizePlaced = 0.2f;
 
     [SerializeField]
     Color _outlineColorFree = new Color(0.7f, 0.7f, 0.7f, 0.5f);
@@ -22,7 +23,7 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     CbObjectStateMachine _stateMachine;
     CbObjectPlacedSubStateMachine _placedSubStateMachine;
 
-    [SerializeField]
+    [SerializeField, ReadOnly]
     private CbObjectStateMachine.CbObjectState _lastKnownState;
 
     private void Awake()
@@ -32,8 +33,7 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
         // Add an outline component
         _outline = gameObject.AddComponent<Outline>();
-        _outline.OutlineMode = Outline.Mode.OutlineAll;
-        _outline.enabled = false;
+        UpdateOutlineState(CbObjectStateMachine.CbObjectState.Free);
     }
 
     private void OnEnable()
@@ -63,37 +63,43 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         _outline.enabled = false;
     }
 
-    private void UpdateOutlineState()
+    private void UpdateOutlineState(CbObjectStateMachine.CbObjectState newState)
     {
-        // check the state of the CbObject. Swap outline if state has changed
-        CbObjectStateMachine.CbObjectState currentState = _stateMachine.GetCurrentState();
-
-        if (_lastKnownState == currentState) return;
-
-        switch (currentState)
+        switch (newState)
         {
             case CbObjectStateMachine.CbObjectState.Free:
                 _outline.OutlineWidth = _outlineSizeFree;
                 _outline.OutlineColor = _outlineColorFree;
+                _outline.OutlineMode = Outline.Mode.OutlineAll;
                 _outline.enabled = false;
                 break;
             case CbObjectStateMachine.CbObjectState.Selected:
                 _outline.OutlineWidth = _outlineSizeSelected;
                 _outline.OutlineColor = _outlineColorSelected;
+                _outline.OutlineMode = Outline.Mode.OutlineAll;
                 _outline.enabled = true;
                 break;
             case CbObjectStateMachine.CbObjectState.Placed:
                 _outline.OutlineWidth = _outlineSizePlaced;
                 _outline.OutlineColor = _outlineColorPlaced;
+                _outline.OutlineMode = Outline.Mode.OutlineVisible;
                 break;
         }
 
-        _lastKnownState = currentState;
+        _lastKnownState = newState;
     }
 
     private void LateUpdate()
     {
-        UpdateOutlineState();
+        // check the state of the CbObject. Swap outline if state has changed
+        CbObjectStateMachine.CbObjectState currentState = _stateMachine.GetCurrentState();
+
+        //Debug.Log($"Current State: {currentState}. Last Known: {_lastKnownState}");
+
+        if (_lastKnownState != currentState)
+        {
+            UpdateOutlineState(currentState);
+        }
     }
 
     private void SetDetatchStartedOutline()
@@ -106,15 +112,5 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     {
         _outline.OutlineWidth = _outlineSizeFree;
         _outline.OutlineColor = _outlineColorDetatchCompleted;
-    }
-
-    public void HideOutline(bool setHidden)
-    {
-        if (setHidden)
-        {
-            _outline.OutlineWidth = 0;
-        }
-        
-        _outline.enabled = true;
     }
 }
