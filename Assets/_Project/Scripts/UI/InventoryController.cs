@@ -43,6 +43,18 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        CbObjectPlacedFocusedSubState.cbObjectFocusedScriptableData += RefreshInventoryList;
+        GameModeStateMachine.OnStateChange = (state) =>
+        {
+            if (state == GameModeStateMachine.GameModeState.Build)
+            {
+                RefreshInventoryList();
+            }
+        };
+    }
+
     private VisualElement GetInventoryUIElement(string rootVisualElementName)
     {
         // Get the inventory element
@@ -88,6 +100,8 @@ public class InventoryController : MonoBehaviour
 
     private void RefreshInventoryList(CbObjectScriptableData cbObject = null)
     {
+        _inventoryElement.Clear();
+        
         List<CbObjectScriptableData> inventoryList = GetInventoryList(cbObject);
         
         foreach (CbObjectScriptableData inventoryObject in inventoryList) 
@@ -112,7 +126,7 @@ public class InventoryController : MonoBehaviour
             return _inventorySets[_rootSet];
         }
 
-        if (!_inventorySets.ContainsKey(cbObject) == false)
+        if (_inventorySets.ContainsKey(cbObject) == false)
         {
             Debug.LogWarning($"Requested Inventory Set: {cbObject.name} cannot be found. Inventory will not refresh");
             return null;

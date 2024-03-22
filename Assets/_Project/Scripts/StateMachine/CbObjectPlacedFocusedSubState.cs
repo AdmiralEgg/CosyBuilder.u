@@ -9,6 +9,7 @@ public class CbObjectPlacedFocusedSubState : BaseState<CbObjectPlacedSubStateMac
     private CbObjectPlacedSubStateMachine _subStateMachine;
 
     public static Action<CbObjectPlacedSubStateMachine> CbObjectFocused;
+    public static Action<CbObjectScriptableData> cbObjectFocusedScriptableData;
 
     public CbObjectPlacedFocusedSubState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState key, CbObjectPlacedSubStateMachine stateMachine, Rigidbody cbObjectRb) : base(key)
     {
@@ -18,6 +19,7 @@ public class CbObjectPlacedFocusedSubState : BaseState<CbObjectPlacedSubStateMac
     public override void EnterState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState lastState)
     {
         _subStateMachine.GetComponent<CbObjectFocusCameraController>().EnableFocusCamera();
+        cbObjectFocusedScriptableData?.Invoke(_subStateMachine.GetComponent<CbObjectParameters>().CbObjectData);
         CbObjectFocused?.Invoke(_subStateMachine);
     }
 

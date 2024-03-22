@@ -1,14 +1,15 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Cinemachine;
-using Sirenix.Utilities;
-using System.Collections.Generic;
-using static DictionarySerialization;
 
 public class CbObjectParameters : MonoBehaviour
 {
     [SerializeField, Required]
     private CbObjectScriptableData _cbObjectData;
+
+    public CbObjectScriptableData CbObjectData
+    {
+        get { return _cbObjectData; }
+    }
 
     [Header("Scriptable Object Data")]
     [SerializeField, ReadOnly]
