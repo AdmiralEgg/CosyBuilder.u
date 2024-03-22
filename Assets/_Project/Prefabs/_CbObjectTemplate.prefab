@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3056472616193747676}
   - component: {fileID: 2228807508288427765}
   - component: {fileID: -8872006458397177251}
+  - component: {fileID: 6420626884067356611}
   m_Layer: 0
   m_Name: _CbObjectTemplate
   m_TagString: Untagged
@@ -51,14 +52,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2223018777079849592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f9b253a3a1b464ea4f55ec2bcd243c, type: 3}
+  m_Script: {fileID: 11500000, guid: 975ff295c466e0c46ae333d3df67ba12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cbObjectData: {fileID: 11400000, guid: 7ff9303322af6e04f892ae8606ab8101, type: 2}
+  _cbObjectData: {fileID: 11400000, guid: 18375f3129ca2b94fa0225210d14218e, type: 2}
   _nameInUI: Default
-  _placedPosition: 0
+  _placedPosition: 1
   _isCustomisable: 0
-  _minSelectionHeight: 1
+  _minSelectionHeight: 0.5
   _isFocusable: 0
   _focusCameraType: 0
 --- !u!114 &5373443174110706908
@@ -89,8 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: 
-  _lastState: 
   _queuedState: 
+  _lastState: 
   _initialState: 0
 --- !u!114 &4379505700911955378
 MonoBehaviour:
@@ -105,8 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: 
-  _lastState: 
   _queuedState: 
+  _lastState: 
   _detatchHoldStartTime: 0.2
   _detatchHoldAnimationTime: 0.5
   _initialPlacedSubState: 0
@@ -220,6 +221,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6420626884067356611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223018777079849592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4d0f4877451004ea1dd04132e0297d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPool: {fileID: 0}
 --- !u!1 &4682322144564431079
 GameObject:
   m_ObjectHideFlags: 0

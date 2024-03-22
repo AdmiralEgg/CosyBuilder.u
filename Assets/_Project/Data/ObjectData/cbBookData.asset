@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1f9c0855153ce41914daae849ed062, type: 3}
+  m_Name: cbBookData
+  m_EditorClassIdentifier: 
+  UIName: Book
+  Prefab: {fileID: 8698045013528468025, guid: e4e74f718b9c28b4ead64d5fdfb0e071, type: 3}
+  InventoryIcon: {fileID: 2800000, guid: 1313b6d11b79dff448ae10d2363c069e, type: 3}
+  AvailableInInventory: 1
+  AvailableAtRoot: 0
+  ParentObjects:
+  - {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
+  - {fileID: 11400000, guid: abaf1525511b4634ca967d1c5b20ae03, type: 2}
+  MinimumSelectionHeight: 0.5
+  PlacablePosition: 0
+  FocusType: 0
+  IsCustomisable: 0

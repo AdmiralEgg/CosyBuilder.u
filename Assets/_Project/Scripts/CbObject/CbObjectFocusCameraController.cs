@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using static DictionarySerialization;
 using System.Collections.Generic;
 using System;
-using static ObjectData;
+using static CbObjectScriptableData;
 using System.Linq;
 
 public class CbObjectFocusCameraController : MonoBehaviour
@@ -16,11 +16,11 @@ public class CbObjectFocusCameraController : MonoBehaviour
     [SerializeField, ReadOnly]
     private SerializableDictionary<GameObject, GameObject> _focusCameraDictionaryWithParentGameObjects = new SerializableDictionary<GameObject, GameObject>();
 
-    private CbObjectData _objectData;
+    private CbObjectParameters _objectData;
 
     private void Awake()
     {
-        _objectData = GetComponent<CbObjectData>();
+        _objectData = GetComponent<CbObjectParameters>();
     }
 
     private void Start()
@@ -32,7 +32,7 @@ public class CbObjectFocusCameraController : MonoBehaviour
     private void AddSetTypeCameraReferences()
     {
         if (_focusCameraList.Count == 0) return;
-        if (_objectData.FocusCameraType != ObjectData.FocusCameraType.Set) return;
+        if (_objectData.FocusCameraType != CbObjectScriptableData.FocusCameraType.Set) return;
 
         foreach (var camera in _focusCameraList)
         {
@@ -51,7 +51,7 @@ public class CbObjectFocusCameraController : MonoBehaviour
         });
 
         if (_focusCameraList.Count == 0) return;
-        if (_objectData.FocusCameraType == ObjectData.FocusCameraType.None)
+        if (_objectData.FocusCameraType == CbObjectScriptableData.FocusCameraType.None)
         {
             Debug.LogWarning("Found Focus VCams, but FocusCameraType set to 'None'. Set a FocusCameraType to use Focus on this CbObject");
             return;
@@ -66,13 +66,13 @@ public class CbObjectFocusCameraController : MonoBehaviour
 
         switch (_objectData.FocusCameraType)
         {
-            case ObjectData.FocusCameraType.Default:
+            case CbObjectScriptableData.FocusCameraType.Default:
                 enabledCamera = GetBestDefaultFocusCamera();
                 break;
-            case ObjectData.FocusCameraType.Set:
+            case CbObjectScriptableData.FocusCameraType.Set:
                 enabledCamera = GetBestSetFocusCamera(objectFocused);
                 break;
-            case ObjectData.FocusCameraType.Orbital:
+            case CbObjectScriptableData.FocusCameraType.Orbital:
                 enabledCamera = GetConfiguredOrbitalCamera();
                 break;
         }

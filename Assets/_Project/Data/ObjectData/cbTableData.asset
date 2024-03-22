@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1f9c0855153ce41914daae849ed062, type: 3}
+  m_Name: cbTableData
+  m_EditorClassIdentifier: 
+  UIName: Table
+  Prefab: {fileID: 8966535618353275937, guid: bd75b4d30ffadac4f986a50151a93487, type: 3}
+  InventoryIcon: {fileID: 2800000, guid: 9febeef07dabe7c44b4cc26e27fc97e7, type: 3}
+  PlacablePosition: 2
+  IsCustomisable: 0
+  FocusType: 3
+  AvailableInInventory: 1
+  MinimumSelectionHeight: 0.5
+  ParentObjects: []

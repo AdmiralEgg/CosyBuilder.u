@@ -56,7 +56,7 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
         QueuedState = LookupState(_initialPlacedSubState);
     }
 
-    public CbObjectData GetObjectData()
+    public CbObjectParameters GetObjectData()
     {
         return _parentStateMachine.CbObjectData;
     }

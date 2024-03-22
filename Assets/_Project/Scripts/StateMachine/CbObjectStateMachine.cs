@@ -16,8 +16,8 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     private CbObjectSelectedState _cbObjectSelectedState;
     private CbObjectPlacedState _cbObjectPlacedState;
 
-    private CbObjectData _cbObjectData;
-    public CbObjectData CbObjectData
+    private CbObjectParameters _cbObjectData;
+    public CbObjectParameters CbObjectData
     {
         get { return _cbObjectData; }
     }
@@ -39,7 +39,7 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
 
     private void Awake()
     {
-        _cbObjectData = GetComponent<CbObjectData>();
+        _cbObjectData = GetComponent<CbObjectParameters>();
         _cbObjectRigidBody = GetComponent<Rigidbody>();
         _cbObjectLayerController = GetComponent<CbObjectLayerController>();
         _cbObjectRotationController = GetComponent<CbObjectRotationController>();

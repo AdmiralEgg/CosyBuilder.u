@@ -10,7 +10,7 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
     private PlacedPosition _placedPosition = PlacedPosition.Floor;
 
     [SerializeField, ReadOnly, Tooltip("If placed on an object, a ref to the parent object.")]
-    private CbObjectData _parentObject;
+    private CbObjectParameters _parentObject;
 
     [SerializeReference, ReadOnly]
     private bool _detatchOnPointerUp = false;

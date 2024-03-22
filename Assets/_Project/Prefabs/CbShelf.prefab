@@ -1001,6 +1001,7 @@ GameObject:
   - component: {fileID: 3410720724832602390}
   - component: {fileID: 7517918875082950870}
   - component: {fileID: 6356555886459643534}
+  - component: {fileID: 3406729180666937904}
   m_Layer: 0
   m_Name: CbShelf
   m_TagString: Untagged
@@ -1037,14 +1038,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8621155214587277750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f9b253a3a1b464ea4f55ec2bcd243c, type: 3}
+  m_Script: {fileID: 11500000, guid: 975ff295c466e0c46ae333d3df67ba12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cbObjectData: {fileID: 11400000, guid: 5a7dbaa1c62ab2040b66a2cf326822d6, type: 2}
-  _nameInUI: 
-  _placedPosition: 0
+  _cbObjectData: {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
+  _nameInUI: Default
+  _placedPosition: 1
   _isCustomisable: 0
-  _minSelectionHeight: 0
+  _minSelectionHeight: 0.5
   _isFocusable: 0
   _focusCameraType: 0
 --- !u!114 &3179575321190829594
@@ -1075,8 +1076,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: 
-  _lastState: 
   _queuedState: 
+  _lastState: 
   _initialState: 0
 --- !u!114 &7986559922460006389
 MonoBehaviour:
@@ -1091,8 +1092,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: 
-  _lastState: 
   _queuedState: 
+  _lastState: 
   _detatchHoldStartTime: 0.2
   _detatchHoldAnimationTime: 0.5
   _initialPlacedSubState: 0
@@ -1206,3 +1207,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3406729180666937904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8621155214587277750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4d0f4877451004ea1dd04132e0297d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPool: {fileID: 0}

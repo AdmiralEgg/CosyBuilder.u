@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class CbObjectMovementController : MonoBehaviour
 {
-    CbObjectData _objectData;
+    CbObjectParameters _objectData;
 
     [SerializeField, MMReadOnly]
     private bool _isInsideFreeSnapPoint = false;
@@ -26,13 +26,13 @@ public class CbObjectMovementController : MonoBehaviour
 
     private void Awake()
     {
-        _objectData = GetComponent<CbObjectData>();
+        _objectData = GetComponent<CbObjectParameters>();
     }
 
     private void Update()
     {
         //CbObjectBoundsCheck();
-        if (_objectData.PlacedPosition == ObjectData.PlacedPosition.SnapPoint)
+        if (_objectData.PlacedPosition == CbObjectScriptableData.PlacedPosition.SnapPoint)
         {
             SnapPointRadiusCheck();
         }
