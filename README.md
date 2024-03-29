@@ -1,1 +1,1 @@
-![Project Build]https://github.com/AdmiralEgg/CosyBuilder.u/actions/workflows/BuildProject.yml/badge.svg
+![Project Build](https://github.com/AdmiralEgg/CosyBuilder.u/actions/workflows/BuildProject.yml/badge.svg)
