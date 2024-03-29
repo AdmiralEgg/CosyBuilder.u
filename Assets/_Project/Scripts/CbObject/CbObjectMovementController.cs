@@ -1,13 +1,13 @@
-using MoreMountains.Tools;
 using System;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
 
 public class CbObjectMovementController : MonoBehaviour
 {
     CbObjectParameters _objectData;
 
-    [SerializeField, MMReadOnly]
+    [SerializeField, ReadOnly]
     private bool _isInsideFreeSnapPoint = false;
 
     public bool IsInsideFreeSnapPoint
@@ -15,7 +15,7 @@ public class CbObjectMovementController : MonoBehaviour
         get { return _isInsideFreeSnapPoint; }
     }
 
-    [SerializeField, MMReadOnly]
+    [SerializeField, ReadOnly]
     private SnapPoint _activeSnapPoint;
 
     public SnapPoint ActiveSnapPoint

@@ -1,10 +1,8 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Shapes;
-using MoreMountains.Tools;
+using Sirenix.OdinInspector;
 
 public class RotateCamera : MonoBehaviour
 {

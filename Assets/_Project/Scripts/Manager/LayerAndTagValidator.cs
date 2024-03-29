@@ -1,6 +1,6 @@
-using MoreMountains.Tools;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using static DictionarySerialization;
 
 /// <summary>
@@ -20,7 +20,7 @@ public class LayerAndTagValidator : MonoBehaviour
     private SerializableDictionary<CbTag, string> _tagDictionary = new SerializableDictionary<CbTag, string>();
 
     [Header("Validated Lookups")]
-    [SerializeField, MMReadOnly]
+    [SerializeField, ReadOnly]
     private SerializableDictionary<CbLayer, int> _validatedLayerDataLookup = new SerializableDictionary<CbLayer, int>();
 
     private void Awake()

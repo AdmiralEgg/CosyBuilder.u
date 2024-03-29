@@ -1,8 +1,8 @@
-using MoreMountains.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using static DictionarySerialization;
 
 public class CursorData : MonoBehaviour
@@ -18,10 +18,10 @@ public class CursorData : MonoBehaviour
 
     public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint }
 
-    [SerializeField, MMReadOnly]
+    [SerializeField, ReadOnly]
     private List<LayerMaskTypeData> _layerMaskTypeLookup = new List<LayerMaskTypeData>();
 
-    [SerializeField, MMReadOnly]
+    [SerializeField, ReadOnly]
     private SerializableDictionary<LayerMaskType, string> _raycastColliderHitDebug = new SerializableDictionary<LayerMaskType, string>();
 
     private void Awake()
