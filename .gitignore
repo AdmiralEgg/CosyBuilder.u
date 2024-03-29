@@ -75,12 +75,3 @@ Assets/FullScreen/*
 Assets/_AssetPacks/*
 Assets/Scenes/SampleScene/LightingData.asset
 Assets/LMHPoly/*
-Assets/Plugins/Sirenix/*
-Assets/Feel/*
-Assets/Shapes/*
-
-# Ignore MagicaVoxel Software Assets
-Assets/_Working/MagicaVoxel/*
-!Assets/_Working/MagicaVoxel/palette
-!Assets/_Working/MagicaVoxel/export
-!Assets/_Working/MagicaVoxel/vox
