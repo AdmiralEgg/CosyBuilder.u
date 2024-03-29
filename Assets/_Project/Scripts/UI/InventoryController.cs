@@ -1,12 +1,9 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Sirenix.OdinInspector;
-using static DictionarySerialization;
 using System.Collections.Generic;
-using static UnityEditor.AddressableAssets.Build.Layout.BuildLayout;
 using UnityEngine.UIElements;
-using System;
-using System.Xml.Linq;
+using static DictionarySerialization;
 
 public class InventoryController : MonoBehaviour
 {
