@@ -1,7 +1,5 @@
 using MoreMountains.Tools;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static DictionarySerialization;
 
@@ -25,29 +23,9 @@ public class LayerAndTagValidator : MonoBehaviour
     [SerializeField, MMReadOnly]
     private SerializableDictionary<CbLayer, int> _validatedLayerDataLookup = new SerializableDictionary<CbLayer, int>();
 
-    [SerializeField, MMReadOnly]
-    private SerializableDictionary<CbTag, string> _validatedTagDataLookup = new SerializableDictionary<CbTag, string>();
-
     private void Awake()
     {
         ValidateLayers();
-        ValidateTags();
-    }
-
-    private void ValidateTags()
-    {
-        foreach (KeyValuePair<CbTag, string> tag in _tagDictionary)
-        {
-            string[] allTags = UnityEditorInternal.InternalEditorUtility.tags;
-
-            if (allTags.Contains(tag.Value) == false)
-            {
-                Debug.LogError($"Cannot find tag {tag.Value}, check the tag exists and is correctly named in the tag manager.");
-                continue;
-            }
-
-            _validatedTagDataLookup.Add(tag.Key, tag.Value);
-        }
     }
 
     private void ValidateLayers()
