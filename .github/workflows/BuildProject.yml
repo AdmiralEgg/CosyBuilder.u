@@ -42,12 +42,18 @@ jobs:
           - WebGL
 
     steps:    
-    - uses: actions/checkout@v4
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+
+    - name: Checkout Repo
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
         lfs: true
 
-    - name: Structure of checkout files
+    - name: Check Repo Structure
       run: ls -R
 
     - uses: actions/cache@v4 #https://github.com/actions/cache
