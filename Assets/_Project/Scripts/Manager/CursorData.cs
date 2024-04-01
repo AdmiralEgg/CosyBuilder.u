@@ -4,9 +4,12 @@ using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using static DictionarySerialization;
+using static UnityEditor.PlayerSettings;
 
 public class CursorData : MonoBehaviour
 {
+    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint }
+
     public static CursorData Instance;
 
     [SerializeField]
@@ -15,8 +18,6 @@ public class CursorData : MonoBehaviour
     private Ray _rayFromMouseCursor;
 
     private LayerAndTagValidator _layerAndTagValidator;
-
-    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint }
 
     [SerializeField, ReadOnly]
     private List<LayerMaskTypeData> _layerMaskTypeLookup = new List<LayerMaskTypeData>();
@@ -71,7 +72,7 @@ public class CursorData : MonoBehaviour
         ));
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _rayFromMouseCursor = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -124,6 +125,11 @@ public class CursorData : MonoBehaviour
         raycastHit = RunRaycast(layerMask);
 
         return raycastHit;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(_rayFromMouseCursor.origin, _rayFromMouseCursor.direction * 200, Color.yellow);
     }
 
     private static RaycastHit RunRaycast(int layerMask = -1)

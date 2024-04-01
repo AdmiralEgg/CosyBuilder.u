@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class CbObjectMovementController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class CbObjectMovementController : MonoBehaviour
 
     [SerializeField, ReadOnly]
     private SnapPoint _activeSnapPoint;
+
+    private Vector3 _objectMovePosition;
 
     public SnapPoint ActiveSnapPoint
     {
@@ -93,11 +96,26 @@ public class CbObjectMovementController : MonoBehaviour
         // Follow the cursor, don't go below the min height
         if (hit.point.y < _objectData.MinSelectionHeight)
         {
-            this.transform.position = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
+            // this.transform.position = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
+            Vector3 targetPosition = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
+
+            _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.06f);
         }
         else
         {
-            this.transform.position = hit.point;
+            // this.transform.position = hit.point;
+            //_objectMovePosition = hit.point;
+            _objectMovePosition = Vector3.MoveTowards(this.transform.position, hit.point, 0.06f);
+        }
+
+        this.transform.position = _objectMovePosition;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_objectMovePosition != null)
+        {
+            Gizmos.DrawWireSphere(_objectMovePosition, 0.1f);
         }
     }
 
