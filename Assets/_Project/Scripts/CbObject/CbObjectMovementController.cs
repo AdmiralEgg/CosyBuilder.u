@@ -99,13 +99,13 @@ public class CbObjectMovementController : MonoBehaviour
             // this.transform.position = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
             Vector3 targetPosition = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
 
-            _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.06f);
+            _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.15f);
         }
         else
         {
             // this.transform.position = hit.point;
             //_objectMovePosition = hit.point;
-            _objectMovePosition = Vector3.MoveTowards(this.transform.position, hit.point, 0.06f);
+            _objectMovePosition = Vector3.MoveTowards(this.transform.position, hit.point, 0.15f);
         }
 
         this.transform.position = _objectMovePosition;

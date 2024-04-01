@@ -8,7 +8,7 @@ using static UnityEditor.PlayerSettings;
 
 public class CursorData : MonoBehaviour
 {
-    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint }
+    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck }
 
     public static CursorData Instance;
 
@@ -24,6 +24,10 @@ public class CursorData : MonoBehaviour
 
     [SerializeField, ReadOnly]
     private SerializableDictionary<LayerMaskType, string> _raycastColliderHitDebug = new SerializableDictionary<LayerMaskType, string>();
+
+    private CbObjectParameters _lastCbObjectHit;
+
+    public static Action<CbObjectParameters> OnCbObjectHit;
 
     private void Awake()
     {
@@ -70,6 +74,18 @@ public class CursorData : MonoBehaviour
             },
             LayerAndTagValidator.MaskInclusionType.Include
         ));
+
+        Instance._layerMaskTypeLookup.Add(new LayerMaskTypeData
+        (
+            LayerMaskType.CbObjectOutlineCheck,
+            "Check for any CbObject, static or not",
+            new LayerAndTagValidator.CbLayer[]
+            {
+                LayerAndTagValidator.CbLayer.CbObject,
+                LayerAndTagValidator.CbLayer.CbObjectStatic,
+            },
+            LayerAndTagValidator.MaskInclusionType.Include
+        ));
     }
 
     private void FixedUpdate()
@@ -80,6 +96,8 @@ public class CursorData : MonoBehaviour
         {
             RayCastDebug();
         }
+
+        SendCbObjectMouseOverEvents();
     }
 
     private void RayCastDebug()
@@ -97,6 +115,27 @@ public class CursorData : MonoBehaviour
             }
 
             _raycastColliderHitDebug.Add(layer, foundObject);
+        }
+    }
+
+    public void SendCbObjectMouseOverEvents()
+    {
+        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectOutlineCheck);
+
+        if (hit.collider == null && _lastCbObjectHit == null) return;
+
+        if (hit.collider == null && _lastCbObjectHit != null)
+        {
+            OnCbObjectHit?.Invoke(null);
+            _lastCbObjectHit = null;
+            return;
+        }
+
+        if (hit.collider.gameObject != _lastCbObjectHit)
+        {
+            // send event
+            OnCbObjectHit?.Invoke(hit.collider.gameObject.GetComponentInParent<CbObjectParameters>());
+            _lastCbObjectHit = hit.collider.gameObject.GetComponentInParent<CbObjectParameters>();
         }
     }
 

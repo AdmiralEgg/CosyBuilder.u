@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 
-public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CbObjectOutlineController : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     float _outlineSizeFree = 0.15f, _outlineSizeSelected = 0.2f, _outlineSizePlaced = 0.2f;
@@ -24,7 +24,7 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     CbObjectPlacedSubStateMachine _placedSubStateMachine;
 
     [SerializeField, ReadOnly]
-    private CbObjectStateMachine.CbObjectState _lastKnownState;
+    private CbObjectStateMachine.CbObjectState _lastCheckedState;
 
     private void Awake()
     {
@@ -34,6 +34,36 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         // Add an outline component
         _outline = gameObject.AddComponent<Outline>();
         UpdateOutlineState(CbObjectStateMachine.CbObjectState.Free);
+        _outline.enabled = false;
+
+        CursorData.OnCbObjectHit += NewCbObjectHit;
+    }
+
+    private void NewCbObjectHit(CbObjectParameters @object)
+    {
+        if (TempSelectedStateManager.IsObjectSelected() == true) return;
+
+        if (@object == null)
+        {
+            Debug.Log("Hit nothing, turn off outline");
+            _outline.enabled = false;
+            return;
+        }
+
+        if (@object.gameObject != this.gameObject)
+        {
+            Debug.Log("Did not hit me, turn off outline");
+            _outline.enabled = false;
+            return;
+        }
+
+        if (@object.gameObject == this.gameObject)
+        {
+            Debug.Log("Hit me!" + @object.name);
+            _outline.enabled = true;
+            return;
+        }
+
     }
 
     private void OnEnable()
@@ -48,20 +78,20 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         _placedSubStateMachine.OnSetDetatchCompletedOutlineEvent -= SetDetatchCompletedOutline;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        // TODO: Check whether a CbObject is already selected!
-        if (TempSelectedStateManager.IsObjectSelected() == true) return;
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    // TODO: Check whether a CbObject is already selected!
+    //    if (TempSelectedStateManager.IsObjectSelected() == true) return;
 
-        _outline.enabled = true;
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        // If we're in the selected state, don't turn off the outline
-        if (_stateMachine.GetCurrentState() == CbObjectStateMachine.CbObjectState.Selected) return;
+    //    _outline.enabled = true;
+    //}
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    // If we're in the selected state, don't turn off the outline
+    //    if (_stateMachine.GetCurrentState() == CbObjectStateMachine.CbObjectState.Selected) return;
         
-        _outline.enabled = false;
-    }
+    //    _outline.enabled = false;
+    //}
 
     private void UpdateOutlineState(CbObjectStateMachine.CbObjectState newState)
     {
@@ -83,10 +113,11 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
                 _outline.OutlineWidth = _outlineSizePlaced;
                 _outline.OutlineColor = _outlineColorPlaced;
                 _outline.OutlineMode = Outline.Mode.OutlineVisible;
+                _outline.enabled = false;
                 break;
         }
 
-        _lastKnownState = newState;
+        _lastCheckedState = newState;
     }
 
     private void LateUpdate()
@@ -94,9 +125,9 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
         // check the state of the CbObject. Swap outline if state has changed
         CbObjectStateMachine.CbObjectState currentState = _stateMachine.GetCurrentState();
 
-        //Debug.Log($"Current State: {currentState}. Last Known: {_lastKnownState}");
+        //Debug.Log($"Current State: {currentState}. Last Known: {_lastCheckedState}");
 
-        if (_lastKnownState != currentState)
+        if (_lastCheckedState != currentState)
         {
             UpdateOutlineState(currentState);
         }
