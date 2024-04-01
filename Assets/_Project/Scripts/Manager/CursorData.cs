@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using static DictionarySerialization;
-using static UnityEditor.PlayerSettings;
 
 public class CursorData : MonoBehaviour
 {
