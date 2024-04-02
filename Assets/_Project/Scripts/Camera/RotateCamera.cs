@@ -34,6 +34,9 @@ public class RotateCamera : MonoBehaviour
 
     [SerializeField, Tooltip("Distance As Screen Percentage value threshold for a 90 degree rotation turning into a 180 degree rotation."), Range(0.1f, 0.9f)]
     float _fullSpinDistanceThreshold = 0.6f;
+    
+    [SerializeField, Tooltip("Distance As Screen Percentage that a 90 degree rotation will be performed."), Range(0.02f, 0.2f)]
+    float _minimumFlickScreenPercentage = 0.05f;
 
     private float _flickStartTime, _flickEndTime;
     private float _flickDuration;
@@ -82,7 +85,7 @@ public class RotateCamera : MonoBehaviour
             _flickSpeed = _flickVerticalDistanceAsScreenPercentage / (_flickEndTime - _flickStartTime);
 
             // if the flick is too small, ignore it and let the snap run
-            if (Mathf.Abs(_flickVerticalDistanceAsScreenPercentage) < 0.1)
+            if (Mathf.Abs(_flickVerticalDistanceAsScreenPercentage) < _minimumFlickScreenPercentage)
             {
                 Debug.Log($"Flick too small. Size {_flickVerticalDistanceAsScreenPercentage}");
                 _flickRotationState = FlickRotationState.Idle;

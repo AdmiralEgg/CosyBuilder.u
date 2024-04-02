@@ -456,7 +456,7 @@
                     "name": "",
                     "id": "12862f27-f1ba-4356-b0a8-318e56bea095",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Hold(duration=0.1)",
+                    "interactions": "Hold(duration=0.11)",
                     "processors": "",
                     "groups": "",
                     "action": "FlickRotate",
