@@ -5,10 +5,16 @@ using Unity.Properties;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ItemPool : MonoBehaviour
+public class ItemPool: MonoBehaviour
 {
     [SerializeField, AssetsOnly]
-    GameObject _item;
+    GameObject _itemPrefab;
+
+    public GameObject ItemPrefab
+    {
+        get { return _itemPrefab; }
+        set { _itemPrefab = value; }
+    }
 
     [SerializeField, ReadOnly]
     public ObjectPool<GameObject> Pool;
@@ -32,17 +38,16 @@ public class ItemPool : MonoBehaviour
 
     bool _collectionChecks = false;
 
-    [SerializeField]
-    bool _prewarmPool = true;
-
     public event Action<int> ItemCountUpdate;
 
-    void Awake()
+    public void SetupItemPool(GameObject cbObjectPrefab, bool prewarmPool = false)
     {
+        ItemPrefab = cbObjectPrefab;
+        
         // do some object pooling
         Pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, _collectionChecks, 10, 20);
 
-        if (_prewarmPool)
+        if (prewarmPool)
         {
             PrewarmPool();
         }
@@ -86,8 +91,11 @@ public class ItemPool : MonoBehaviour
 
     private GameObject CreatePooledItem()
     {
-        GameObject tmp = Instantiate(_item);
+        GameObject tmp = GameObject.Instantiate(ItemPrefab);
+        
+        // AddComponent, not get
         tmp.GetComponent<ReturnToItemPool>().SetSpawnPool(this);
+
         tmp.transform.parent = this.transform;
         tmp.transform.position = new Vector3(8, 0, 20);
         return tmp;

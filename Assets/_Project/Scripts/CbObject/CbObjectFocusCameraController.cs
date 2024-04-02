@@ -51,13 +51,11 @@ public class CbObjectFocusCameraController : MonoBehaviour
         });
 
         if (_focusCameraList.Count == 0) return;
-        if (_objectData.FocusCameraType == CbObjectScriptableData.FocusCameraType.None)
+        if (_objectData.IsFocusable == false)
         {
-            Debug.LogWarning("Found Focus VCams, but FocusCameraType set to 'None'. Set a FocusCameraType to use Focus on this CbObject");
+            Debug.LogWarning("Found Focus VCams, IsFocusable is false. Set a FocusCameraType to use Focus on this CbObject");
             return;
         }
-
-        _objectData.IsFocusable = true;
     }
 
     public void EnableFocusCamera(GameObject objectFocused = null)

@@ -4,25 +4,26 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using static DictionarySerialization;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using System;
 
 public class InventoryController : MonoBehaviour
 {
     [SerializeField, ReadOnly]
     private SerializableDictionary<CbObjectScriptableData, List<CbObjectScriptableData>> _inventorySets = new SerializableDictionary<CbObjectScriptableData, List<CbObjectScriptableData>>();
 
+    [SerializeField, ReadOnly]
+    private SerializableDictionary<CbObjectScriptableData, ItemPool> _poolSets = new SerializableDictionary<CbObjectScriptableData, ItemPool>();
+
     [SerializeField, Required]
     private AssetLabelReference _cbObjectDataLabel;
 
-    [SerializeField]
-    string _inventoryElementName = "Inventory";
-
     [Tooltip("Objects available while in Build mode")]
-    CbObjectScriptableData _rootSet;
+    private CbObjectScriptableData _rootSet;
 
-    VisualElement _inventoryElement;
+    private string _inventoryElementName = "Inventory";
 
-    [SerializeField]
-    Texture2D _shelfTexture;
+    private VisualElement _inventoryElement;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class InventoryController : MonoBehaviour
     private void Start()
     {
         CbObjectPlacedFocusedSubState.cbObjectFocusedScriptableData += RefreshInventoryList;
+        
         GameModeStateMachine.OnStateChange = (state) =>
         {
             if (state == GameModeStateMachine.GameModeState.Build)
@@ -89,10 +91,25 @@ public class InventoryController : MonoBehaviour
                         _inventorySets.Add(cbObjectParent, newList);
                     }
                 }
+
+                ItemPool itemPool = ConfigureObjectPool(cbObject);
+                _poolSets.Add(cbObject, itemPool);
             }
 
             RefreshInventoryList();
         };
+    }
+
+    private ItemPool ConfigureObjectPool(CbObjectScriptableData cbObjectData)
+    {
+        GameObject poolObject = new GameObject();
+        poolObject.transform.parent = this.transform;
+        poolObject.name = $"{cbObjectData.UIName}_CbObjectPool";
+
+        var itemPool = poolObject.AddComponent<ItemPool>();
+        itemPool.SetupItemPool(cbObjectData.Prefab, prewarmPool: true);
+
+        return itemPool;
     }
 
     private void RefreshInventoryList(CbObjectScriptableData cbObject = null)
@@ -101,18 +118,32 @@ public class InventoryController : MonoBehaviour
         
         List<CbObjectScriptableData> inventoryList = GetInventoryList(cbObject);
         
-        foreach (CbObjectScriptableData inventoryObject in inventoryList) 
+        foreach (CbObjectScriptableData inventoryObject in inventoryList)
         {
-
             VisualElement itemTile = InventoryTileBuilder.GetConfiguredItemTile(inventoryObject.InventoryIcon);
             VisualElement amountLabel = InventoryTileBuilder.GetConfiguredAmountLabel();
+
+            // Add click callbacks for both elements
+            itemTile.RegisterCallback<MouseDownEvent>(e =>
+            {
+                if (e.button == 1)
+                {
+                    Debug.Log("RIGHT Mouse down on inventory!!");
+                    GameObject @object;
+                    //pool.Pool.Get(out @object);
+                    //@object.transform.position = new Vector3(0, 4, 0);
+                }
+
+                if (e.button == 0)
+                {
+                    Debug.Log("LEFT Mouse down on inventory!!");
+                }
+            });
 
             itemTile.Add(amountLabel);
 
             _inventoryElement.Add(itemTile);
         }
-
-        // Configure Spawn Pools?
     }
 
     private List<CbObjectScriptableData> GetInventoryList(CbObjectScriptableData cbObject)

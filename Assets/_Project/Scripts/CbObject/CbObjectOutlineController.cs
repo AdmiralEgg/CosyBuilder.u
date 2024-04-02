@@ -45,25 +45,21 @@ public class CbObjectOutlineController : MonoBehaviour//, IPointerEnterHandler, 
 
         if (@object == null)
         {
-            Debug.Log("Hit nothing, turn off outline");
             _outline.enabled = false;
             return;
         }
 
         if (@object.gameObject != this.gameObject)
         {
-            Debug.Log("Did not hit me, turn off outline");
             _outline.enabled = false;
             return;
         }
 
         if (@object.gameObject == this.gameObject)
         {
-            Debug.Log("Hit me!" + @object.name);
             _outline.enabled = true;
             return;
         }
-
     }
 
     private void OnEnable()

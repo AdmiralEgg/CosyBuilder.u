@@ -31,7 +31,11 @@ public class CbObjectFreeState : BaseState<CbObjectStateMachine.CbObjectState>
 
     private void OnPointerUp(PointerEventData data)
     {
-        _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Selected);
+        // only on left click
+        if (data.button == 0)
+        {
+            _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Selected);
+        }
     }
 
     public override void ExitState()
