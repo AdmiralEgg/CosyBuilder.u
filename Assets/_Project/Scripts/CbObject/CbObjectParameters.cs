@@ -27,7 +27,10 @@ public class CbObjectParameters : MonoBehaviour
     private bool _isCustomisable = false;
 
     [SerializeField, ReadOnly]
-    public float MinSelectionHeight = 0.5f;
+    public float GroundOffset = 0.5f;
+
+    [SerializeField, ReadOnly]
+    public float WallOffset = 0.5f;
 
     [Header("Focus Data")]
     [SerializeField, ReadOnly]
@@ -59,7 +62,8 @@ public class CbObjectParameters : MonoBehaviour
 
         FocusCameraType = _runTimeCbObjectData.FocusType;
         PlacedPosition = _runTimeCbObjectData.PlacablePosition;
-        MinSelectionHeight = _runTimeCbObjectData.MinimumSelectionHeight;
+        GroundOffset = _runTimeCbObjectData.GroundHeightOffset;
+        WallOffset = _runTimeCbObjectData.WallHeightOffset;
 
         _nameInUI = _runTimeCbObjectData.name;
         _isCustomisable = _runTimeCbObjectData.IsCustomisable;

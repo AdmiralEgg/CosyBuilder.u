@@ -20,7 +20,8 @@ MonoBehaviour:
   ParentObjects:
   - {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
   - {fileID: 11400000, guid: abaf1525511b4634ca967d1c5b20ae03, type: 2}
-  MinimumSelectionHeight: 0.5
+  GroundHeightOffset: 0.2
+  WallHeightOffset: 0.5
   PlacablePosition: 0
   FocusType: 0
   IsCustomisable: 0

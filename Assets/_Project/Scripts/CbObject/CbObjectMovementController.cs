@@ -85,28 +85,30 @@ public class CbObjectMovementController : MonoBehaviour
         _isInsideFreeSnapPoint = true;
     }
 
+    public void MoveSpawnedObject()
+    {
+        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+
+        this.transform.position = new Vector3(hit.point.x, _objectData.GroundOffset, hit.point.z);
+    }
+
     private void MoveObject()
     {
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
-        // We've hit nothing, don't move
+        // We've hit nothing
         if (hit.collider == null) return;
 
-        // TODO: Change this so it takes into account the position of the mesh and we don't have to define minselectionheight
-        // Follow the cursor, don't go below the min height
-        if (hit.point.y < _objectData.MinSelectionHeight)
-        {
-            // this.transform.position = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
-            Vector3 targetPosition = new Vector3(hit.point.x, _objectData.MinSelectionHeight, hit.point.z);
+        // TODO: Add offsets for Ground and Surface faces. 
+        
+        Vector3 positionOffsets = new Vector3(
+            hit.normal.x * _objectData.WallOffset,
+            hit.normal.y * _objectData.GroundOffset,
+            hit.normal.z * _objectData.WallOffset
+        );
 
-            _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.15f);
-        }
-        else
-        {
-            // this.transform.position = hit.point;
-            //_objectMovePosition = hit.point;
-            _objectMovePosition = Vector3.MoveTowards(this.transform.position, hit.point, 0.15f);
-        }
+        Vector3 targetPosition = (hit.point + positionOffsets);
+        _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.15f);
 
         this.transform.position = _objectMovePosition;
     }

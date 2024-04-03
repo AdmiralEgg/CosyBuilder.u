@@ -161,12 +161,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cbObjectData: {fileID: 11400000, guid: 18375f3129ca2b94fa0225210d14218e, type: 2}
+  _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
-  _placedPosition: 1
+  PlacedPosition: 1
   _isCustomisable: 0
-  _minSelectionHeight: 0.5
+  MinSelectionHeight: 0.5
+  FocusCameraType: 0
   _isFocusable: 0
-  _focusCameraType: 0
 --- !u!114 &6226693812989463105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,15 +279,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7d1b9db55427544994dbfada3eb22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outlineSizeFree: 3
-  _outlineSizeSelected: 4
-  _outlineSizePlaced: 6
+  _outlineSizeFree: 0.15
+  _outlineSizeSelected: 0.2
+  _outlineSizePlaced: 0.2
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
   _outlineColorDetatchStarted: {r: 0.9, g: 0.33, b: 0, a: 0.5}
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
-  _lastKnownState: 0
+  _lastCheckedState: 0
 --- !u!114 &7206896235467617757
 MonoBehaviour:
   m_ObjectHideFlags: 0

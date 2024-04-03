@@ -29,7 +29,10 @@ public class CbObjectScriptableData : ScriptableObject
 
     [Header("Movement Data")]
     [Tooltip("Height off the ground where the center of the gameobject can't be lower than")]
-    public float MinimumSelectionHeight = 0.5f;
+    public float GroundHeightOffset = 0.5f;
+
+    [Tooltip("Height off walls where the center of the gameobject can't be lower than")]
+    public float WallHeightOffset = 0.25f;
 
     [Tooltip("Can the object hang on a SnapPoint on a wall?")]
     public PlacedPosition PlacablePosition = PlacedPosition.None;

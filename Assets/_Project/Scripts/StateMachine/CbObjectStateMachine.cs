@@ -10,8 +10,9 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
     [SerializeField]
     private CbObjectState _initialState;
 
-    public enum CbObjectState { Free, Selected, Placed }
+    public enum CbObjectState { Spawned, Free, Selected, Placed }
 
+    private CbObjectSpawnedState _cbObjectSpawnedState;
     private CbObjectFreeState _cbObjectFreeState;
     private CbObjectSelectedState _cbObjectSelectedState;
     private CbObjectPlacedState _cbObjectPlacedState;
@@ -50,10 +51,12 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
 
         _cbObjectPlacedSubStateMachine.enabled = false;
 
+        _cbObjectSpawnedState = new CbObjectSpawnedState(CbObjectState.Spawned, this, _cbObjectMovementController);
         _cbObjectFreeState = new CbObjectFreeState(CbObjectState.Free, this);
         _cbObjectSelectedState = new CbObjectSelectedState(CbObjectState.Selected, this);
         _cbObjectPlacedState = new CbObjectPlacedState(CbObjectState.Placed, this, _cbObjectPlacedSubStateMachine);
 
+        AddStateToLookup(CbObjectState.Spawned, _cbObjectSpawnedState);
         AddStateToLookup(CbObjectState.Free, _cbObjectFreeState);
         AddStateToLookup(CbObjectState.Selected, _cbObjectSelectedState);
         AddStateToLookup(CbObjectState.Placed, _cbObjectPlacedState);

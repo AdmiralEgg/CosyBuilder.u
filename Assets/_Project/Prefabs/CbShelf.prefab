@@ -935,7 +935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8157770757940567500}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05034388, y: 0.9440378, z: -0.17141151, w: -0.27726564}
+  m_LocalRotation: {x: -0.050343893, y: 0.9440378, z: -0.17141151, w: -0.2772657}
   m_LocalPosition: {x: 1.8, y: 1.25, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1042,12 +1042,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cbObjectData: {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
+  _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
-  _placedPosition: 1
+  PlacedPosition: 1
   _isCustomisable: 0
-  _minSelectionHeight: 0.5
+  MinSelectionHeight: 0.5
+  FocusCameraType: 0
   _isFocusable: 0
-  _focusCameraType: 0
 --- !u!114 &3179575321190829594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,15 +1160,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7d1b9db55427544994dbfada3eb22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outlineSizeFree: 3
-  _outlineSizeSelected: 4
-  _outlineSizePlaced: 7
-  _outlineColorFree: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 0.5019608}
+  _outlineSizeFree: 0.15
+  _outlineSizeSelected: 0.2
+  _outlineSizePlaced: 0.2
+  _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
-  _outlineColorPlaced: {r: 0.7264151, g: 0, b: 0, a: 0.69803923}
-  _outlineColorDetatchStarted: {r: 0, g: 0, b: 0, a: 0}
-  _outlineColorDetatchCompleted: {r: 0, g: 0, b: 0, a: 0}
-  _lastKnownState: 0
+  _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
+  _outlineColorDetatchStarted: {r: 0.9, g: 0.33, b: 0, a: 0.5}
+  _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
+  _lastCheckedState: 0
 --- !u!114 &7517918875082950870
 MonoBehaviour:
   m_ObjectHideFlags: 0
