@@ -44,10 +44,10 @@ public class CursorData : MonoBehaviour
             "For use when CbObject is in selected state to follow the cursor",
             new LayerAndTagValidator.CbLayer[]
             {
-            LayerAndTagValidator.CbLayer.CbObject,
-            LayerAndTagValidator.CbLayer.IgnoreRaycast,
-            LayerAndTagValidator.CbLayer.SnapPoint,
-            LayerAndTagValidator.CbLayer.CbObjectBounds
+                LayerAndTagValidator.CbLayer.CbObject,
+                LayerAndTagValidator.CbLayer.IgnoreRaycast,
+                LayerAndTagValidator.CbLayer.SnapPoint,
+                LayerAndTagValidator.CbLayer.CbObjectBounds
             },
             LayerAndTagValidator.MaskInclusionType.Exclude
         ));

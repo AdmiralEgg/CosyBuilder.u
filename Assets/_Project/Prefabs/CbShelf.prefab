@@ -935,7 +935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8157770757940567500}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.050343893, y: 0.9440378, z: -0.17141151, w: -0.2772657}
+  m_LocalRotation: {x: -0.050343875, y: 0.9440378, z: -0.1714115, w: -0.27726564}
   m_LocalPosition: {x: 1.8, y: 1.25, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1046,7 +1046,8 @@ MonoBehaviour:
   _nameInUI: Default
   PlacedPosition: 1
   _isCustomisable: 0
-  MinSelectionHeight: 0.5
+  GroundOffset: 0.5
+  WallOffset: 0.5
   FocusCameraType: 0
   _isFocusable: 0
 --- !u!114 &3179575321190829594

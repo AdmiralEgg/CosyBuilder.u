@@ -25,7 +25,37 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
     public override void EnterState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState lastState)
     {
         _isPointerHovering = false;
+        
+        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed += SwitchToFocusView;
 
+        _subStateMachine.OnScrollEvent += OnScroll;
+        _subStateMachine.OnPointerDownEvent += OnPointerDown;
+        _subStateMachine.OnPointerUpEvent += OnPointerUp;
+        _subStateMachine.OnPointerEnterEvent += OnPointerEnter;
+        _subStateMachine.OnPointerExitEvent += OnPointerExit;
+
+        SetPlacedPosition();
+        ConfigureRigidbody();
+    }
+
+    private void SetPlacedPosition()
+    {
+        // before fixing, move to the cursor marker
+        switch (_subStateMachine.GetObjectData().PlacedPosition)
+        {
+            case CbObjectScriptableData.PlacedPosition.SnapPoint:
+                RaycastHit snapPointhit = CursorData.GetRaycastHit(CursorData.LayerMaskType.WithinSnapPoint);
+                _subStateMachine.transform.position = snapPointhit.collider.GetComponent<SnapPoint>().transform.position;
+                break;
+            case CbObjectScriptableData.PlacedPosition.Floor:
+                RaycastHit movementHit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+                _subStateMachine.transform.position = movementHit.point;
+                break;
+        }
+    }
+
+    private void ConfigureRigidbody()
+    {
         _cbObjectRb.useGravity = false;
         _cbObjectRb.isKinematic = true;
 
@@ -35,14 +65,6 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
             RigidbodyConstraints.FreezeRotationX |
             RigidbodyConstraints.FreezeRotationY |
             RigidbodyConstraints.FreezeRotationZ;
-        
-        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed += SwitchToFocusView;
-
-        _subStateMachine.OnScrollEvent += OnScroll;
-        _subStateMachine.OnPointerDownEvent += OnPointerDown;
-        _subStateMachine.OnPointerUpEvent += OnPointerUp;
-        _subStateMachine.OnPointerEnterEvent += OnPointerEnter;
-        _subStateMachine.OnPointerExitEvent += OnPointerExit;
     }
 
     private void SwitchToFocusView(InputAction.CallbackContext context)

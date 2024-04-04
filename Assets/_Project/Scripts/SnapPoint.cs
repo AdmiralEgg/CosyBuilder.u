@@ -1,9 +1,4 @@
 using Shapes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SnapPoint : MonoBehaviour
@@ -43,21 +38,21 @@ public class SnapPoint : MonoBehaviour
         _snapPointIndicator.Color = _indicatorColor;
         _snapPointIndicator.enabled = false;
 
-
         // subscribe to CbObject state changes
         CbObjectStateMachine.OnStateChange += OnCbObjectStateChange;
     }
 
     private void OnCbObjectStateChange(CbObjectStateMachine.CbObjectState state)
     {
-        if (state == CbObjectStateMachine.CbObjectState.Selected)
-        {
-            ShowSnapPoint(true);
-        }
-        else
+        if (state != CbObjectStateMachine.CbObjectState.Selected)
         {
             ShowSnapPoint(false);
+            return;
         }
+        
+        if (TempSelectedStateManager.SelectedObject.PlacedPosition != CbObjectScriptableData.PlacedPosition.SnapPoint) return;
+        
+        ShowSnapPoint(true);
     }
 
     private void OnDrawGizmos()

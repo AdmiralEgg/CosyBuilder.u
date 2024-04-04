@@ -8,6 +8,8 @@ using static DictionarySerialization;
 /// </summary>
 public class LayerAndTagValidator : MonoBehaviour
 {
+    LayerAndTagValidator Instance;
+    
     // Note: IgnoreRaycast is an OOTB layer provided by Unity
     public enum CbLayer { CbObject, CbObjectStatic, CbObjectBounds, CbObjectSpawnPlane, Interactable, IgnoreRaycast, SnapPoint, StaticScene, UI }
     public enum CbTag { Roof, Window, Floor, Door, Pillar, Wall }
@@ -17,15 +19,18 @@ public class LayerAndTagValidator : MonoBehaviour
     private SerializableDictionary<CbLayer, string> _layerDictionary = new SerializableDictionary<CbLayer, string>();
 
     [SerializeField, Header("Creates link between Tags and CbTags enum value")]
-    private SerializableDictionary<CbTag, string> _tagDictionary = new SerializableDictionary<CbTag, string>();
+    public SerializableDictionary<CbTag, string> _tagDictionary = new SerializableDictionary<CbTag, string>();
 
     [Header("Validated Lookups")]
-    [SerializeField, ReadOnly]
-    private SerializableDictionary<CbLayer, int> _validatedLayerDataLookup = new SerializableDictionary<CbLayer, int>();
+    public static SerializableDictionary<CbLayer, int> ValidatedLayerDataLookup = new SerializableDictionary<CbLayer, int>();
+    public static SerializableDictionary<CbTag, string> ValidatedTagDataLookup = new SerializableDictionary<CbTag, string>();
 
     private void Awake()
     {
+        Instance = this;
+        
         ValidateLayers();
+        ValidateTags();
     }
 
     private void ValidateLayers()
@@ -41,13 +46,27 @@ public class LayerAndTagValidator : MonoBehaviour
                 continue;
             }
 
-            _validatedLayerDataLookup.Add(layer.Key, layerIdentifier);
+            ValidatedLayerDataLookup.Add(layer.Key, layerIdentifier);
+        }
+    }
+
+    private void ValidateTags()
+    {
+        // No validation for tags yet, just make them available
+        foreach (KeyValuePair<CbTag, string> tag in _tagDictionary)
+        {
+            ValidatedTagDataLookup.Add(tag.Key, tag.Value);
         }
     }
 
     public int GetLayerIdentifier(CbLayer layer)
     {
-        return _validatedLayerDataLookup[layer];
+        return ValidatedLayerDataLookup[layer];
+    }
+
+    public string GetTagString(CbTag tag)
+    {
+        return _tagDictionary[tag];
     }
 
     public Dictionary<CbLayer, int> BuildLayerMaskList(CbLayer[] layers, MaskInclusionType inclusionType)
@@ -57,7 +76,7 @@ public class LayerAndTagValidator : MonoBehaviour
         // if excluding, then populate the temp dictionary with everything
         if (inclusionType == MaskInclusionType.Exclude)
         {
-            filteredDictionary = new Dictionary<CbLayer, int>(_validatedLayerDataLookup);
+            filteredDictionary = new Dictionary<CbLayer, int>(ValidatedLayerDataLookup);
         }
         else
         {
@@ -70,7 +89,7 @@ public class LayerAndTagValidator : MonoBehaviour
             if (inclusionType == MaskInclusionType.Include)
             {
                 // add to parsedDictionary
-                filteredDictionary.Add(layer, _validatedLayerDataLookup[layer]);
+                filteredDictionary.Add(layer, ValidatedLayerDataLookup[layer]);
             }
 
             if (inclusionType == MaskInclusionType.Exclude)

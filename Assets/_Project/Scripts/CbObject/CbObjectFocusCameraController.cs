@@ -5,13 +5,12 @@ using Sirenix.OdinInspector;
 using static DictionarySerialization;
 using System.Collections.Generic;
 using System;
-using static CbObjectScriptableData;
 using System.Linq;
 
 public class CbObjectFocusCameraController : MonoBehaviour
 {
     [SerializeField, ReadOnly]
-    private List<GameObject> _focusCameraList;
+    private List<CinemachineVirtualCamera> _focusCameraList;
 
     [SerializeField, ReadOnly]
     private SerializableDictionary<GameObject, GameObject> _focusCameraDictionaryWithParentGameObjects = new SerializableDictionary<GameObject, GameObject>();
@@ -25,37 +24,38 @@ public class CbObjectFocusCameraController : MonoBehaviour
 
     private void Start()
     {
-        ConfigureFocusCameras();
-        AddSetTypeCameraReferences();
-    }
+        FindFocusCameras();
 
-    private void AddSetTypeCameraReferences()
-    {
-        if (_focusCameraList.Count == 0) return;
-        if (_objectData.FocusCameraType != CbObjectScriptableData.FocusCameraType.Set) return;
+        if (_focusCameraList.Count != 0)
+        {
+            _objectData.IsFocusable = true;
+        }
 
         foreach (var camera in _focusCameraList)
         {
-            _focusCameraDictionaryWithParentGameObjects.Add(camera.transform.parent.gameObject, camera.gameObject);
+            ConfigureFocusCameras(camera);
         }
     }
 
-    private void ConfigureFocusCameras()
+    private void FindFocusCameras()
     {
+        if (_objectData.FocusCameraType == CbObjectScriptableData.FocusCameraType.None) return;
+        
         GetComponentsInChildren<CinemachineVirtualCamera>().ForEach(camera =>
         {
-            camera.Priority = 12;
-            camera.gameObject.SetActive(false);
-
-            _focusCameraList.Add(camera.gameObject);
+            _focusCameraList.Add(camera);
         });
+    }
 
-        if (_focusCameraList.Count == 0) return;
-        if (_objectData.IsFocusable == false)
+    private void ConfigureFocusCameras(CinemachineVirtualCamera cam)
+    {
+        cam.Priority = 12;
+        cam.gameObject.SetActive(false);
+
+        if (_objectData.FocusCameraType == CbObjectScriptableData.FocusCameraType.Set)
         {
-            Debug.LogWarning("Found Focus VCams, IsFocusable is false. Set a FocusCameraType to use Focus on this CbObject");
-            return;
-        }
+            _focusCameraDictionaryWithParentGameObjects.Add(cam.transform.parent.gameObject, cam.gameObject);
+        };
     }
 
     public void EnableFocusCamera(GameObject objectFocused = null)
@@ -82,9 +82,9 @@ public class CbObjectFocusCameraController : MonoBehaviour
 
     public void DisableFocusCamera()
     {
-        foreach (GameObject cameraGameObject in _focusCameraList)
+        foreach (CinemachineVirtualCamera cameraGameObject in _focusCameraList)
         {
-            cameraGameObject.SetActive(false);
+            cameraGameObject.gameObject.SetActive(false);
         }
     }
 
@@ -94,10 +94,8 @@ public class CbObjectFocusCameraController : MonoBehaviour
 
         Dictionary<CinemachineVirtualCamera, float> cameraDistances = new Dictionary<CinemachineVirtualCamera, float>();
 
-        foreach (GameObject cameraGameObject in _focusCameraList)
+        foreach (CinemachineVirtualCamera camera in _focusCameraList)
         {
-            var camera = cameraGameObject.GetComponent<CinemachineVirtualCamera>();
-
             // raycast from the focus target to the camera
             Physics.Raycast(camera.LookAt.position, camera.transform.position, out RaycastHit hitInfo, maxRaycastDistance, ~LayerMask.GetMask("MovementPlane", "SpawnPlane"));
 

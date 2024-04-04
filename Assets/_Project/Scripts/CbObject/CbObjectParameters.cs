@@ -36,14 +36,14 @@ public class CbObjectParameters : MonoBehaviour
     [SerializeField, ReadOnly]
     public CbObjectScriptableData.FocusCameraType FocusCameraType;
     
-    [SerializeField, ReadOnly]
+    [SerializeField, ReadOnly, Tooltip("Set to True if FocusCameraType is set, and the CbObject has a focus camera")]
     private bool _isFocusable = false;
 
     public bool IsFocusable
     {
         get { return _isFocusable; }
         
-        private set
+        set
         {
             _isFocusable = value;
         }
@@ -67,14 +67,5 @@ public class CbObjectParameters : MonoBehaviour
 
         _nameInUI = _runTimeCbObjectData.name;
         _isCustomisable = _runTimeCbObjectData.IsCustomisable;
-
-        if (_runTimeCbObjectData.FocusType != CbObjectScriptableData.FocusCameraType.None)
-        {
-            _isFocusable = true;
-        }
-        else
-        {
-            _isFocusable = false;
-        }
     }
 }

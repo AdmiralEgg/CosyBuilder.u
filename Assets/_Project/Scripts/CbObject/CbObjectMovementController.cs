@@ -52,16 +52,16 @@ public class CbObjectMovementController : MonoBehaviour
     /// </summary>
     private void SnapPointRadiusCheck()
     {
-        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.WithinSnapPoint);
+        RaycastHit snapPointHit = CursorData.GetRaycastHit(CursorData.LayerMaskType.WithinSnapPoint);
 
-        if (hit.collider == null)
+        if (snapPointHit.collider == null)
         {
             _isInsideFreeSnapPoint = false;
             _activeSnapPoint = null;
             return;
         }
 
-        SnapPoint snapPoint = hit.collider.GetComponent<SnapPoint>();
+        SnapPoint snapPoint = snapPointHit.collider.GetComponent<SnapPoint>();
 
         if (snapPoint.InUse == true)
         {
@@ -70,18 +70,17 @@ public class CbObjectMovementController : MonoBehaviour
             return;
         }
 
+        RaycastHit surfaceHit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+
+        Vector3 positionOffsets = new Vector3(
+            surfaceHit.normal.x * _objectData.WallOffset,
+            surfaceHit.normal.y * _objectData.GroundOffset,
+            surfaceHit.normal.z * _objectData.WallOffset
+        );
+
+        this.transform.position = (snapPointHit.collider.transform.position + positionOffsets);
+
         _activeSnapPoint = snapPoint;
-
-        this.transform.position = hit.collider.transform.position;
-
-        // TODO: We want a hover over the snappoint before placing down
-        //this.transform.position = new Vector3
-        //(
-        //    hit.collider.transform.position.x,
-        //    hit.collider.transform.position.y,
-        //    transform.position.z
-        //);
-
         _isInsideFreeSnapPoint = true;
     }
 
@@ -99,8 +98,7 @@ public class CbObjectMovementController : MonoBehaviour
         // We've hit nothing
         if (hit.collider == null) return;
 
-        // TODO: Add offsets for Ground and Surface faces. 
-        
+        // TODO: Add offsets for Ground and Surface faces.         
         Vector3 positionOffsets = new Vector3(
             hit.normal.x * _objectData.WallOffset,
             hit.normal.y * _objectData.GroundOffset,

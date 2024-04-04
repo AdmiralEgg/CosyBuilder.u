@@ -327,6 +327,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3237294389563166387, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.2772657
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237294389563166387, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.050343893
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237294389563166387, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.17141151
+      objectReference: {fileID: 0}
     - target: {fileID: 7783906082998034205, guid: 3738ba2c1d65464488b31fcda419dd81, type: 3}
       propertyPath: _initialState
       value: 1
@@ -404,14 +416,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172178863}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -9, y: 0, z: 8.78}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 6, y: 0, z: 8.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 816379466}
   m_Father: {fileID: 1566874841}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!65 &172178865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -550,12 +562,12 @@ MonoBehaviour:
       Value: UI
   _tagDictionary:
     _serializedList:
-    - Key: 0
-      Value: Roof
     - Key: 1
       Value: Window
     - Key: 2
       Value: Floor
+    - Key: 0
+      Value: Roof
     - Key: 3
       Value: Door
     - Key: 4
@@ -1212,14 +1224,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871876523}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -6, y: 0, z: 8.78}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 6, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1568940535}
   m_Father: {fileID: 1566874841}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!65 &871876525
 BoxCollider:
   m_ObjectHideFlags: 0

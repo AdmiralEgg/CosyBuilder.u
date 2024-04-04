@@ -16,6 +16,7 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
         PlayerInput.GetPlayerByIndex(0).actions["DropOrPlace"].performed += OnDropOrPlace;
+        
         TempSelectedStateManager.SetSelectedObject(_stateMachine.CbObjectData);
 
         Cursor.visible = false;
@@ -41,16 +42,37 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
     {
         Debug.Log("Drop or place...");
         
-        // if over a snappoint, then attach
-        if (_stateMachine.GetActiveSnapPoint() != null)
+        switch (_stateMachine.CbObjectData.PlacedPosition)
         {
-            Debug.Log("Switch to Placed state");
+            case CbObjectScriptableData.PlacedPosition.None:
+                _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
+                break;
             
-            _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Placed);
-            return;
+            case CbObjectScriptableData.PlacedPosition.SnapPoint:
+                if (_stateMachine.GetActiveSnapPoint() == null)
+                {
+                    _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
+                    break;
+                }
+
+                Debug.Log("Switch to Placed state: SnapPoint");
+                _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Placed);
+                break;
+            case CbObjectScriptableData.PlacedPosition.Floor:
+
+                if (CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask).collider.tag != LayerAndTagValidator.ValidatedTagDataLookup[LayerAndTagValidator.CbTag.Floor])
+                {
+                    _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
+                    break;
+                }
+
+                Debug.Log("Switch to Placed state: Floor");
+                _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Placed);
+                break;
+            default:
+                _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
+                break;
         }
-        
-        _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
     }
 
     private void PlayStateChangeAudio(CbObjectStateMachine.CbObjectState lastState)
