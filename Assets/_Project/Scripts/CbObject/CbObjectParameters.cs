@@ -32,6 +32,9 @@ public class CbObjectParameters : MonoBehaviour
     [SerializeField, ReadOnly]
     public float WallOffset = 0.5f;
 
+    [SerializeField, ReadOnly]
+    public float SurfaceOffset = 0.05f;
+
     [Header("Focus Data")]
     [SerializeField, ReadOnly]
     public CbObjectScriptableData.FocusCameraType FocusCameraType;
@@ -64,6 +67,7 @@ public class CbObjectParameters : MonoBehaviour
         PlacedPosition = _runTimeCbObjectData.PlacablePosition;
         GroundOffset = _runTimeCbObjectData.GroundHeightOffset;
         WallOffset = _runTimeCbObjectData.WallHeightOffset;
+        SurfaceOffset = _runTimeCbObjectData.SurfaceHeightOffset;
 
         _nameInUI = _runTimeCbObjectData.name;
         _isCustomisable = _runTimeCbObjectData.IsCustomisable;

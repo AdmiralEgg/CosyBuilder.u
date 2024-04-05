@@ -17,7 +17,8 @@ MonoBehaviour:
   InventoryIcon: {fileID: 2800000, guid: 9febeef07dabe7c44b4cc26e27fc97e7, type: 3}
   AvailableInInventory: 1
   AvailableAtRoot: 1
-  ParentObjects: []
+  ParentObjects:
+  - {fileID: 11400000, guid: 18375f3129ca2b94fa0225210d14218e, type: 2}
   GroundHeightOffset: 0.5
   WallHeightOffset: 1
   PlacablePosition: 2

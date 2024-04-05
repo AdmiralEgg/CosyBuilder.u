@@ -1,25 +1,33 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class CbObjectPlacedFocusedSubState : BaseState<CbObjectPlacedSubStateMachine.CbObjectPlacedSubState>
 {
     private CbObjectPlacedSubStateMachine _subStateMachine;
+    private CbObjectFocusCameraController _focusController;
 
     public static Action<CbObjectPlacedSubStateMachine> CbObjectFocused;
-    public static Action<CbObjectScriptableData> cbObjectFocusedScriptableData;
+    public static Action<CbObjectScriptableData> CbObjectFocusedScriptableData;
 
-    public CbObjectPlacedFocusedSubState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState key, CbObjectPlacedSubStateMachine stateMachine, Rigidbody cbObjectRb) : base(key)
+    public CbObjectPlacedFocusedSubState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState key, CbObjectPlacedSubStateMachine stateMachine, CbObjectFocusCameraController focusController) : base(key)
     {
         _subStateMachine = stateMachine;
+        _focusController = focusController;
     }
 
     public override void EnterState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState lastState)
     {
-        _subStateMachine.GetComponent<CbObjectFocusCameraController>().EnableFocusCamera();
-        cbObjectFocusedScriptableData?.Invoke(_subStateMachine.GetComponent<CbObjectParameters>().CbObjectData);
+        if (_subStateMachine.GetObjectData().FocusCameraType == CbObjectScriptableData.FocusCameraType.Set)
+        {
+            GameObject focusedObject = _subStateMachine.GetFocusedGameObject();
+            _focusController.EnableFocusCamera(focusedObject);
+        }
+        else
+        {
+            _focusController.EnableFocusCamera();
+        }
+        
+        CbObjectFocusedScriptableData?.Invoke(_subStateMachine.GetComponent<CbObjectParameters>().CbObjectData);
         CbObjectFocused?.Invoke(_subStateMachine);
     }
 

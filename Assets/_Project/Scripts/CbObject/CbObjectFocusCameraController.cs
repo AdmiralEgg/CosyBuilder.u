@@ -117,7 +117,7 @@ public class CbObjectFocusCameraController : MonoBehaviour
 
     private CinemachineVirtualCamera GetBestSetFocusCamera(GameObject objectFocused)
     {
-        Debug.Log($"Inside get best set focus: {objectFocused.name}");
+        //Debug.Log($"Inside get best set focus: {objectFocused.name}");
 
         // get the key from the value
         CinemachineVirtualCamera foundCamera = _focusCameraDictionaryWithParentGameObjects[objectFocused].GetComponent<CinemachineVirtualCamera>();
@@ -130,6 +130,12 @@ public class CbObjectFocusCameraController : MonoBehaviour
     /// </summary>
     private CinemachineVirtualCamera GetConfiguredOrbitalCamera()
     {
-        throw new NotImplementedException();
+        // TODO: Raycast from target point 360 around
+        // Work out angle allowed based on the result
+        // Allow edge of screen moving of camera
+        // https://docs.unity3d.com/Packages/com.unity.cinemachine@2.8/manual/CinemachineBodyOrbitalTransposer.html#:~:text=Orbital%20Transposer%20attempts%20to%20position%20the%20camera%20so,then%20the%20player%20can%20also%20control%20the%20camera.
+        // Change the 'Bias' to set the start point of the rotation
+
+        return _focusCameraList.FirstOrDefault();
     }
 }

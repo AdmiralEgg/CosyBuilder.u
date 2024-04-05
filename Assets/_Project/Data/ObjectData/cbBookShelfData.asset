@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b1f9c0855153ce41914daae849ed062, type: 3}
-  m_Name: cbBookData
+  m_Name: cbBookShelfData
   m_EditorClassIdentifier: 
-  UIName: Book
-  Prefab: {fileID: 8698045013528468025, guid: e4e74f718b9c28b4ead64d5fdfb0e071, type: 3}
-  InventoryIcon: {fileID: 2800000, guid: 1313b6d11b79dff448ae10d2363c069e, type: 3}
+  UIName: Book Shelf
+  Prefab: {fileID: 2223018777079849592, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
+  InventoryIcon: {fileID: 2800000, guid: c003c079f3f10c5498ea13f88fcb3ace, type: 3}
   AvailableInInventory: 1
-  AvailableAtRoot: 0
-  ParentObjects:
-  - {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
-  - {fileID: 11400000, guid: bf4f8b5c39e60b140b01e90cb20a409b, type: 2}
+  AvailableAtRoot: 1
+  ParentObjects: []
   GroundHeightOffset: 0.2
   WallHeightOffset: 0.5
-  PlacablePosition: 0
-  FocusType: 0
+  PlacablePosition: 2
+  FocusType: 2
   IsCustomisable: 0

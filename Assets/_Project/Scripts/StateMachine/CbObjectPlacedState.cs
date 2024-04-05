@@ -26,6 +26,8 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
+        SetPlacedPosition();
+
         // Switch on required components
         _stateMachine.UpdateRotationComponent(isActive: false);
         _stateMachine.UpdateMovementComponent(isActive: false);
@@ -39,6 +41,25 @@ public class CbObjectPlacedState : BaseState<CbObjectStateMachine.CbObjectState>
         }
 
         _stateMachine.SetLayers(CbObjectLayerController.LayerState.CbObjectStatic);
+    }
+
+    /// <summary>
+    /// Ensure object is placed on the ground or wall, and isn't hovering.
+    /// </summary>
+    private void SetPlacedPosition()
+    {
+        // before fixing, move to the cursor marker
+        switch (_subStateMachine.GetObjectData().PlacedPosition)
+        {
+            case CbObjectScriptableData.PlacedPosition.SnapPoint:
+                RaycastHit snapPointhit = CursorData.GetRaycastHit(CursorData.LayerMaskType.WithinSnapPoint);
+                _subStateMachine.transform.position = snapPointhit.collider.GetComponent<SnapPoint>().transform.position;
+                break;
+            case CbObjectScriptableData.PlacedPosition.Floor:
+                RaycastHit movementHit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+                _subStateMachine.transform.position = movementHit.point;
+                break;
+        }
     }
 
     public override void ExitState()

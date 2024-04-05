@@ -34,24 +34,7 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         _subStateMachine.OnPointerEnterEvent += OnPointerEnter;
         _subStateMachine.OnPointerExitEvent += OnPointerExit;
 
-        SetPlacedPosition();
         ConfigureRigidbody();
-    }
-
-    private void SetPlacedPosition()
-    {
-        // before fixing, move to the cursor marker
-        switch (_subStateMachine.GetObjectData().PlacedPosition)
-        {
-            case CbObjectScriptableData.PlacedPosition.SnapPoint:
-                RaycastHit snapPointhit = CursorData.GetRaycastHit(CursorData.LayerMaskType.WithinSnapPoint);
-                _subStateMachine.transform.position = snapPointhit.collider.GetComponent<SnapPoint>().transform.position;
-                break;
-            case CbObjectScriptableData.PlacedPosition.Floor:
-                RaycastHit movementHit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
-                _subStateMachine.transform.position = movementHit.point;
-                break;
-        }
     }
 
     private void ConfigureRigidbody()
@@ -100,6 +83,22 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
         await WaitForDetatchStart(ct, _subStateMachine.DetatchHoldStartTime);
     }
 
+    private void OnScroll(PointerEventData data)
+    {
+        UnityEngine.Debug.Log($"Selected Object: {data.pointerCurrentRaycast.gameObject}");
+
+        _subStateMachine.SetFocusedGameObject(data.pointerCurrentRaycast.gameObject);
+
+        // Check scroll up
+        if (data.scrollDelta.y <= 0) return;
+
+        // check object is focusable
+        if (_subStateMachine.GetObjectData().IsFocusable == false) return;
+
+        // start zooming the camera, if a zoom threshold hits then switch to the VCam
+        _subStateMachine.QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused);
+    }
+
     private async Task WaitForDetatchStart(CancellationToken token, float waitTime)
     {
         float time = 0;
@@ -128,16 +127,4 @@ public class CbObjectPlacedDefaultSubState : BaseState<CbObjectPlacedSubStateMac
     }
 
     public override void UpdateState() { }
-
-    private void OnScroll(PointerEventData data)
-    {
-        // Check scroll up
-        if (data.scrollDelta.y <= 0) return;
-
-        // check object is focusable
-        if (_subStateMachine.GetObjectData().IsFocusable == false) return;
-
-        // start zooming the camera, if a zoom threshold hits then switch to the VCam
-        _subStateMachine.QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused);
-    }
 }

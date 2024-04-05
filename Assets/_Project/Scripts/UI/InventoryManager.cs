@@ -51,7 +51,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        CbObjectPlacedFocusedSubState.cbObjectFocusedScriptableData += RefreshInventoryList;
+        CbObjectPlacedFocusedSubState.CbObjectFocusedScriptableData += RefreshInventoryList;
         
         GameModeStateMachine.OnStateChange = (state) =>
         {
@@ -82,6 +82,8 @@ public class InventoryManager : MonoBehaviour
             // Put them into sets of objects with a PARENT and CHILDREN
             foreach (CbObjectScriptableData cbObject in cbObjectData.Result)
             {
+                CheckObjectCanSpawn(cbObject);
+                
                 InstantiateInventoryItem(cbObject);
 
                 // Initialize InventoryPool
@@ -93,6 +95,15 @@ public class InventoryManager : MonoBehaviour
 
             RefreshInventoryList();
         };
+    }
+
+    private void CheckObjectCanSpawn(CbObjectScriptableData cbObject)
+    {
+        // if no root and no parents
+        if (cbObject.AvailableAtRoot == false && cbObject.ParentObjects.Length == 0)
+        {
+            Debug.LogWarning($"Object {cbObject.name} is not available to spawn. Please check CbObjectData");
+        }
     }
 
     private void InstantiateInventoryPool(CbObjectScriptableData cbObject)
@@ -145,7 +156,9 @@ public class InventoryManager : MonoBehaviour
         inventoryElement.Clear();
         
         List<CbObjectScriptableData> inventoryList = GetInventoryList(cbObject);
-        
+
+        if (inventoryList == null) return;
+
         foreach (CbObjectScriptableData inventoryObject in inventoryList)
         {
             VisualElement inventoryTile = _inventoryTileLookup[inventoryObject];

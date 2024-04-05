@@ -35,18 +35,22 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     private CbObjectPlacedDetatchingSubState _detatchingSubState;
     private CbObjectPlacedFocusedSubState _focusedSubState;
 
+    // If multiple focusable objects exist, this is the one scrolled over.
+    private GameObject _focusedGameObject;
+
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
     public Action OnSetDetatchStartedOutlineEvent, OnSetDetatchCompletedOutlineEvent, OnPointerEnterEvent, OnPointerExitEvent;
 
     private void Awake()
     {
         Rigidbody _cbObjectRigidBody = GetComponent<Rigidbody>();
+        CbObjectFocusCameraController _cbObjectFocusCameraController = GetComponent<CbObjectFocusCameraController>();
         _parentStateMachine = GetComponent<CbObjectStateMachine>();
 
         // create substates
         _defaultSubState = new CbObjectPlacedDefaultSubState(CbObjectPlacedSubState.Default, this, _cbObjectRigidBody);
         _detatchingSubState = new CbObjectPlacedDetatchingSubState(CbObjectPlacedSubState.Detatching, this, _cbObjectRigidBody);
-        _focusedSubState = new CbObjectPlacedFocusedSubState(CbObjectPlacedSubState.Focused, this, _cbObjectRigidBody);
+        _focusedSubState = new CbObjectPlacedFocusedSubState(CbObjectPlacedSubState.Focused, this, _cbObjectFocusCameraController);
 
         AddStateToLookup(CbObjectPlacedSubState.Default, _defaultSubState);
         AddStateToLookup(CbObjectPlacedSubState.Detatching, _detatchingSubState);
@@ -102,5 +106,15 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     public void OnPointerExit(PointerEventData eventData)
     {
         OnPointerExitEvent?.Invoke();
+    }
+
+    public GameObject GetFocusedGameObject()
+    {
+        return _focusedGameObject;
+    }
+
+    public void SetFocusedGameObject(GameObject focusedObject)
+    {
+        _focusedGameObject = focusedObject;
     }
 }

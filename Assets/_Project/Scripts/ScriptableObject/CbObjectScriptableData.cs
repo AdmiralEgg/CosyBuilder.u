@@ -34,6 +34,9 @@ public class CbObjectScriptableData : ScriptableObject
     [Tooltip("Height off walls where the center of the gameobject can't be lower than")]
     public float WallHeightOffset = 0.25f;
 
+    [Tooltip("Hover height from surfaces")]
+    public float SurfaceHeightOffset = 0.05f;
+
     [Tooltip("Can the object hang on a SnapPoint on a wall?")]
     public PlacedPosition PlacablePosition = PlacedPosition.None;
 
