@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cbCandle_Base_Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 1a78df65fa9a5b946897d4132cab5d1f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 70d8b46c68d9ea24084ca4fa0a7eaad9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UVTexture:
-        m_Texture: {fileID: 2800000, guid: 2abd45f788b20b54981e83fd67412210, type: 3}
+        m_Texture: {fileID: 2800000, guid: ae2e856f95fc4314e9749e54f1419715, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:

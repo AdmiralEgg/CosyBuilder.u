@@ -13,9 +13,9 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 1
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 1
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -104,7 +104,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _MetallicValue: 0.271
+    - _MetallicValue: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -112,12 +112,12 @@ Material:
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SmoothnessValue: 0.073
+    - _SmoothnessValue: 0.5
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _TransparencyValue: 0.232
+    - _TransparencyValue: 0.4
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
@@ -128,7 +128,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FromColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _ToColor: {r: 0.3945354, g: 0.5849056, b: 0.48518792, a: 1}
+    - _ToColor: {r: 0.2285066, g: 0.47218537, b: 0.745283, a: 1}
     - _TransparencyColor: {r: 0.6666667, g: 0.6666667, b: 0.7058824, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6363168925562131562

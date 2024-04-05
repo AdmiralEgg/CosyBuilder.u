@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: -8872006458397177251}
   - component: {fileID: 6420626884067356611}
   m_Layer: 0
-  m_Name: _CbObjectTemplate
+  m_Name: _cbObjectTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
+  SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
 --- !u!114 &5373443174110706908

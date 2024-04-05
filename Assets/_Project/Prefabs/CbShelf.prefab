@@ -1056,7 +1056,7 @@ GameObject:
   - component: {fileID: 6356555886459643534}
   - component: {fileID: 3406729180666937904}
   m_Layer: 0
-  m_Name: CbShelf
+  m_Name: cbShelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1071,7 +1071,7 @@ Transform:
   m_GameObject: {fileID: 8621155214587277750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.81, z: 6.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 0
+  _initialState: 1
 --- !u!114 &7986559922460006389
 MonoBehaviour:
   m_ObjectHideFlags: 0

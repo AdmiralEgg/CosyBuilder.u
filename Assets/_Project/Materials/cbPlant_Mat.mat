@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cbPlant_Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 1a78df65fa9a5b946897d4132cab5d1f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 70d8b46c68d9ea24084ca4fa0a7eaad9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UVTexture:
-        m_Texture: {fileID: 2800000, guid: 2a97289bf7c518f43bba7436c91c2b24, type: 3}
+        m_Texture: {fileID: 2800000, guid: f2fea238c1e3804409f76e7d03c85746, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -90,6 +90,7 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -103,6 +104,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _MetallicValue: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -110,19 +112,24 @@ Material:
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SmoothnessValue: 0.5
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _TransparencyValue: 0.4
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FromColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _ToColor: {r: 0.8113208, g: 0.7054714, b: 0.24110004, a: 0}
+    - _ToColor: {r: 0.2285066, g: 0.47218537, b: 0.745283, a: 1}
+    - _TransparencyColor: {r: 0.6666667, g: 0.6666667, b: 0.7058824, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6363168925562131562
 MonoBehaviour:

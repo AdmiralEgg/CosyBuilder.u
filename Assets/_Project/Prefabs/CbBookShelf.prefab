@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: -8872006458397177251}
   - component: {fileID: 6420626884067356611}
   m_Layer: 0
-  m_Name: CbBookShelf
+  m_Name: cbBookShelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 0
+  _initialState: 1
 --- !u!114 &4379505700911955378
 MonoBehaviour:
   m_ObjectHideFlags: 0

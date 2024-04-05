@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7067788214665705940}
   - component: {fileID: 2215338665527002477}
   m_Layer: 0
-  m_Name: CbBook
+  m_Name: cbBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.3333, y: 0.3333, z: 0.3333}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1345282481213776796}
@@ -165,7 +165,9 @@ MonoBehaviour:
   _nameInUI: Default
   PlacedPosition: 1
   _isCustomisable: 0
-  MinSelectionHeight: 0.5
+  GroundOffset: 0.5
+  WallOffset: 0.5
+  SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
 --- !u!114 &6226693812989463105
@@ -198,7 +200,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 0
+  _initialState: 1
 --- !u!114 &6924211578286332145
 MonoBehaviour:
   m_ObjectHideFlags: 0
