@@ -45,6 +45,9 @@ public class GameModeFocusState : BaseState<GameModeStateMachine.GameModeState>
 
     private void OnRevertFocus(InputAction.CallbackContext context)
     {
+        // If object is selected, ignore the revert request
+        if (TempSelectedStateManager.IsObjectSelected() == true) return;
+        
         FocusList[0].QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Default);
 
         // Pop the top item from the FocusTree.

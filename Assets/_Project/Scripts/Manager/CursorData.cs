@@ -7,7 +7,7 @@ using static DictionarySerialization;
 
 public class CursorData : MonoBehaviour
 {
-    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck }
+    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface }
 
     public static CursorData Instance;
 
@@ -47,7 +47,8 @@ public class CursorData : MonoBehaviour
                 LayerAndTagValidator.CbLayer.CbObject,
                 LayerAndTagValidator.CbLayer.IgnoreRaycast,
                 LayerAndTagValidator.CbLayer.SnapPoint,
-                LayerAndTagValidator.CbLayer.CbObjectBounds
+                LayerAndTagValidator.CbLayer.CbObjectBounds,
+                LayerAndTagValidator.CbLayer.PlaceableSurface
             },
             LayerAndTagValidator.MaskInclusionType.Exclude
         ));
@@ -82,6 +83,17 @@ public class CursorData : MonoBehaviour
             {
                 LayerAndTagValidator.CbLayer.CbObject,
                 LayerAndTagValidator.CbLayer.CbObjectStatic,
+            },
+            LayerAndTagValidator.MaskInclusionType.Include
+        ));
+
+        Instance._layerMaskTypeLookup.Add(new LayerMaskTypeData
+        (
+            LayerMaskType.OnPlaceableSurface,
+            "Check whether we are hovering on a placable surface",
+            new LayerAndTagValidator.CbLayer[]
+            {
+                LayerAndTagValidator.CbLayer.PlaceableSurface
             },
             LayerAndTagValidator.MaskInclusionType.Include
         ));
@@ -176,11 +188,11 @@ public class CursorData : MonoBehaviour
         
         if (layerMask == -1) 
         {
-            Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity);
+            Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask, QueryTriggerInteraction.Collide);
         }
         else
         {
-            Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask);
+            Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask, QueryTriggerInteraction.Collide);
         }
 
         return hit;

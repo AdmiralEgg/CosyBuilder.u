@@ -18,7 +18,9 @@ MonoBehaviour:
   AvailableInInventory: 1
   AvailableAtRoot: 1
   ParentObjects: []
-  MinimumSelectionHeight: 0.5
+  GroundHeightOffset: 0.5
+  WallHeightOffset: 0.25
+  SurfaceHeightOffset: 0.3
   PlacablePosition: 1
   FocusType: 1
   IsCustomisable: 0

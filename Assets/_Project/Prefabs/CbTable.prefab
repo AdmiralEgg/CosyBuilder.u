@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1709277778963117883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3694362142088130515}
+  - component: {fileID: 2284743762493437135}
+  m_Layer: 13
+  m_Name: cbTable_PlacableSurface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3694362142088130515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709277778963117883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1817280578581908843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2284743762493437135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709277778963117883}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5966768, y: 0, z: 1.5933251}
+  m_Center: {x: -0.0033521652, y: 1, z: 0.0016758442}
 --- !u!1 &4968357807235419269
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 226905486449192066}
   m_Layer: 0
-  m_Name: CameraFocusPoint
+  m_Name: cbTable_FocusPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5708871136335036232}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1507315, y: 0.7345203, z: -0.1733967, w: 0.63850886}
+  m_LocalRotation: {x: 0.1507315, y: 0.7345203, z: -0.17339674, w: 0.6385088}
   m_LocalPosition: {x: -2.970804, y: 2.613, z: 0.4175191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -376,6 +429,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7481924673356255332}
+  - {fileID: 3694362142088130515}
   - {fileID: 226905486449192066}
   - {fileID: 5264001279147713458}
   m_Father: {fileID: 0}
@@ -399,6 +453,7 @@ MonoBehaviour:
   _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
+  SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
 --- !u!114 &5108721167038257740

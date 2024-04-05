@@ -560,6 +560,8 @@ MonoBehaviour:
       Value: StaticScene
     - Key: 8
       Value: UI
+    - Key: 9
+      Value: PlaceableSurface
   _tagDictionary:
     _serializedList:
     - Key: 1
@@ -636,6 +638,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectedObjectMoveController: {fileID: 0}
   _markerColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &464958335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 464958336}
+  - component: {fileID: 464958337}
+  m_Layer: 13
+  m_Name: Sill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &464958336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464958335}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1690067628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &464958337
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464958335}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5195796, y: 0, z: 0.4}
+  m_Center: {x: -1.4962016, y: 0.9, z: 0.14026928}
 --- !u!1 &473998799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,6 +2275,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1438661085}
+  - {fileID: 1690067628}
   - {fileID: 1386489953}
   - {fileID: 871876524}
   - {fileID: 172178864}
@@ -2434,6 +2490,134 @@ MonoBehaviour:
   _snapRadius: 0.4
   _indicatorColor: {r: 1, g: 1, b: 1, a: 0.4}
   _snapIndicatorRadius: 0.1
+--- !u!1 &1690067627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690067628}
+  - component: {fileID: 1690067631}
+  - component: {fileID: 1690067630}
+  - component: {fileID: 1690067629}
+  - component: {fileID: 1690067632}
+  m_Layer: 12
+  m_Name: WallWithSill
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1690067628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690067627}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 8.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 464958336}
+  m_Father: {fileID: 1566874841}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &1690067629
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690067627}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 0.5084677}
+  m_Center: {x: -1.5, y: 1.5, z: -0.24576616}
+--- !u!33 &1690067630
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690067627}
+  m_Mesh: {fileID: 4300000, guid: b6229365b0f88b0489bf78a535e9530f, type: 2}
+--- !u!23 &1690067631
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690067627}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b22e270a5f476c74a8745048abf12902, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1690067632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690067627}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.4623024, y: 0.36742115, z: 0.33243752}
+  m_Center: {x: -1.4999999, y: 0.75512767, z: 0.1571598}
 --- !u!1 &1757509289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2561,6 +2745,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 826275233}
     m_Modifications:
+    - target: {fileID: 930119989151555970, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.111208685
+      objectReference: {fileID: 0}
+    - target: {fileID: 930119989151555970, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.024953762
+      objectReference: {fileID: 0}
+    - target: {fileID: 930119989151555970, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.96937954
+      objectReference: {fileID: 0}
+    - target: {fileID: 930119989151555970, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.21751602
+      objectReference: {fileID: 0}
     - target: {fileID: 2223018777079849592, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
       propertyPath: m_Name
       value: CbBookShelf

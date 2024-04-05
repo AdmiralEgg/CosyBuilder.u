@@ -98,12 +98,26 @@ public class CbObjectMovementController : MonoBehaviour
         // We've hit nothing
         if (hit.collider == null) return;
 
-        // TODO: Add offsets for Ground and Surface faces.         
-        Vector3 positionOffsets = new Vector3(
-            hit.normal.x * _objectData.WallOffset,
-            hit.normal.y * _objectData.GroundOffset,
-            hit.normal.z * _objectData.WallOffset
-        );
+        RaycastHit placeableSurface = CursorData.GetRaycastHit(CursorData.LayerMaskType.OnPlaceableSurface);
+
+        Vector3 positionOffsets = Vector3.zero;
+
+        if (placeableSurface.collider != null)
+        {
+            positionOffsets = new Vector3(
+                placeableSurface.normal.x * _objectData.SurfaceOffset,
+                placeableSurface.normal.y * _objectData.SurfaceOffset,
+                placeableSurface.normal.z * _objectData.SurfaceOffset
+            );
+        }
+        else
+        {
+            positionOffsets = new Vector3(
+                hit.normal.x * _objectData.WallOffset,
+                hit.normal.y * _objectData.GroundOffset,
+                hit.normal.z * _objectData.WallOffset
+            );
+        }
 
         Vector3 targetPosition = (hit.point + positionOffsets);
         _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.15f);

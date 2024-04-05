@@ -11,7 +11,7 @@ public class LayerAndTagValidator : MonoBehaviour
     LayerAndTagValidator Instance;
     
     // Note: IgnoreRaycast is an OOTB layer provided by Unity
-    public enum CbLayer { CbObject, CbObjectStatic, CbObjectBounds, CbObjectSpawnPlane, Interactable, IgnoreRaycast, SnapPoint, StaticScene, UI }
+    public enum CbLayer { CbObject, CbObjectStatic, CbObjectBounds, CbObjectSpawnPlane, Interactable, IgnoreRaycast, SnapPoint, StaticScene, UI, PlaceableSurface }
     public enum CbTag { Roof, Window, Floor, Door, Pillar, Wall }
     public enum MaskInclusionType { Include, Exclude }
 
