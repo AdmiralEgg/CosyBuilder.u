@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1f9c0855153ce41914daae849ed062, type: 3}
   m_Name: cbCushionSmall
   m_EditorClassIdentifier: 
-  UIName: Default
+  UIName: Small Cushion
   Prefab: {fileID: 0}
-  InventoryIcon: {fileID: 0}
+  InventoryIcon: {fileID: 2800000, guid: 97762e30384a1624193d37a3820053c9, type: 3}
   AvailableInInventory: 1
-  AvailableAtRoot: 1
+  AvailableAtRoot: 0
   ParentObjects: []
   GroundHeightOffset: 0.5
   WallHeightOffset: 0.25

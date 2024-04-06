@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cbPictureFrame
   m_EditorClassIdentifier: 
   UIName: Picture Frame
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 4618375657437973861, guid: 21fbe580b7d68c84a9032dc404b64fe9, type: 3}
   InventoryIcon: {fileID: 2800000, guid: 59aed4349488eca4bbe7e7dbf3aa33f5, type: 3}
   AvailableInInventory: 1
   AvailableAtRoot: 1

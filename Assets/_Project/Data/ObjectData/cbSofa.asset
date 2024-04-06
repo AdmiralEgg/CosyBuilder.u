@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cbSofa
   m_EditorClassIdentifier: 
   UIName: Sofa
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6996849567784096020, guid: dd099795a1b9e8c44b47323ffc181f7f, type: 3}
   InventoryIcon: {fileID: 0}
   AvailableInInventory: 0
   AvailableAtRoot: 0

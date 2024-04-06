@@ -59,21 +59,18 @@ public class EdgeOfScreenMoveCamera : MonoBehaviour
 
         _currentMousePosition = Input.mousePosition;
 
-        // if cursor is outside bounds (offscreen), do nothing
-        if (_currentMousePosition.y > Screen.height ||
-            _currentMousePosition.x > Screen.width ||
-            _currentMousePosition.y < 0 ||
-            _currentMousePosition.x < 0)
-        {
-            return;
-        }
+        // if game is unfocused, do nothing
+        if (Application.isFocused == false) return;
+        if (Cursor.lockState != CursorLockMode.Confined) return;
+
+        // if we're in the editor, do nothing
+        if (Application.isEditor == true) return;
 
         if (_currentMousePosition.x >= _upperBoundsX)
         {
             // Edge of screen X (right)
             _boundsPercentageOverX = Mathf.Clamp(((Input.mousePosition.x - _upperBoundsX) / (Screen.width - _upperBoundsX)), 0, 1); // returns a value between 0 and 1. 
             _easedMovementSpeedXRight = (_movementSpeed * _minimumMoveSpeed) + Mathf.Lerp(0, (_movementSpeed * (1 - _minimumMoveSpeed)), _boundsPercentageOverX);
-            
             
             //this.transform.Translate(Vector3.right * _easedMovementSpeedX * Time.deltaTime, Space.Self);
         }

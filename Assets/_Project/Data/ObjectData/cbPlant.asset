@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cbPlant
   m_EditorClassIdentifier: 
   UIName: Plant
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2873973397994141127, guid: 2d0db220876a9b146ad481d0f5386286, type: 3}
   InventoryIcon: {fileID: 2800000, guid: 4b919da08a39c4f42be9b5df5cb5bf2a, type: 3}
   AvailableInInventory: 1
   AvailableAtRoot: 0

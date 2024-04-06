@@ -25,21 +25,30 @@ public class InventoryManager : MonoBehaviour
     [Tooltip("Objects available while in Build mode")]
     private CbObjectScriptableData _rootSet;
     
-    [SerializeField]
-    private UIDocument _inventoryUI;
+    [SerializeField, Required]
+    private UIDocument _inventoryUIDocument;
+
+    private VisualElement _inventoryContainerVisualElement;
     
     private InventoryObjectPoolController _inventoryPoolController;
-    
+
     private const string INVENTORY_ELEMENT_NAME = "Inventory";
+    private const string ROOT_SET_NAME = "RootSet";
 
     private void Awake()
     {
+        // Create a rootSet
         _rootSet = ScriptableObject.CreateInstance<CbObjectScriptableData>();
+        _rootSet.name = ROOT_SET_NAME;
+        _inventorySetLookup.Add(_rootSet, new List<CbObjectScriptableData>());
+
+        // Get a reference to the pool controller
         _inventoryPoolController = GetComponent<InventoryObjectPoolController>();
 
-        VisualElement inventoryElement = GetInventoryUIElement(INVENTORY_ELEMENT_NAME);
+        VisualElement rootElement = _inventoryUIDocument.rootVisualElement;
+        _inventoryContainerVisualElement = rootElement.Q<VisualElement>(INVENTORY_ELEMENT_NAME);
 
-        if (inventoryElement != null )
+        if (_inventoryContainerVisualElement != null )
         {
             BuildInventorySets();
         }
@@ -62,27 +71,15 @@ public class InventoryManager : MonoBehaviour
         };
     }
 
-    private VisualElement GetInventoryUIElement(string rootVisualElementName)
-    {
-        // Get the inventory element
-        VisualElement rootElement = _inventoryUI.rootVisualElement;
-        return rootElement.Q<VisualElement>(rootVisualElementName);
-    }
-
     private void BuildInventorySets()
     {
-        // Create a rootSet
-        _rootSet.name = "RootSet";
-
-        _inventorySetLookup.Add(_rootSet, new List<CbObjectScriptableData>());
-
         // Get all scriptable objects
         Addressables.LoadAssetsAsync<CbObjectScriptableData>(_cbObjectDataLabel, null).Completed += (cbObjectData) =>
         {
             // Put them into sets of objects with a PARENT and CHILDREN
             foreach (CbObjectScriptableData cbObject in cbObjectData.Result)
             {
-                CheckObjectCanSpawn(cbObject);
+                if (CanObjectSpawn(cbObject) == false) continue;
                 
                 InstantiateInventoryItem(cbObject);
 
@@ -97,13 +94,22 @@ public class InventoryManager : MonoBehaviour
         };
     }
 
-    private void CheckObjectCanSpawn(CbObjectScriptableData cbObject)
+    private bool CanObjectSpawn(CbObjectScriptableData cbObject)
     {
         // if no root and no parents
         if (cbObject.AvailableAtRoot == false && cbObject.ParentObjects.Length == 0)
         {
-            Debug.LogWarning($"Object {cbObject.name} is not available to spawn. Please check CbObjectData");
+            Debug.LogWarning($"Object {cbObject.name} is not available to spawn. Please check CbObjectData.");
+            return false;
         }
+
+        if (cbObject.Prefab == null)
+        {
+            Debug.LogWarning($"Object {cbObject.name} does not have an attached prefab. Please check CbObjectData");
+            return false;
+        }
+
+        return true;
     }
 
     private void InstantiateInventoryPool(CbObjectScriptableData cbObject)
@@ -119,8 +125,9 @@ public class InventoryManager : MonoBehaviour
     /// <param name="cbObject"></param>
     private void InstantiateInventoryItem(CbObjectScriptableData cbObject)
     {
-        if (cbObject.AvailableAtRoot)
+        if (cbObject.AvailableAtRoot == true)
         {
+            //TODO: Don't add it if already exists
             _inventorySetLookup[_rootSet].Add(cbObject);
         }
 
@@ -128,7 +135,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (_inventorySetLookup.ContainsKey(cbObjectParent))
             {
-                _inventorySetLookup[_rootSet].Add(cbObject);
+                _inventorySetLookup[cbObjectParent].Add(cbObject);
             }
             else
             {
@@ -151,9 +158,7 @@ public class InventoryManager : MonoBehaviour
     /// <param name="cbObject"></param>
     private void RefreshInventoryList(CbObjectScriptableData cbObject = null)
     {
-        VisualElement inventoryElement = GetInventoryUIElement(INVENTORY_ELEMENT_NAME);
-
-        inventoryElement.Clear();
+        _inventoryContainerVisualElement.Clear();
         
         List<CbObjectScriptableData> inventoryList = GetInventoryList(cbObject);
 
@@ -166,7 +171,7 @@ public class InventoryManager : MonoBehaviour
             if (inventoryTile == null) continue;
 
             // fetch element from the InventoryTile dictionary
-            inventoryElement.Add(inventoryTile);
+            _inventoryContainerVisualElement.Add(inventoryTile);
         }
     }
 

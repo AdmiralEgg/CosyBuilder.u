@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8571673135033194463}
   - component: {fileID: 6346087169096044815}
   - component: {fileID: 4160474576493484014}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbWall_Mesh
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -136,9 +136,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8886367641307505444}
-  - component: {fileID: 8244117948160919481}
   - component: {fileID: 6085383794350544952}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: SnapPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,27 +159,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8968828378057746943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8244117948160919481
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2832705734081393141}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6085383794350544952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,8 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inUse: 0
   _snapRadius: 0.4
-  _indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  _snapIndicatorRadius: 0
+  _indicatorColor: {r: 0.990566, g: 0.990566, b: 0.990566, a: 0.5019608}
+  _snapIndicatorRadius: 0.1
 --- !u!1 &8546090310519245373
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8968828378057746943}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbWall
   m_TagString: Wall
   m_Icon: {fileID: 0}

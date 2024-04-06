@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1f9c0855153ce41914daae849ed062, type: 3}
   m_Name: cbFishTank
   m_EditorClassIdentifier: 
-  UIName: FishTank
-  Prefab: {fileID: 2223018777079849592, guid: 55bf52c65e9f9bf43b5cc92cb90a0b84, type: 3}
+  UIName: Fish Tank
+  Prefab: {fileID: 2239969447966173507, guid: ef8267e917886e447b441bcc282a9a04, type: 3}
   InventoryIcon: {fileID: 2800000, guid: 27f094890f8d575418402c3694b8ce94, type: 3}
   AvailableInInventory: 1
   AvailableAtRoot: 0

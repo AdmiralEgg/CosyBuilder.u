@@ -80,6 +80,11 @@ public class MoveCamera : MonoBehaviour
         newPositionSphere.Radius = 0.1f;
         newPositionSphere.Color = Color.cyan;
 
+        _grabStartIndicator = new GameObject();
+        Sphere grabStartSphere = _grabStartIndicator.AddComponent<Sphere>();
+        grabStartSphere.Radius = 0.1f;
+        grabStartSphere.Color = Color.green;
+
         PlayerInput playerInput = PlayerInput.GetPlayerByIndex(0);
 
         _moveAction = playerInput.actions.FindAction("Move");

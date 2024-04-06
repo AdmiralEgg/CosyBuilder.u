@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: cbVase
   m_EditorClassIdentifier: 
   UIName: Vase
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 6092277062805595622, guid: ad4bae1f0c1710a4caa5369ba417bbfd, type: 3}
   InventoryIcon: {fileID: 2800000, guid: 8c5dd6f5a15d05d4282417d30b121d27, type: 3}
   AvailableInInventory: 1
   AvailableAtRoot: 0
