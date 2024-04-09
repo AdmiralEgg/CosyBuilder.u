@@ -182,18 +182,14 @@ public class CursorData : MonoBehaviour
         Debug.DrawRay(_rayFromMouseCursor.origin, _rayFromMouseCursor.direction * 200, Color.yellow);
     }
 
+    /// <summary>
+    /// If no layermask is passed, use -1
+    /// </summary>
     private static RaycastHit RunRaycast(int layerMask = -1)
     {
         RaycastHit hit;
         
-        if (layerMask == -1) 
-        {
-            Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask, QueryTriggerInteraction.Collide);
-        }
-        else
-        {
-            Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask, QueryTriggerInteraction.Collide);
-        }
+        Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask, QueryTriggerInteraction.Collide);
 
         return hit;
     }

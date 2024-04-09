@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using ImGuiNET;
-using System.Xml.Linq;
-using Shapes;
-using UnityEditor.Rendering;
 
 public class GameModeFocusState : BaseState<GameModeStateMachine.GameModeState>
 {
@@ -33,6 +27,20 @@ public class GameModeFocusState : BaseState<GameModeStateMachine.GameModeState>
         PlayerInput.GetPlayerByIndex(0).actions["FocusModeRevert"].performed += OnRevertFocus;
         CbObjectPlacedFocusedSubState.CbObjectFocused += FocusListAdd;
         ImGuiUn.Layout += OnImGuiLayout;
+    }
+
+    public override void UpdateState() { }
+
+    public override void ExitState()
+    {
+        _stateMachine.CurrentFocus = null;
+        FocusList.Clear();
+
+        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed -= OnRevertFocus;
+        PlayerInput.GetPlayerByIndex(0).actions["FocusModeRevert"].performed -= OnRevertFocus;
+        CbObjectPlacedFocusedSubState.CbObjectFocused -= FocusListAdd;
+
+        ImGuiUn.Layout -= OnImGuiLayout;
     }
 
     private void FocusListAdd(CbObjectPlacedSubStateMachine objectStateMachine)
@@ -62,20 +70,6 @@ public class GameModeFocusState : BaseState<GameModeStateMachine.GameModeState>
             FocusList[0].QueueNextState(CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused);
         }
     }
-
-    public override void ExitState()
-    {
-        _stateMachine.CurrentFocus = null;
-        FocusList.Clear();
-
-        PlayerInput.GetPlayerByIndex(0).actions["SwitchView"].performed -= OnRevertFocus;
-        PlayerInput.GetPlayerByIndex(0).actions["FocusModeRevert"].performed -= OnRevertFocus;
-        CbObjectPlacedFocusedSubState.CbObjectFocused -= FocusListAdd;
-
-        ImGuiUn.Layout -= OnImGuiLayout;
-    }
-
-    public override void UpdateState() { }
 
     private void OnImGuiLayout()
     {

@@ -5,8 +5,6 @@ public class InventoryObjectPoolController : MonoBehaviour
 {
     public ItemPool InitializeInventoryTile(CbObjectScriptableData cbObjectdata)
     {
-        Debug.Log($"Got new inventory item {cbObjectdata}");
-        
         ItemPool itemPool = ConfigureObjectPool(cbObjectdata);
 
         return itemPool;

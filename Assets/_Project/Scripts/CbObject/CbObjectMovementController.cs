@@ -27,6 +27,9 @@ public class CbObjectMovementController : MonoBehaviour
         set { _activeSnapPoint = value; }
     }
 
+    //[SerializeField, Tooltip("Maximum speed the object follows the cursor at"), Range(0.15f, 1f)]
+    private float _objectCursorFollowSpeed = 0.5f;
+
     private void Awake()
     {
         _objectData = GetComponent<CbObjectParameters>();
@@ -42,7 +45,10 @@ public class CbObjectMovementController : MonoBehaviour
         
         if (_isInsideFreeSnapPoint == false)
         {
-            MoveObject();
+            // Check Placable Surface Hit
+            Vector3 placeableSurface = GetPlacableSurfaceNormal();
+
+            MoveObject(placeableSurface);
         }
     }
 
@@ -91,23 +97,21 @@ public class CbObjectMovementController : MonoBehaviour
         this.transform.position = new Vector3(hit.point.x, _objectData.GroundOffset, hit.point.z);
     }
 
-    private void MoveObject()
+    private void MoveObject(Vector3 placeableSurfaceNormal)
     {
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
         // We've hit nothing
         if (hit.collider == null) return;
 
-        RaycastHit placeableSurface = CursorData.GetRaycastHit(CursorData.LayerMaskType.OnPlaceableSurface);
-
         Vector3 positionOffsets = Vector3.zero;
 
-        if (placeableSurface.collider != null)
+        if (placeableSurfaceNormal != Vector3.zero)
         {
             positionOffsets = new Vector3(
-                placeableSurface.normal.x * _objectData.SurfaceOffset,
-                placeableSurface.normal.y * _objectData.SurfaceOffset,
-                placeableSurface.normal.z * _objectData.SurfaceOffset
+                placeableSurfaceNormal.x * _objectData.SurfaceOffset,
+                placeableSurfaceNormal.y * _objectData.SurfaceOffset,
+                placeableSurfaceNormal.z * _objectData.SurfaceOffset
             );
         }
         else
@@ -120,9 +124,27 @@ public class CbObjectMovementController : MonoBehaviour
         }
 
         Vector3 targetPosition = (hit.point + positionOffsets);
-        _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, 0.15f);
+        _objectMovePosition = Vector3.MoveTowards(this.transform.position, targetPosition, _objectCursorFollowSpeed);
 
         this.transform.position = _objectMovePosition;
+    }
+
+    private Vector3 GetPlacableSurfaceNormal()
+    {
+        RaycastHit placeableSurface = CursorData.GetRaycastHit(CursorData.LayerMaskType.OnPlaceableSurface);
+
+        if (placeableSurface.transform == null)
+        {
+            return Vector3.zero;
+        }
+
+        // if placeable surface is the selected object, ignore it
+        if (placeableSurface.transform.gameObject == this.gameObject)
+        {
+            return Vector3.zero;
+        }
+
+        return placeableSurface.normal;
     }
 
     private void OnDrawGizmos()

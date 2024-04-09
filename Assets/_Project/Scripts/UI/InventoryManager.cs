@@ -61,14 +61,38 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         CbObjectPlacedFocusedSubState.CbObjectFocusedScriptableData += RefreshInventoryList;
-        
+
         GameModeStateMachine.OnStateChange = (state) =>
         {
             if (state == GameModeStateMachine.GameModeState.Build)
             {
                 RefreshInventoryList();
             }
+
+            // TODO: Get a reference to the current focus from the GameModeStateManager.
+            if (state == GameModeStateMachine.GameModeState.Focus)
+            {
+                // Get the object focused (GameModeStateMachine.CurrentFocus)
+
+                // Refresh inventory with the focus object data
+            }
         };
+
+        // Hide inventory on blending
+        SendCameraBlendEvents.CameraBlendStarted += HideInventory;
+        SendCameraBlendEvents.CameraBlendFinished += ShowInventory;
+    }
+
+    private void HideInventory()
+    {
+        Debug.Log("Hide inventory");
+        _inventoryContainerVisualElement.AddToClassList("hidden");
+    }
+
+    private void ShowInventory()
+    {
+        Debug.Log("Show inventory");
+        _inventoryContainerVisualElement.RemoveFromClassList("hidden");
     }
 
     private void BuildInventorySets()

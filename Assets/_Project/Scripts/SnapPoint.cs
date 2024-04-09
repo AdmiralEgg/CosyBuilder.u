@@ -31,6 +31,7 @@ public class SnapPoint : MonoBehaviour
 
         // Create a sphere collider
         var sphereCollider = this.gameObject.AddComponent<SphereCollider>();
+        sphereCollider.isTrigger = true;
         sphereCollider.radius = _snapRadius;
 
         _snapPointIndicator = this.gameObject.AddComponent<Sphere>();
