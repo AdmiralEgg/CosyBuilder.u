@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CbObject", order = 1)]
@@ -43,6 +44,13 @@ public class CbObjectScriptableData : ScriptableObject
     [Header("Interaction Data")]
     [Tooltip("If the object has a focus camera, what type of camera is it.")]
     public FocusCameraType FocusType = CbObjectScriptableData.FocusCameraType.None;
+
+    [Header("Customisation Data")]
+    [Tooltip("Single static colour to apply to object")]
+    public Color StaticColor;
+
+    [Tooltip("List of random colours to apply to object")]
+    public List<Color> RandomColorList;
 
     [Tooltip("Can the object be visually changed using the UI?")]
     public bool IsCustomisable = false;

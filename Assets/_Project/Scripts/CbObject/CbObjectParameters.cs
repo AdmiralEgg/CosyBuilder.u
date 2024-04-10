@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEditor;
+using System.Collections.Generic;
 
 
 public class CbObjectParameters : MonoBehaviour
@@ -22,9 +23,6 @@ public class CbObjectParameters : MonoBehaviour
 
     [SerializeField, ReadOnly]
     public CbObjectScriptableData.PlacedPosition PlacedPosition = CbObjectScriptableData.PlacedPosition.SnapPoint;
-
-    [SerializeField, ReadOnly]
-    private bool _isCustomisable = false;
 
     [SerializeField, ReadOnly]
     public float GroundOffset = 0.5f;
@@ -52,6 +50,16 @@ public class CbObjectParameters : MonoBehaviour
         }
     }
 
+    [Header("Customisation Data")]
+    [SerializeField, ReadOnly, Tooltip("Customisation feature not available.")]
+    private bool _isCustomisable = false;
+
+    [SerializeField, ReadOnly]
+    public List<Color> RandomColorList;
+
+    [SerializeField, ReadOnly]
+    public Color StaticColor;
+
     private void Awake()
     {
         InitializeObjectData();
@@ -68,6 +76,8 @@ public class CbObjectParameters : MonoBehaviour
         GroundOffset = _runTimeCbObjectData.GroundHeightOffset;
         WallOffset = _runTimeCbObjectData.WallHeightOffset;
         SurfaceOffset = _runTimeCbObjectData.SurfaceHeightOffset;
+        StaticColor = _runTimeCbObjectData.StaticColor;
+        RandomColorList = _runTimeCbObjectData.RandomColorList;
 
         _nameInUI = _runTimeCbObjectData.name;
         _isCustomisable = _runTimeCbObjectData.IsCustomisable;

@@ -6,11 +6,16 @@ using System.Collections.Generic;
 using UnityEngine.UIElements;
 using static DictionarySerialization;
 using System.Collections;
+using ImGuiNET;
+using UnityEditorInternal;
 
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField, Required]
     private AssetLabelReference _cbObjectDataLabel;
+
+    [SerializeField, Required]
+    private VisualTreeAsset _itemTileAsset;
 
     [Header("Inventory Lookups")]
     [SerializeField, ReadOnly]
@@ -82,6 +87,9 @@ public class InventoryManager : MonoBehaviour
         SendCameraBlendEvents.CameraBlendStarted += HideInventory;
         SendCameraBlendEvents.CameraBlendFinished += ShowInventory;
     }
+    private void OnEnable() => ImGuiUn.Layout += OnImGuiLayout;
+
+    private void OnDisable() => ImGuiUn.Layout -= OnImGuiLayout;
 
     private void HideInventory()
     {
@@ -168,10 +176,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        VisualElement itemTile = InventoryTileBuilder.GetConfiguredItemTile(cbObject.InventoryIcon);
-        VisualElement amountLabel = InventoryTileBuilder.GetConfiguredAmountLabel();
-
-        itemTile.Add(amountLabel);
+        VisualElement itemTile = InventoryTileBuilder.GetNewConfTile(_itemTileAsset, cbObject.InventoryIcon);
 
         _inventoryTileLookup.Add(cbObject, itemTile);
     }
@@ -257,5 +262,16 @@ public class InventoryManager : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
 
         itemTile.visible = true;
+    }
+
+    private void OnImGuiLayout()
+    {
+        if (ImGui.CollapsingHeader("Inventory", ImGuiTreeNodeFlags.DefaultOpen))
+        {
+            if (ImGui.Button("Refresh Inventory"))
+            {
+                RefreshInventoryList();
+            }
+        }
     }
 }

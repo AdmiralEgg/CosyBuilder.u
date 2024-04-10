@@ -3,6 +3,28 @@ using UnityEngine.UIElements;
 
 public static class InventoryTileBuilder
 {
+    public static VisualElement GetNewConfTile(VisualTreeAsset tileAsset, Texture2D icon = null)
+    {
+        //VisualElement ve = new VisualElement(tileAsset);
+        TemplateContainer itemTileContainer = tileAsset.Instantiate();
+
+        VisualElement itemTile = itemTileContainer.contentContainer.Query<VisualElement>("ItemTile");
+
+        // Resize correctly
+        itemTile.style.maxHeight = new StyleLength(new Length(100, LengthUnit.Percent));
+        itemTile.style.minHeight = new StyleLength(new Length(100, LengthUnit.Percent));
+
+        // Callback to ensure UI element remains square
+        itemTile.RegisterCallback<GeometryChangedEvent, VisualElement>(NewHeightCallback, itemTile);
+        
+        if (icon != null)
+        {
+            itemTile.style.backgroundImage = new StyleBackground(icon);
+        }
+
+        return itemTileContainer;
+    }
+
     public static VisualElement GetConfiguredItemTile(Texture2D icon = null)
     {
         VisualElement itemTile = new VisualElement();
