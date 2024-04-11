@@ -7,7 +7,7 @@ using static DictionarySerialization;
 
 public class CursorData : MonoBehaviour
 {
-    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface }
+    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface, OnInteraction }
 
     public static CursorData Instance;
 
@@ -48,7 +48,9 @@ public class CursorData : MonoBehaviour
                 LayerAndTagValidator.CbLayer.IgnoreRaycast,
                 LayerAndTagValidator.CbLayer.SnapPoint,
                 LayerAndTagValidator.CbLayer.CbObjectBounds,
-                LayerAndTagValidator.CbLayer.PlaceableSurface
+                LayerAndTagValidator.CbLayer.PlaceableSurface,
+                LayerAndTagValidator.CbLayer.CustomisationPoint,
+                LayerAndTagValidator.CbLayer.InteractionPoint
             },
             LayerAndTagValidator.MaskInclusionType.Exclude
         ));
@@ -94,6 +96,18 @@ public class CursorData : MonoBehaviour
             new LayerAndTagValidator.CbLayer[]
             {
                 LayerAndTagValidator.CbLayer.PlaceableSurface
+            },
+            LayerAndTagValidator.MaskInclusionType.Include
+        ));
+
+        Instance._layerMaskTypeLookup.Add(new LayerMaskTypeData
+        (
+            LayerMaskType.OnInteraction,
+            "Check whether we are hovering on a placable surface",
+            new LayerAndTagValidator.CbLayer[]
+            {
+                LayerAndTagValidator.CbLayer.InteractionPoint,
+                LayerAndTagValidator.CbLayer.CustomisationPoint
             },
             LayerAndTagValidator.MaskInclusionType.Include
         ));

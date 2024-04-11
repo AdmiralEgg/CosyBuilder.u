@@ -14,9 +14,12 @@ public class TempSelectedStateManager : MonoBehaviour
         private set { _selectedObject = value; }
     }
 
+    private static GameModeStateMachine _gameModeStateMachine;
+
     void Awake()
     {
         Instance = this;
+        _gameModeStateMachine = GetComponent<GameModeStateMachine>();
     }
 
     public static void SetSelectedObject(CbObjectParameters data)
@@ -31,5 +34,8 @@ public class TempSelectedStateManager : MonoBehaviour
         return false;
     }
 
-    
+    public static GameModeStateMachine.GameModeState GetGameModeState()
+    {
+        return _gameModeStateMachine.GetCurrentState();
+    }
 }

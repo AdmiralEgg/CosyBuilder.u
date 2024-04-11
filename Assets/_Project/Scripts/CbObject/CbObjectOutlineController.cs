@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 
-public class CbObjectOutlineController : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
+public class CbObjectOutlineController : MonoBehaviour
 {
     [SerializeField]
     float _outlineSizeFree = 0.15f, _outlineSizeSelected = 0.2f, _outlineSizePlaced = 0.2f;
+
+    [SerializeField, Tooltip("As the camera gets closer to the object, the outline size should increase. In focus mode, multiply the outline sizes.")]
+    float _focusStateOutlineSizeMultiplyer = 15f;
 
     [SerializeField]
     Color _outlineColorFree = new Color(0.7f, 0.7f, 0.7f, 0.5f);
@@ -39,24 +42,27 @@ public class CbObjectOutlineController : MonoBehaviour//, IPointerEnterHandler, 
         CursorData.OnCbObjectHit += NewCbObjectHit;
     }
 
-    private void NewCbObjectHit(CbObjectParameters @object)
+    private void NewCbObjectHit(CbObjectParameters cbObject)
     {
         if (TempSelectedStateManager.IsObjectSelected() == true) return;
 
-        if (@object == null)
+        if (cbObject == null)
         {
             _outline.enabled = false;
             return;
         }
 
-        if (@object.gameObject != this.gameObject)
+        if (cbObject.gameObject != this.gameObject)
         {
             _outline.enabled = false;
             return;
         }
 
-        if (@object.gameObject == this.gameObject)
+        if (cbObject.gameObject == this.gameObject)
         {
+            CbObjectStateMachine.CbObjectState currentState = _stateMachine.GetCurrentState();
+            UpdateOutlineState(currentState);
+
             _outline.enabled = true;
             return;
         }
@@ -74,39 +80,27 @@ public class CbObjectOutlineController : MonoBehaviour//, IPointerEnterHandler, 
         _placedSubStateMachine.OnSetDetatchCompletedOutlineEvent -= SetDetatchCompletedOutline;
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    // TODO: Check whether a CbObject is already selected!
-    //    if (TempSelectedStateManager.IsObjectSelected() == true) return;
-
-    //    _outline.enabled = true;
-    //}
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    // If we're in the selected state, don't turn off the outline
-    //    if (_stateMachine.GetCurrentState() == CbObjectStateMachine.CbObjectState.Selected) return;
-        
-    //    _outline.enabled = false;
-    //}
-
     private void UpdateOutlineState(CbObjectStateMachine.CbObjectState newState)
-    {
+    {        
+        float _focusMultiplyer = TempSelectedStateManager.GetGameModeState() 
+            == GameModeStateMachine.GameModeState.Focus ? _focusStateOutlineSizeMultiplyer : 1;
+
         switch (newState)
         {
             case CbObjectStateMachine.CbObjectState.Free:
-                _outline.OutlineWidth = _outlineSizeFree;
+                _outline.OutlineWidth = (_outlineSizeFree * _focusMultiplyer);
                 _outline.OutlineColor = _outlineColorFree;
                 _outline.OutlineMode = Outline.Mode.OutlineAll;
                 _outline.enabled = false;
                 break;
             case CbObjectStateMachine.CbObjectState.Selected:
-                _outline.OutlineWidth = _outlineSizeSelected;
+                _outline.OutlineWidth = (_outlineSizeSelected * _focusMultiplyer);
                 _outline.OutlineColor = _outlineColorSelected;
                 _outline.OutlineMode = Outline.Mode.OutlineAll;
                 _outline.enabled = true;
                 break;
             case CbObjectStateMachine.CbObjectState.Placed:
-                _outline.OutlineWidth = _outlineSizePlaced;
+                _outline.OutlineWidth = (_outlineSizePlaced * _focusMultiplyer);
                 _outline.OutlineColor = _outlineColorPlaced;
                 _outline.OutlineMode = Outline.Mode.OutlineVisible;
                 _outline.enabled = false;
@@ -120,8 +114,6 @@ public class CbObjectOutlineController : MonoBehaviour//, IPointerEnterHandler, 
     {
         // check the state of the CbObject. Swap outline if state has changed
         CbObjectStateMachine.CbObjectState currentState = _stateMachine.GetCurrentState();
-
-        //Debug.Log($"Current State: {currentState}. Last Known: {_lastCheckedState}");
 
         if (_lastCheckedState != currentState)
         {

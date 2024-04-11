@@ -199,8 +199,8 @@ GameObject:
   - component: {fileID: 6151097164625445273}
   - component: {fileID: 2932762183414297267}
   - component: {fileID: 7226325279908835543}
-  m_Layer: 3
-  m_Name: BlowCandle
+  m_Layer: 10
+  m_Name: cbInteractBlowCandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,8 +254,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.67210186, y: 0.4263292, z: 0.64456016}
-  m_Center: {x: -0.0046842694, y: 0.21422938, z: -0.0017999113}
+  m_Size: {x: 0.5736203, y: 0.5051145, z: 0.56331336}
+  m_Center: {x: -0.0046842885, y: 0.25362203, z: 0.0018931859}
 --- !u!1 &2155872229082884286
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &837016194343228906
 Transform:
   m_ObjectHideFlags: 0
@@ -5457,12 +5457,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2344714993409635549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5577,6 +5579,7 @@ MonoBehaviour:
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}

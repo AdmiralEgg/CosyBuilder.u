@@ -129,8 +129,8 @@ GameObject:
   - component: {fileID: 7792478300251436504}
   - component: {fileID: 3217653114682046350}
   - component: {fileID: 8136712002808528964}
-  m_Layer: 12
-  m_Name: Switch
+  m_Layer: 10
+  m_Name: cbInteractSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 125083269045894466}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.469, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,7 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e739dd8de1da94c4ea446e574d543188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleActive: []
+  _toggleActive:
+  - {fileID: 5209474255648936013}
+  - {fileID: 5215425136250078}
+  - {fileID: 6477572047757460656}
   _runAnimation: []
 --- !u!65 &8136712002808528964
 BoxCollider:
@@ -184,8 +187,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25408873, y: 0.24106336, z: 0.22593749}
-  m_Center: {x: 0.04419927, y: 1.5496331, z: -0.009071082}
+  m_Size: {x: 0.21694863, y: 0.2500465, z: 0.27796373}
+  m_Center: {x: 0.071486056, y: 0.075716496, z: -0.04072462}
 --- !u!1 &818100921483182943
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,12 +476,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1075805455906405002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +598,7 @@ MonoBehaviour:
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
+  _focusStateOutlineSizeMultiplyer: 10
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
@@ -781,6 +787,7 @@ GameObject:
   - component: {fileID: 5913215361681480240}
   - component: {fileID: 5620692618249787978}
   - component: {fileID: 4279054237085742510}
+  - component: {fileID: 1352072248752169877}
   m_Layer: 3
   m_Name: cbStandingLamp_Stand_Mesh
   m_TagString: Selectable
@@ -872,5 +879,26 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 1.9022483, z: 0.5}
-  m_Center: {x: -0.050000012, y: 0.95112413, z: -0.050000012}
+  m_Size: {x: 0.5, y: 0.23225224, z: 0.5}
+  m_Center: {x: -0.050000012, y: 0.11612612, z: -0.050000012}
+--- !u!65 &1352072248752169877
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312254482599555777}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.11746186, y: 1.8571415, z: 0.14056957}
+  m_Center: {x: -0.05787486, y: 1.1714292, z: -0.054857194}

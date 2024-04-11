@@ -133,7 +133,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8468698443541190279
 Transform:
@@ -368,7 +368,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 126
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5749621862258193822
 Transform:
@@ -472,7 +472,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8670257174007748848
 Transform:
@@ -508,8 +508,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.28473997, y: 0.20535822, z: 0.1355694}
-  m_Center: {x: -1.4997205, y: 1.6519383, z: -0.057026}
+  m_Size: {x: 0.39819574, y: 0.20535822, z: 0.22689798}
+  m_Center: {x: -1.5000242, y: 1.6519434, z: -0.0113617}
 --- !u!114 &3520906664509393100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,4 +523,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggleActive: []
-  _runAnimation: []
+  _runAnimation:
+  - OpenWindow

@@ -10,6 +10,7 @@ TagManager:
   - Window
   - Pillar
   - Wall
+  - FlatSurface
   layers:
   - Default
   - TransparentFX
@@ -21,11 +22,11 @@ TagManager:
   - CbObjectStatic
   - CbObjectBounds
   - CbObjectSpawnPlane
-  - Interactable
+  - InteractionPoint
   - SnapPoint
   - StaticScene
   - PlaceableSurface
-  - 
+  - CustomisationPoint
   - 
   - 
   - 

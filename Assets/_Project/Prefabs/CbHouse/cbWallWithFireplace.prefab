@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 3391167150787754607}
   - component: {fileID: 6545654050705959675}
   - component: {fileID: 5642908633109297049}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: FireLighters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,8 +201,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9314532, y: 2.1103413, z: 1.2363299}
-  m_Center: {x: -4.465103, y: 1.5447451, z: 0.22628942}
+  m_Size: {x: 2.831249, y: 2.4845548, z: 2.5879896}
+  m_Center: {x: -4.520154, y: 1.731851, z: 0.9021191}
 --- !u!114 &5642908633109297049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e739dd8de1da94c4ea446e574d543188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleActive: []
+  _toggleActive:
+  - {fileID: 3398329708159532477}
   _runAnimation: []
 --- !u!1 &1889167532116552607
 GameObject:
@@ -355,9 +356,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1356040573210096704}
   - component: {fileID: 2461249874915664949}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Mantle
-  m_TagString: FlatSurface
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

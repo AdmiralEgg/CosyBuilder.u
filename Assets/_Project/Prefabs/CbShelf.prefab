@@ -454,8 +454,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3353466722991221795}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05034388, y: 0.9440378, z: -0.17141151, w: 0.27726564}
-  m_LocalPosition: {x: -1.8, y: 1.25, z: 3}
+  m_LocalRotation: {x: 0.04419423, y: 0.9546277, z: -0.18256474, w: 0.23109081}
+  m_LocalPosition: {x: -1.44, y: 1.25, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -711,8 +711,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4099739, y: 0, z: 0.59832144}
-  m_Center: {x: -0.008197427, y: 0.22, z: 0.29920936}
+  m_Size: {x: 2.58537, y: 0.030470252, z: 0.6756932}
+  m_Center: {x: -0.0002706051, y: 0.20476484, z: 0.33789524}
 --- !u!1 &6376037401922110598
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,8 +988,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8157770757940567500}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05034388, y: 0.9440378, z: -0.17141151, w: -0.27726564}
-  m_LocalPosition: {x: 1.8, y: 1.25, z: 3}
+  m_LocalRotation: {x: -0.046113204, y: 0.9517759, z: -0.17952889, w: -0.24447009}
+  m_LocalPosition: {x: 1.54, y: 1.25, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1099,12 +1099,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &3179575321190829594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1221,7 @@ MonoBehaviour:
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}

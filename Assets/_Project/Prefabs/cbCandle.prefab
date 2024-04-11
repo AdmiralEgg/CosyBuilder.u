@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6554391431509912565
 Transform:
   m_ObjectHideFlags: 0
@@ -4976,12 +4976,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2775305472747419987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5096,6 +5098,7 @@ MonoBehaviour:
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
@@ -5578,8 +5581,8 @@ GameObject:
   - component: {fileID: 2014220795457107908}
   - component: {fileID: 9006459211824883827}
   - component: {fileID: 5815091734501282842}
-  m_Layer: 3
-  m_Name: BlowCandle
+  m_Layer: 10
+  m_Name: cbInteractBlowCandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5612,7 +5615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e739dd8de1da94c4ea446e574d543188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleActive: []
+  _toggleActive:
+  - {fileID: 357769730728788843}
+  - {fileID: 7509784197301600197}
   _runAnimation: []
 --- !u!65 &5815091734501282842
 BoxCollider:
@@ -5633,5 +5638,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.67210186, y: 0.4263292, z: 0.64456016}
-  m_Center: {x: -0.0046842694, y: 0.21422938, z: -0.0017999113}
+  m_Size: {x: 0.54984534, y: 0.48363695, z: 0.52230406}
+  m_Center: {x: -0.0046842694, y: 0.24288325, z: 0.0020205975}

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5049735703055333629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0.672, z: 0.2448}
+  m_LocalPosition: {x: 0, y: 0.672, z: 0.2448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 5634241703700999325}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.79999995, y: 0.79999995, z: 0.79999995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -263,12 +263,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1195434143416559199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +385,7 @@ MonoBehaviour:
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
@@ -523,8 +526,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7686768388899420089}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.012543585, y: 0.9736318, z: -0.22097343, w: 0.05526833}
-  m_LocalPosition: {x: 5.7366695, y: 1.7856001, z: 2.5568001}
+  m_LocalRotation: {x: -0.03773367, y: 0.9581333, z: -0.15007742, w: -0.24090156}
+  m_LocalPosition: {x: 1.64, y: 1.7856001, z: 3.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

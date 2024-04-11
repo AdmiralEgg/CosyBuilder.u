@@ -62,12 +62,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1968981730079158663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +184,7 @@ MonoBehaviour:
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
@@ -251,8 +254,8 @@ GameObject:
   - component: {fileID: 9001074978187142219}
   - component: {fileID: 3050211543049417746}
   - component: {fileID: 8392047806162406397}
-  m_Layer: 12
-  m_Name: Switch
+  m_Layer: 10
+  m_Name: cbInteractSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,8 +295,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.14376855, y: 0.11758751, z: 0.15821552}
-  m_Center: {x: 0.054840207, y: 0.38730815, z: -0.01651764}
+  m_Size: {x: 0.18561248, y: 0.20062101, z: 0.25866002}
+  m_Center: {x: 0.10566101, y: 0.3457914, z: -0.020672351}
 --- !u!114 &8392047806162406397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e739dd8de1da94c4ea446e574d543188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleActive: []
+  _toggleActive:
+  - {fileID: 6898799545418071497}
   _runAnimation: []
 --- !u!1 &6898799545418071497
 GameObject:
@@ -543,6 +547,7 @@ GameObject:
   - component: {fileID: 6280449716373127376}
   - component: {fileID: 4006652800875488363}
   - component: {fileID: 1451999993428021529}
+  - component: {fileID: 1785626576987359454}
   m_Layer: 3
   m_Name: cbSideLight_Stand_Mesh
   m_TagString: Selectable
@@ -634,5 +639,26 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 1.3957785, z: 1.5}
-  m_Center: {x: -0.050000004, y: 0.69788927, z: -0.050000004}
+  m_Size: {x: 1.5, y: 0.61722755, z: 1.5}
+  m_Center: {x: -0.050000004, y: 0.30861378, z: -0.050000004}
+--- !u!65 &1785626576987359454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031496235120297911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.298861, y: 1.0834863, z: 0.29886088}
+  m_Center: {x: -0.055315204, y: 1.1582577, z: -0.055314846}

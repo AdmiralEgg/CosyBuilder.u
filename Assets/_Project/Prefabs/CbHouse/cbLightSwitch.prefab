@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4074359811425768172}
   - component: {fileID: 8423651650606310449}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: cbInteractSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.98572135, y: 1.0249873, z: 0.57878363}
-  m_Center: {x: -0.046405137, y: 0.14457005, z: -0.12850672}
+  m_Size: {x: 0.98572135, y: 1.0249873, z: 0.61002785}
+  m_Center: {x: -0.04640512, y: 0.14457004, z: 0.01364981}
 --- !u!114 &8423651650606310449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e739dd8de1da94c4ea446e574d543188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleActive: []
+  _toggleActive:
+  - {fileID: 0}
   _runAnimation: []
 --- !u!1 &2223018777079849592
 GameObject:
@@ -112,7 +113,6 @@ GameObject:
   - component: {fileID: 6535730278218041170}
   - component: {fileID: 8865171360237352854}
   - component: {fileID: 2430840474589060858}
-  - component: {fileID: 1282600200452694506}
   m_Layer: 0
   m_Name: cbLightSwitch_Mesh
   m_TagString: Untagged
@@ -185,24 +185,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1282600200452694506
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4682322144564431079}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9, y: 1.8, z: 1.7}
-  m_Center: {x: -0.049999997, y: 0.9, z: -0.049999982}

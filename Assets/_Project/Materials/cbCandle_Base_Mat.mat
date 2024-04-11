@@ -128,7 +128,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FromColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _ToColor: {r: 0.3584906, g: 0.15726237, b: 0.17934838, a: 1}
+    - _ToColor: {r: 0.9150943, g: 0.56656754, b: 0.21150766, a: 1}
     - _TransparencyColor: {r: 0.6666667, g: 0.6666667, b: 0.7058824, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6363168925562131562

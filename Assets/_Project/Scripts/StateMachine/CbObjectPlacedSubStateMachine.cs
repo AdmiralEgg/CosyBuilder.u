@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static CbObjectStateMachine;
 
 public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubStateMachine.CbObjectPlacedSubState>, IPointerDownHandler, IPointerUpHandler, IScrollHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -116,5 +117,10 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     public void SetFocusedGameObject(GameObject focusedObject)
     {
         _focusedGameObject = focusedObject;
+    }
+    
+    public CbObjectPlacedSubState GetCurrentState()
+    {
+        return CurrentState.StateKey;
     }
 }

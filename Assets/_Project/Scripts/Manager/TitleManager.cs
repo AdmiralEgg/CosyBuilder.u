@@ -21,17 +21,6 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
-        //case GameState.Title:
-        //    s_buildModeUI.gameObject.SetActive(false);
-        //    s_titleUI.gameObject.SetActive(true);
-        //    s_titleCamera.gameObject.SetActive(true);
-        //    RegisterTitleButtonCallbacks();
-        //    SwitchInputMap("Title");
-        //    EnableInputMap("FocusCamera", false);
-        //    EnableInputMap("BuildCamera", false);
-        //    EnableInputMap("UI", true);
-        //    break;
-
         if (_skipTitleScreen == false)
         {
             ConfigureTitleScreen();
@@ -45,18 +34,15 @@ public class TitleManager : MonoBehaviour
 
     private void ConfigureTitleScreen()
     {
-        //_gameUI.enabled = false;
-        
+        _gameUI.rootVisualElement.AddToClassList("hidden");
+        _titleUI.rootVisualElement.RemoveFromClassList("hidden");
 
-        // disable inventory UI
-        _titleUI.enabled = true;
         _titleCamera.enabled = true;
     }
 
     private void DisableTitleScreen()
     {
-        // disable inventory UI
-        _titleUI.enabled = false;
+        _titleUI.rootVisualElement.AddToClassList("hidden");
         _titleCamera.enabled = false;
 
         StartCoroutine(WaitForBlend());
@@ -65,8 +51,8 @@ public class TitleManager : MonoBehaviour
     private IEnumerator WaitForBlend()
     {
         yield return new WaitForSeconds(2);
-        
-        //_gameUI.enabled = true;
+
+        _gameUI.rootVisualElement.RemoveFromClassList("hidden");
     }
 
     private void RegisterTitleButtonCallbacks()
@@ -77,8 +63,6 @@ public class TitleManager : MonoBehaviour
         VisualElement rootElement = _titleUI.rootVisualElement;
         Button startButton = rootElement.Q<Button>("StartButton");
         Button optionsButton = rootElement.Q<Button>("OptionsButton");
-
-        //startButton.clicked += OnClickStart;
 
         startButton.RegisterCallback<MouseDownEvent>(e =>
         {

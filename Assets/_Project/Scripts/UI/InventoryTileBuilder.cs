@@ -25,81 +25,9 @@ public static class InventoryTileBuilder
         return itemTileContainer;
     }
 
-    public static VisualElement GetConfiguredItemTile(Texture2D icon = null)
+    public static void GetConfiguredAmountLabel(ItemPool poolToBind = null)
     {
-        VisualElement itemTile = new VisualElement();
-
-        // size
-        itemTile.style.maxHeight = new StyleLength(new Length(100, LengthUnit.Percent));
-        itemTile.style.minHeight = new StyleLength(new Length(100, LengthUnit.Percent));
-
-        // boarder
-        itemTile.style.borderLeftWidth = 3f;
-        itemTile.style.borderRightWidth = 3f;
-        itemTile.style.borderTopWidth = 3f;
-        itemTile.style.borderBottomWidth = 3f;
-        itemTile.style.borderTopLeftRadius = 5f;
-        itemTile.style.borderTopRightRadius = 5f;
-        itemTile.style.borderBottomLeftRadius = 5f;
-        itemTile.style.borderBottomRightRadius = 5f;
-
-        // margins
-        itemTile.style.marginLeft = 3f;
-        itemTile.style.marginRight = 3f;
-
-        // boarder colour
-        StyleColor boarderStyle = new StyleColor();
-        boarderStyle.value = Color.grey;
-        itemTile.style.borderLeftColor = boarderStyle;
-        itemTile.style.borderRightColor = boarderStyle;
-        itemTile.style.borderTopColor = boarderStyle;
-        itemTile.style.borderBottomColor = boarderStyle;
-
-        // background
-        if (icon != null)
-        {
-            itemTile.style.backgroundImage = new StyleBackground(icon);
-        }
-
-        itemTile.RegisterCallback<GeometryChangedEvent, VisualElement>(NewHeightCallback, itemTile);
-
-        return itemTile;
-    }
-
-    public static VisualElement GetConfiguredAmountLabel(ItemPool poolToBind = null)
-    {
-        VisualElement amountLabel = new VisualElement();
-
-        amountLabel.style.position = Position.Absolute;
-        amountLabel.style.right = -5;
-        amountLabel.style.bottom = -5;
-
-        // boarder thickness
-        amountLabel.style.borderLeftWidth = 3f;
-        amountLabel.style.borderRightWidth = 3f;
-        amountLabel.style.borderTopWidth = 3f;
-        amountLabel.style.borderBottomWidth = 3f;
-        amountLabel.style.borderTopLeftRadius = 5f;
-        amountLabel.style.borderTopRightRadius = 5f;
-        amountLabel.style.borderBottomLeftRadius = 5f;
-        amountLabel.style.borderBottomRightRadius = 5f;
-
-        // background color
-        var backgroundColor = new StyleColor();
-        backgroundColor.value = Color.white;
-        amountLabel.style.backgroundColor = backgroundColor;
-
-        // boarder colour
-        StyleColor boarderStyle = new StyleColor();
-        boarderStyle.value = Color.grey;
-        amountLabel.style.borderLeftColor = boarderStyle;
-        amountLabel.style.borderRightColor = boarderStyle;
-        amountLabel.style.borderTopColor = boarderStyle;
-        amountLabel.style.borderBottomColor = boarderStyle;
-
-        amountLabel.BringToFront();
-
-        amountLabel.RegisterCallback<GeometryChangedEvent, VisualElement>(NewHeightCallback, amountLabel);
+        //amountLabel.RegisterCallback<GeometryChangedEvent, VisualElement>(NewHeightCallback, amountLabel);
 
         Label inventoryItemAmountLabel = new Label();
 
@@ -117,25 +45,6 @@ public static class InventoryTileBuilder
         {
             inventoryItemAmountLabel.text = "99";
         }
-
-        inventoryItemAmountLabel.style.textShadow = new StyleTextShadow();
-        inventoryItemAmountLabel.style.marginBottom = 0;
-        inventoryItemAmountLabel.style.marginTop = 0;
-        inventoryItemAmountLabel.style.marginLeft = 0;
-        inventoryItemAmountLabel.style.marginRight = 0;
-        inventoryItemAmountLabel.style.paddingBottom = 0;
-        inventoryItemAmountLabel.style.paddingTop = 0;
-        inventoryItemAmountLabel.style.paddingLeft = 0;
-        inventoryItemAmountLabel.style.paddingRight = 0;
-        inventoryItemAmountLabel.style.alignSelf = Align.Center;
-        inventoryItemAmountLabel.style.color = Color.black;
-
-        amountLabel.pickingMode = PickingMode.Ignore;
-        inventoryItemAmountLabel.pickingMode = PickingMode.Ignore;
-
-        amountLabel.Add(inventoryItemAmountLabel);
-
-        return amountLabel;
     }
 
     private static void NewHeightCallback(GeometryChangedEvent evt, VisualElement visualElement)

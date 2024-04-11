@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/CbCoreStyle.uss?fileID=7433441132597879392&amp;guid=71495363febe6fc4f98c8b368f9d4a08&amp;type=3#CbCoreStyle" />
+    <ui:VisualElement name="ColorPicker" class="colorpicker-visible" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; bottom: auto;">
+        <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" name="CBSlider" style="flex-shrink: 1; flex-grow: 1; min-height: auto; height: 20px; max-width: none; max-height: none; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; position: absolute; left: 0; width: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>

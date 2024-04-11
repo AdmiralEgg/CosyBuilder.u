@@ -38,6 +38,11 @@ public class GameModeStateMachine : StateMachine<GameModeStateMachine.GameModeSt
     private void OnEnable() => ImGuiUn.Layout += OnImGuiLayout;
     private void OnDisable() => ImGuiUn.Layout -= OnImGuiLayout;
 
+    public GameModeState GetCurrentState()
+    {
+        return CurrentState.StateKey;
+    }
+
     private void OnImGuiLayout()
     {
         if (ImGui.CollapsingHeader($"GameModeState", ImGuiTreeNodeFlags.DefaultOpen))
