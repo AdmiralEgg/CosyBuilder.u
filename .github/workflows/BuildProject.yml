@@ -80,3 +80,4 @@ jobs:
       with:
         name: Build_${{ matrix.targetPlatform }}_${{ steps.builder.outputs.buildVersion }}
         path: build/${{ matrix.targetPlatform }}
+        retention-days: 1
