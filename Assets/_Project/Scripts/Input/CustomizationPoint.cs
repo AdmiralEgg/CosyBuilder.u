@@ -1,24 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Shapes;
 using UnityEngine.EventSystems;
 
-public class CustomizationPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
-    private CustomizationManager _customizationManager;
-    
-    private Sphere _customizationPoint;
-
-    const int SATURATION = 70;
-    const int VALUE = 50;
-    const int ALPHA = 150;
-
-    int _currentHue = 0;
+    private MaterialCustomizationController _materialCustomizationController;
 
     [SerializeField]
-    bool _IsInFocus = true;
+    private ColorPickerController _colorPicker;
+
+    [SerializeField]
+    bool _isSelected = false;
+
+    [SerializeField]
+    private Color _defaultColor;
+
+    private Coroutine _colorChangeOverTime;
+
+    private Sphere _customizationPoint;
+
+    private const int SATURATION = 70;
+    private const int VALUE = 50;
+    private const int ALPHA = 150;
+
+    private int _currentHue = 0;
 
     void Awake()
     {
@@ -26,37 +33,62 @@ public class CustomizationPoint : MonoBehaviour, IPointerEnterHandler, IPointerE
         _customizationPoint = gameObject.AddComponent<Sphere>();
         _customizationPoint.Radius = 0.1f;
 
-        StartCoroutine(ColorChangeOverTime());
+        _colorPicker.ColorSwitch += UpdateMaterials;
+
+        UpdateMaterials(_defaultColor);
+        RemoveSelectedState();
     }
 
     private IEnumerator ColorChangeOverTime()
     {
-        while (_IsInFocus)
-        { 
-            _currentHue = ((_currentHue + 1) % 300);
+        _currentHue = ((_currentHue + 1) % 300);
 
-            Color newColor = Color.HSVToRGB(_currentHue / 300f, SATURATION / 100f, VALUE / 100f);
-            newColor.a = ALPHA / 255f;
+        Color newColor = Color.HSVToRGB(_currentHue / 300f, SATURATION / 100f, VALUE / 100f);
+        newColor.a = ALPHA / 255f;
 
-            _customizationPoint.Color = newColor;
+        _customizationPoint.Color = newColor;
 
-            yield return new WaitForSeconds(0.05f);
-        }
+        yield return new WaitForSeconds(0.05f);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // send a message to the clicked gameobject
-        Debug.Log("Bring up customisation window for " + _customizationManager.name);
+        if (_isSelected == false)
+        {
+            SetSelectedState();
+        }
+        else
+        {
+            RemoveSelectedState();
+        }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    private void SetSelectedState()
     {
-        
+        _isSelected = true;
+
+        // hightlight the customisation point
+        StopCoroutine(_colorChangeOverTime);
+        _customizationPoint.Color = Color.white;
+
+        // Get the current material colour
+        Color currentMaterialColor = _materialCustomizationController.GetCurrentMaterialColor();
+
+        // enable the colorpicker
+        _colorPicker.ShowColorPicker(true);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void RemoveSelectedState()
     {
-        
+        _isSelected = false;
+        _colorPicker.ShowColorPicker(false);
+
+        _colorChangeOverTime = StartCoroutine(ColorChangeOverTime());
+    }
+
+    private void UpdateMaterials(Color color)
+    {
+        Debug.Log("Update materials to: " + color.ToString());
+        _materialCustomizationController.UpdateAllMaterialInstances(color);
     }
 }

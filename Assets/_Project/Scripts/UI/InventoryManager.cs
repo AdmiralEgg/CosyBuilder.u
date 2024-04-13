@@ -1,13 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
-using static DictionarySerialization;
 using System.Collections;
 using ImGuiNET;
-using UnityEditorInternal;
+using static DictionarySerialization;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -22,7 +20,7 @@ public class InventoryManager : MonoBehaviour
     private SerializableDictionary<CbObjectScriptableData, List<CbObjectScriptableData>> _inventorySetLookup = new SerializableDictionary<CbObjectScriptableData, List<CbObjectScriptableData>>();
 
     [SerializeField, ReadOnly]
-    private SerializableDictionary<CbObjectScriptableData, VisualElement> _inventoryTileLookup = new SerializableDictionary<CbObjectScriptableData, VisualElement>();
+    private SerializableDictionary<CbObjectScriptableData, VisualElement> _itemTileLookup = new SerializableDictionary<CbObjectScriptableData, VisualElement>();
 
     [SerializeField, ReadOnly]
     private SerializableDictionary<CbObjectScriptableData, ItemPool> _inventoryPoolLookup = new SerializableDictionary<CbObjectScriptableData, ItemPool>();
@@ -87,8 +85,8 @@ public class InventoryManager : MonoBehaviour
         SendCameraBlendEvents.CameraBlendStarted += HideInventory;
         SendCameraBlendEvents.CameraBlendFinished += ShowInventory;
     }
-    private void OnEnable() => ImGuiUn.Layout += OnImGuiLayout;
 
+    private void OnEnable() => ImGuiUn.Layout += OnImGuiLayout;
     private void OnDisable() => ImGuiUn.Layout -= OnImGuiLayout;
 
     private void HideInventory()
@@ -113,13 +111,15 @@ public class InventoryManager : MonoBehaviour
             {
                 if (CanObjectSpawn(cbObject) == false) continue;
                 
-                InstantiateInventoryItem(cbObject);
+                VisualElement itemTile = InstantiateItemTile(cbObject);
+
+                _itemTileLookup.Add(cbObject, itemTile);
 
                 // Initialize InventoryPool
-                InstantiateInventoryPool(cbObject);
+                InstantiateInventoryPool(cbObject, itemTile);
 
                 // Set callbacks
-                SetInventoryTileCallbacks(_inventoryTileLookup[cbObject], _inventoryPoolLookup[cbObject]);
+                SetInventoryTileCallbacks(_itemTileLookup[cbObject], _inventoryPoolLookup[cbObject]);
             }
 
             RefreshInventoryList();
@@ -144,10 +144,14 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
 
-    private void InstantiateInventoryPool(CbObjectScriptableData cbObject)
+    private void InstantiateInventoryPool(CbObjectScriptableData cbObject, VisualElement itemTile)
     {
         ItemPool newPool = _inventoryPoolController.InitializeInventoryTile(cbObject);
-        
+
+        // get link the item value to the pool
+        Label itemAmount = itemTile.Q<Label>("ItemAmountLabel");
+        InventoryTileBuilder.ConfigureAmountLabel(newPool, itemAmount);
+
         _inventoryPoolLookup.Add(cbObject, newPool);
     }
 
@@ -155,7 +159,7 @@ public class InventoryManager : MonoBehaviour
     /// Adds a CbObject to an inventorySet, then initializes an inventory tile and stores it in a dictionary.
     /// </summary>
     /// <param name="cbObject"></param>
-    private void InstantiateInventoryItem(CbObjectScriptableData cbObject)
+    private VisualElement InstantiateItemTile(CbObjectScriptableData cbObject)
     {
         if (cbObject.AvailableAtRoot == true)
         {
@@ -176,9 +180,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        VisualElement itemTile = InventoryTileBuilder.GetNewConfTile(_itemTileAsset, cbObject.InventoryIcon);
-
-        _inventoryTileLookup.Add(cbObject, itemTile);
+        return InventoryTileBuilder.GetItemTile(_itemTileAsset, cbObject.InventoryIcon);
     }
 
     /// <summary>
@@ -195,7 +197,7 @@ public class InventoryManager : MonoBehaviour
 
         foreach (CbObjectScriptableData inventoryObject in inventoryList)
         {
-            VisualElement inventoryTile = _inventoryTileLookup[inventoryObject];
+            VisualElement inventoryTile = _itemTileLookup[inventoryObject];
 
             if (inventoryTile == null) continue;
 

@@ -1,16 +1,8 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class InventoryObjectPoolController : MonoBehaviour
 {
-    public ItemPool InitializeInventoryTile(CbObjectScriptableData cbObjectdata)
-    {
-        ItemPool itemPool = ConfigureObjectPool(cbObjectdata);
-
-        return itemPool;
-    }
-
-    private ItemPool ConfigureObjectPool(CbObjectScriptableData cbObjectData)
+    public ItemPool InitializeInventoryTile(CbObjectScriptableData cbObjectData)
     {
         GameObject poolObject = new GameObject();
         poolObject.transform.parent = this.transform;

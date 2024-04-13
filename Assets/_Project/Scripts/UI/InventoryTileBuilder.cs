@@ -3,9 +3,8 @@ using UnityEngine.UIElements;
 
 public static class InventoryTileBuilder
 {
-    public static VisualElement GetNewConfTile(VisualTreeAsset tileAsset, Texture2D icon = null)
+    public static VisualElement GetItemTile(VisualTreeAsset tileAsset, Texture2D icon = null)
     {
-        //VisualElement ve = new VisualElement(tileAsset);
         TemplateContainer itemTileContainer = tileAsset.Instantiate();
 
         VisualElement itemTile = itemTileContainer.contentContainer.Query<VisualElement>("ItemTile");
@@ -25,25 +24,23 @@ public static class InventoryTileBuilder
         return itemTileContainer;
     }
 
-    public static void GetConfiguredAmountLabel(ItemPool poolToBind = null)
+    public static void ConfigureAmountLabel(ItemPool poolToBind, Label amountLabel)
     {
-        //amountLabel.RegisterCallback<GeometryChangedEvent, VisualElement>(NewHeightCallback, amountLabel);
-
-        Label inventoryItemAmountLabel = new Label();
+        amountLabel.RegisterCallback<GeometryChangedEvent, VisualElement>(NewHeightCallback, amountLabel);
 
         // set default value and bind using an event
         if (poolToBind != null)
         {
-            inventoryItemAmountLabel.text = poolToBind.GetMaxItems().ToString();
+            amountLabel.text = poolToBind.GetMaxItems().ToString();
 
             poolToBind.ItemCountUpdate += (newAmount) =>
             {
-                inventoryItemAmountLabel.text = newAmount.ToString();
+                amountLabel.text = newAmount.ToString();
             };
         }
         else
         {
-            inventoryItemAmountLabel.text = "99";
+            amountLabel.text = "99";
         }
     }
 
