@@ -31,6 +31,7 @@ public class ColorPickerController : MonoBehaviour
     public float ColorSelectorValue;
 
     private VisualElement _colorPickerElement;
+    private Slider _colorSelector;
 
     private bool _colorPickerVisible = false;
     
@@ -51,24 +52,27 @@ public class ColorPickerController : MonoBehaviour
         VisualElement rootElement = UiDocument.rootVisualElement;
         _colorPickerElement = rootElement.Q<VisualElement>("ColorPicker");
 
-        cbStyleSheet.LoadAssetAsync<StyleSheet>().Completed += 
-            (StyleSheet) => 
-            {
-                _colorPickerElement.styleSheets.Add(StyleSheet.Result);
+        _colorSelector = _colorPickerElement.Q<Slider>("CBSlider");
+        _colorSelector.RegisterCallback<ChangeEvent<float>>(OnSliderChangeEvent);
 
-                _colorPickerElement.AddToClassList("colorpicker-visible");
-                _colorPickerElement.AddToClassList("colorpicker-hidden");
+        //cbStyleSheet.LoadAssetAsync<StyleSheet>().Completed += 
+        //    (StyleSheet) => 
+        //    {
+        //        _colorPickerElement.styleSheets.Add(StyleSheet.Result);
 
-                Slider colorSelector = _colorPickerElement.Q<Slider>("CBSlider");
+        //        _colorPickerElement.AddToClassList("colorpicker-visible");
+        //        _colorPickerElement.AddToClassList("colorpicker-hidden");
 
-                // On update of the color selector, send an event...
-                ColorSelectorValue = colorSelector.value;
+        //        Slider colorSelector = _colorPickerElement.Q<Slider>("CBSlider");
 
-                colorSelector.RegisterCallback<ChangeEvent<float>>(OnSliderChangeEvent);
+        //        // On update of the color selector, send an event...
+        //        ColorSelectorValue = colorSelector.value;
 
-                // Subscribe
-                //BuildFreeCursorController.ShowColorPicker += OnShowColorPicker;
-            };
+        //        colorSelector.RegisterCallback<ChangeEvent<float>>(OnSliderChangeEvent);
+
+        //        // Subscribe
+        //        //BuildFreeCursorController.ShowColorPicker += OnShowColorPicker;
+        //    };
     }
 
     private void OnEnable()
@@ -177,6 +181,15 @@ public class ColorPickerController : MonoBehaviour
 
     private void OnSliderChangeEvent(ChangeEvent<float> selectorValueChange)
     {
+        Debug.Log("Slider change event");
+
+        // get the colour palette texture?
+        // Texture2D texture = _colorSelector.style.backgroundImage.value.texture;
+
+        Texture2D tex = _colorSelector.Q<VisualElement>("CBSlider", "unity-drag-container").style.backgroundImage.value.texture;
+
+        Debug.Log("Texture: " + tex.name);
+
         int pixelSelected = (int)(ColorPaletteTexture.width * (selectorValueChange.newValue / 100));
 
         Color colorValue = ColorPaletteTexture.GetPixel(pixelSelected, 0);
