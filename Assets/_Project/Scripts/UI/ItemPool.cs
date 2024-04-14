@@ -28,7 +28,10 @@ public class ItemPool: MonoBehaviour
     [CreateProperty]
     public int CurrentItemCount
     {
-        get => CurrentItemCount;
+        get
+        {
+            return _currentItemCount;
+        }
         set
         {
             _currentItemCount = value;

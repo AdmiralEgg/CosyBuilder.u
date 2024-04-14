@@ -238,22 +238,28 @@ public class InventoryManager : MonoBehaviour
             });
         });
 
-        // Add click callbacks for both elements
         itemTile.RegisterCallback<MouseUpEvent>(e =>
         {
+            // Spawn Item
             if (e.button == 0)
             {
+                if (pool.CurrentItemCount == 0)
+                {
+                    Debug.Log("No items to spawn, return");
+                    return;
+                }
+                
                 GameObject cbObject;
                 pool.Pool.Get(out cbObject);
                 cbObject.GetComponent<CbObjectStateMachine>().QueueNextState(CbObjectStateMachine.CbObjectState.Spawned);
+                StartCoroutine(HideItemTile(itemTile));
             }
 
+            // Customise Item
             if (e.button == 1)
             {
                 Debug.Log("RIGHT Mouse down on inventory. Customise Window.");
             }
-
-            StartCoroutine(HideItemTile(itemTile));
         });
     }
 

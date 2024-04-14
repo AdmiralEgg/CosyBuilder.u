@@ -1,7 +1,4 @@
 using Shapes;
-using Sirenix.OdinInspector;
-using System;
-using System.ComponentModel;
 using UnityEngine;
 
 public class CursorMovementMarker : MonoBehaviour
