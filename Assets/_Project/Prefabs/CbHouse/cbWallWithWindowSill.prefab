@@ -333,7 +333,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 6918698769163721407}
   - component: {fileID: 6980571417012033662}
   - component: {fileID: 2213214553665436759}
+  - component: {fileID: 5925333728843823048}
   m_Layer: 6
   m_Name: cbWallWithWindowSill_Mesh
   m_TagString: Wall
@@ -464,8 +465,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.39134586, z: 0.26915962}
-  m_Center: {x: -1.5, y: 0.19567293, z: 0.15893415}
+  m_Size: {x: 3, y: 0.39134586, z: 0.2914516}
+  m_Center: {x: -1.5, y: 0.19567293, z: 0.15336116}
+--- !u!65 &5925333728843823048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160668605875226872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.437127, y: 0.3021779, z: 0.2914516}
+  m_Center: {x: -1.4972136, y: 0.7473998, z: 0.15336116}
 --- !u!1 &7620829955085408339
 GameObject:
   m_ObjectHideFlags: 0

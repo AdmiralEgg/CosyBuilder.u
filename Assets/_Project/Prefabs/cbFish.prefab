@@ -164,12 +164,14 @@ MonoBehaviour:
   _runTimeCbObjectData: {fileID: 0}
   _nameInUI: Default
   PlacedPosition: 1
-  _isCustomisable: 0
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
   FocusCameraType: 0
   _isFocusable: 0
+  _isCustomisable: 0
+  RandomColorList: []
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1679702507183776759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,9 +280,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4953705972830806072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7d1b9db55427544994dbfada3eb22d, type: 3}
+  m_Script: {fileID: 11500000, guid: ca0aaf2a9b177ae41b9f7de7eba091d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
@@ -289,6 +292,8 @@ MonoBehaviour:
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
   _outlineColorDetatchStarted: {r: 0.9, g: 0.33, b: 0, a: 0.5}
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
+  _highlightPauseForSeconds: 0.4
+  _pauseHighlighting: 0
   _lastCheckedState: 0
 --- !u!114 &1759520488677903723
 MonoBehaviour:

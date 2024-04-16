@@ -81,6 +81,9 @@ public class CbObjectPlacedDetatchingSubState : BaseState<CbObjectPlacedSubState
 
     public override void ExitState()
     {
+        UnityEngine.Debug.Log("Detatch cancelled");
+        _subStateMachine.SetDetatchCancelled();
+
         _ctSource.Dispose();
         _subStateMachine.OnPointerUpEvent -= StopDetaching;
     }

@@ -5092,18 +5092,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2607415419104844381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7d1b9db55427544994dbfada3eb22d, type: 3}
+  m_Script: {fileID: 11500000, guid: ca0aaf2a9b177ae41b9f7de7eba091d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _focusStateOutlineSizeMultiplyer: 15
   _outlineSizeFree: 0.15
   _outlineSizeSelected: 0.2
   _outlineSizePlaced: 0.2
-  _focusStateOutlineSizeMultiplyer: 15
   _outlineColorFree: {r: 0.7, g: 0.7, b: 0.7, a: 0.5}
   _outlineColorSelected: {r: 1, g: 1, b: 1, a: 0.8}
   _outlineColorPlaced: {r: 0.73, g: 0, b: 0, a: 0.7}
   _outlineColorDetatchStarted: {r: 0.9, g: 0.33, b: 0, a: 0.5}
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
+  _highlightPauseForSeconds: 0.4
+  _pauseHighlighting: 0
   _lastCheckedState: 0
 --- !u!114 &3366110936148888278
 MonoBehaviour:
@@ -5638,5 +5640,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.54984534, y: 0.48363695, z: 0.52230406}
-  m_Center: {x: -0.0046842694, y: 0.24288325, z: 0.0020205975}
+  m_Size: {x: 0.24224801, y: 0.2030003, z: 0.24902058}
+  m_Center: {x: 0.0020559207, y: 0.44692695, z: 0.0026335716}

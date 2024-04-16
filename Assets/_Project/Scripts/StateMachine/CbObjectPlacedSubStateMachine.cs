@@ -40,7 +40,7 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     private GameObject _focusedGameObject;
 
     public Action<PointerEventData> OnPointerDownEvent, OnPointerUpEvent, OnScrollEvent;
-    public Action OnSetDetatchStartedOutlineEvent, OnSetDetatchCompletedOutlineEvent, OnPointerEnterEvent, OnPointerExitEvent;
+    public Action OnSetDetatchStartedOutlineEvent, OnSetDetatchCompletedOutlineEvent, OnDetatchCancelled, OnPointerEnterEvent, OnPointerExitEvent;
 
     private void Awake()
     {
@@ -96,6 +96,11 @@ public class CbObjectPlacedSubStateMachine : StateMachine<CbObjectPlacedSubState
     public void SetDetatchCompletedOutline()
     {
         OnSetDetatchCompletedOutlineEvent?.Invoke();
+    }
+
+    public void SetDetatchCancelled()
+    {
+        OnDetatchCancelled?.Invoke();
     }
 
     // Subscribe the UI element to this

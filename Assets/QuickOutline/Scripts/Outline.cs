@@ -4,7 +4,7 @@
 //
 //  Created by Chris Nolet on 3/30/18.
 //  Copyright © 2018 Chris Nolet. All rights reserved.
-//
+//  Amended by Chris Alexander 16/04/24
 
 using System;
 using System.Collections.Generic;
@@ -129,7 +129,7 @@ public class Outline : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void LateUpdate() {
     if (needsUpdate) {
       needsUpdate = false;
 
