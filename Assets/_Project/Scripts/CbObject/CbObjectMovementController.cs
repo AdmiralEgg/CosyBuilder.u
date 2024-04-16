@@ -42,7 +42,7 @@ public class CbObjectMovementController : MonoBehaviour
         {
             SnapPointRadiusCheck();
         }
-        
+
         if (_isInsideFreeSnapPoint == false)
         {
             // Check Placable Surface Hit
@@ -99,6 +99,8 @@ public class CbObjectMovementController : MonoBehaviour
 
     private void MoveObject(Vector3 placeableSurfaceNormal)
     {
+        if (CursorData.GetRaycastHit(CursorData.LayerMaskType.OutOfBounds).collider != null) return;
+        
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
         // We've hit nothing

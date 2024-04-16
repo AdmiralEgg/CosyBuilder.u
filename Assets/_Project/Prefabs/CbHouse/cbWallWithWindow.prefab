@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2360222692559611129}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbWallWithWindow
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1629998975931906332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34,6 +34,7 @@ Transform:
   - {fileID: 8848356236900041979}
   - {fileID: 2742824635831976714}
   - {fileID: 6607333023022398291}
+  - {fileID: 2820492651658970698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2230170077163708800
@@ -47,7 +48,7 @@ GameObject:
   - component: {fileID: 8848356236900041979}
   - component: {fileID: 7872296147403243498}
   - component: {fileID: 3396163435249462373}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -119,6 +120,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3602706562546266973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2820492651658970698}
+  - component: {fileID: 5447710271132673685}
+  m_Layer: 15
+  m_Name: cbOutOfBounds
+  m_TagString: Roof
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2820492651658970698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3602706562546266973}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2360222692559611129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5447710271132673685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3602706562546266973}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.9922404, y: 0, z: 0.50194}
+  m_Center: {x: -1.5015047, y: 3.004949, z: -0.24903}
 --- !u!1 &3838521895688055127
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +186,7 @@ GameObject:
   - component: {fileID: 4147937017713546625}
   - component: {fileID: 8814520916527711812}
   - component: {fileID: 4093413537724878621}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbWallWithWindow_Mesh
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -257,7 +311,7 @@ GameObject:
   - component: {fileID: 932622142570058630}
   - component: {fileID: 5812084823625008773}
   - component: {fileID: 8240374063472434211}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -340,7 +394,7 @@ GameObject:
   - component: {fileID: 2742824635831976714}
   - component: {fileID: 8419440928148657725}
   - component: {fileID: 2619377277052571283}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -423,7 +477,7 @@ GameObject:
   - component: {fileID: 6607333023022398291}
   - component: {fileID: 6816916032205891693}
   - component: {fileID: 6276553962074757761}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}

@@ -11,6 +11,7 @@ TagManager:
   - Pillar
   - Wall
   - FlatSurface
+  - Selectable
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - StaticScene
   - PlaceableSurface
   - CustomisationPoint
-  - 
+  - OutOfBounds
   - 
   - 
   - 

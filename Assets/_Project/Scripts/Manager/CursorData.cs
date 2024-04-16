@@ -7,7 +7,7 @@ using static DictionarySerialization;
 
 public class CursorData : MonoBehaviour
 {
-    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface, OnInteraction }
+    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface, OnInteraction, OutOfBounds }
 
     public static CursorData Instance;
 
@@ -96,6 +96,17 @@ public class CursorData : MonoBehaviour
             new LayerAndTagValidator.CbLayer[]
             {
                 LayerAndTagValidator.CbLayer.PlaceableSurface
+            },
+            LayerAndTagValidator.MaskInclusionType.Include
+        ));
+
+        Instance._layerMaskTypeLookup.Add(new LayerMaskTypeData
+        (
+            LayerMaskType.OutOfBounds,
+            "Check whether we are hovering on a placable surface",
+            new LayerAndTagValidator.CbLayer[]
+            {
+                LayerAndTagValidator.CbLayer.OutOfBounds
             },
             LayerAndTagValidator.MaskInclusionType.Include
         ));

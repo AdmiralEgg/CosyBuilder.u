@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 6346087169096044815}
   - component: {fileID: 4160474576493484014}
   - component: {fileID: 220347130192103055}
-  m_Layer: 6
+  - component: {fileID: 9080996551396955223}
+  m_Layer: 12
   m_Name: cbWallWithFireplace_Fireplace_Mesh
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -126,8 +127,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.215455, y: 1.2837104, z: 1.9706413}
-  m_Center: {x: -4.4240613, y: 0.6418552, z: 0.89363176}
+  m_Size: {x: 9.215455, y: 0.9766507, z: 0.99467695}
+  m_Center: {x: -4.4240613, y: 0.48832536, z: 1.3816174}
 --- !u!65 &220347130192103055
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -149,6 +150,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.233037, y: 1.530489, z: 0.637139}
   m_Center: {x: -4.5238686, y: 0.7549227, z: 2.2210643}
+--- !u!65 &9080996551396955223
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163454396414555884}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.8909426, y: 0.9213881, z: 1.5349445}
+  m_Center: {x: -4.528628, y: 4.6434145, z: 1.6517514}
 --- !u!1 &268231147084293830
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3285456250358570414}
   - component: {fileID: 6896162960247960080}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +432,7 @@ GameObject:
   - component: {fileID: 8886367641307505444}
   - component: {fileID: 8244117948160919481}
   - component: {fileID: 6085383794350544952}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: SnapPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,6 +491,59 @@ MonoBehaviour:
   _snapRadius: 0.4
   _indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   _snapIndicatorRadius: 0
+--- !u!1 &3143682724015730144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3704385118491307754}
+  - component: {fileID: 6139336088870267022}
+  m_Layer: 15
+  m_Name: cbOutOfBounds
+  m_TagString: Roof
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3704385118491307754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3143682724015730144}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8968828378057746943}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6139336088870267022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3143682724015730144}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.9922404, y: 0, z: 0.8055785}
+  m_Center: {x: -1.5015047, y: 3.004949, z: -0.097210765}
 --- !u!1 &3398329708159532477
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6362227010303380165}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +589,7 @@ GameObject:
   - component: {fileID: 8755367447610746309}
   - component: {fileID: 2943595252413404286}
   - component: {fileID: 3841781331457348070}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbWallWithFireplace_Fire_Mesh
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -597,7 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8968828378057746943}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbWallWithFireplace
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -621,6 +696,7 @@ Transform:
   - {fileID: 8755367447610746309}
   - {fileID: 8886367641307505444}
   - {fileID: 1356040573210096704}
+  - {fileID: 3704385118491307754}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2253285502388569856
@@ -631,6 +707,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6362227010303380165}
     m_Modifications:
+    - target: {fileID: 434770577965505361, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 517059092229267012, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1781949194303238864, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
       propertyPath: looping
       value: 1
@@ -715,6 +799,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_Fire_01_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 1781949194303238870, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011211046309551372, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397477349110433957, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403031602270893583, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822978442000442782, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175251082672616142, guid: 4e35892e4c5444340a0e2189311808e5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -736,6 +844,10 @@ PrefabInstance:
     - target: {fileID: 4952131365919966842, guid: 9f90aa15c6b14234ea7247f33f09e816, type: 3}
       propertyPath: m_Name
       value: VFX_Point_Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952131365919966842, guid: 9f90aa15c6b14234ea7247f33f09e816, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6040056879142927025, guid: 9f90aa15c6b14234ea7247f33f09e816, type: 3}
       propertyPath: m_RootOrder
