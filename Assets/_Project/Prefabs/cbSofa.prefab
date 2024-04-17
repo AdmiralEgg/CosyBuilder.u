@@ -408,10 +408,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectSpawn:
     Guid:
-      Data1: 1684392635
-      Data2: 1237854169
-      Data3: -620745592
-      Data4: 856175439
+      Data1: 1873058798
+      Data2: 1292823057
+      Data3: 857128379
+      Data4: -772507559
     Path: event:/ObjectSpawn
 --- !u!54 &8701016675041849015
 Rigidbody:
