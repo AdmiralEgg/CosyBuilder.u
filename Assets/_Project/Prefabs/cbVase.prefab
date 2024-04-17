@@ -308,6 +308,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5eb91967619d5499f976817d141015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectSpawn:
+    Guid:
+      Data1: 1684392635
+      Data2: 1237854169
+      Data3: -620745592
+      Data4: 856175439
+    Path: event:/ObjectSpawn
 --- !u!54 &7009315724530166610
 Rigidbody:
   m_ObjectHideFlags: 0

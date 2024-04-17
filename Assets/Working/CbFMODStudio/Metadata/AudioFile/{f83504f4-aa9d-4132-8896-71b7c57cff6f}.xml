@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f83504f4-aa9d-4132-8896-71b7c57cff6f}">
+		<property name="assetPath">
+			<value>188606__timpryor__wood-creak.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.6052916666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5f9ee1af-8489-4b0a-a35f-3e943c1917ef}</destination>
+		</relationship>
+	</object>
+</objects>

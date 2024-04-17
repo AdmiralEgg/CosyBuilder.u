@@ -80,12 +80,14 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
         // If previous state was hanging, this has been detatched. Play an audio cue.
         if (lastState == CbObjectStateMachine.CbObjectState.Placed)
         {
-            _stateMachine.PlayOneShotAudio("Detatch Audio (Placed -> Selected)");
+            // Detatch Audio (Placed -> Selected)
+            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.NotImplemented);
         }
 
         if (lastState == CbObjectStateMachine.CbObjectState.Free)
         {
-            _stateMachine.PlayOneShotAudio("Select Audio (Free -> Selected)");
+            // Select Audio (Free -> Selected)
+            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.NotImplemented);
         }
     }
 

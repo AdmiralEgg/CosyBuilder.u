@@ -190,7 +190,7 @@ MonoBehaviour:
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
   _highlightPauseForSeconds: 0.4
   _pauseHighlighting: 0
-  _lastCheckedState: 0
+  _currentState: 0
 --- !u!114 &2228807508288427765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5eb91967619d5499f976817d141015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectSpawn:
+    Guid:
+      Data1: 1684392635
+      Data2: 1237854169
+      Data3: -620745592
+      Data4: 856175439
+    Path: event:/ObjectSpawn
 --- !u!114 &4335300629504355576
 MonoBehaviour:
   m_ObjectHideFlags: 0

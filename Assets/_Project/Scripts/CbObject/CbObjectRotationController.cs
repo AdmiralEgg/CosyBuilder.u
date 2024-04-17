@@ -97,7 +97,7 @@ public class CbObjectRotationController : MonoBehaviour
 
         SnapRotation(Quaternion.AngleAxis(rotationAmount, Vector3.up), _quickRotationDuration, SnapRotationType.Quick);
 
-        _audioController.PlayOneShot("play a sound to indicate a quick rotation");
+        _audioController.PlaySoundOneShot(CbObjectAudioController.ObjectAudio.NotImplemented);
     }
 
     public int GetClosestAngle(float angle)
@@ -190,7 +190,7 @@ public class CbObjectRotationController : MonoBehaviour
         _targetRotation = transform.rotation;
         _activeSnapRotationType = rotationType;
 
-        _audioController.PlayOneShot("play a sound to indicate a CB controlled fast rotation");
+        _audioController.PlaySoundOneShot(CbObjectAudioController.ObjectAudio.NotImplemented);
         _snapRotateCoroutine = StartCoroutine(RunSnapRotate(targetRotation, rotationDuration));
     }
 

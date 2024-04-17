@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3918939930657950827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/aster.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/_Project/Audio/FMODBanks/Desktop/Master.bank
+  Name: aster
+  StudioPath: bank:/Master
+  lastModified: 638489707577436996
+  FileSizes: []
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 5373921205168616457}
+  - {fileID: -3918939930657950827}
+  - {fileID: 517077642074197524}
+  - {fileID: 5720439963538161678}
+  - {fileID: 212824702743063930}
+  EditorEvents:
+  - {fileID: 9094293074518532974}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -3918939930657950827}
+  StringsBanks:
+  - {fileID: 5373921205168616457}
+  cacheTime: 638489707577713359
+  cacheVersion: 131616
+--- !u!114 &212824702743063930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.assets.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/_Project/Audio/FMODBanks/Desktop/Master.assets.bank
+  Name: Master.assets
+  StudioPath: bank:/Master.assets
+  lastModified: 638489707577452032
+  FileSizes: []
+  Exists: 1
+--- !u!114 &517077642074197524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/CoreSounds.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/_Project/Audio/FMODBanks/Desktop/CoreSounds.bank
+  Name: CoreSounds
+  StudioPath: bank:/CoreSounds
+  lastModified: 638489707577536075
+  FileSizes: []
+  Exists: 1
+--- !u!114 &5373921205168616457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/_Project/Audio/FMODBanks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638489707577472130
+  FileSizes:
+  - Name: 
+    Value: 912
+  Exists: 1
+--- !u!114 &5720439963538161678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/CoreSounds.assets.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/_Project/Audio/FMODBanks/Desktop/CoreSounds.assets.bank
+  Name: CoreSounds.assets
+  StudioPath: bank:/CoreSounds.assets
+  lastModified: 638489707577713359
+  FileSizes: []
+  Exists: 1
+--- !u!114 &9094293074518532974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ObjectSpawn
+  m_EditorClassIdentifier: 
+  Path: event:/ObjectSpawn
+  Guid:
+    Data1: 1684392635
+    Data2: 1237854169
+    Data3: -620745592
+    Data4: 856175439
+  Banks:
+  - {fileID: 517077642074197524}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

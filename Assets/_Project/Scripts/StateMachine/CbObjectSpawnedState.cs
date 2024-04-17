@@ -17,6 +17,9 @@ public class CbObjectSpawnedState : BaseState<CbObjectStateMachine.CbObjectState
     {
         // Move to the cursor
         _movementController.MoveSpawnedObject();
+
+        // Play spawned sound
+        _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.Spawn);
     }
 
     public override void ExitState() { }

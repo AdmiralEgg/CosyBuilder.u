@@ -19,8 +19,11 @@ MonoBehaviour:
   AvailableAtRoot: 1
   ParentObjects:
   - {fileID: 11400000, guid: 18375f3129ca2b94fa0225210d14218e, type: 2}
-  GroundHeightOffset: 0.5
+  GroundHeightOffset: 0.1
   WallHeightOffset: 1
+  SurfaceHeightOffset: 0.05
   PlacablePosition: 2
   FocusType: 3
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
+  RandomColorList: []
   IsCustomisable: 0

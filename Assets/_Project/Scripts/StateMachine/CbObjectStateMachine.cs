@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static CbObjectAudioController;
 
 public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectState>, IPointerDownHandler, IPointerUpHandler
 {
@@ -96,9 +97,9 @@ public class CbObjectStateMachine : StateMachine<CbObjectStateMachine.CbObjectSt
         _cbObjectLayerController.SetLayers(newLayer);
     }
 
-    public void PlayOneShotAudio(string audio)
+    public void PlayOneShotAudio(ObjectAudio audioName)
     {
-        _cbObjectAudioController.PlayOneShot(audio);
+        _cbObjectAudioController.PlaySoundOneShot(audioName);
     }
     
     public void UpdateMovementComponent(bool isActive)

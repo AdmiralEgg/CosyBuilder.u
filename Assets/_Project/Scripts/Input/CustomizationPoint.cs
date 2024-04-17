@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Shapes;
 using UnityEngine.EventSystems;
+using UnityEditor.SceneManagement;
 
 public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
 {
@@ -19,23 +20,28 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
 
     private Coroutine _colorChangeOverTime;
 
-    private Sphere _customizationPoint;
+    private Rectangle _customizationPoint;
 
     private const int SATURATION = 70;
     private const int VALUE = 50;
-    private const int ALPHA = 150;
+    private const int ALPHA = 255;
 
     private int _currentHue = 0;
 
     void Awake()
     {
         // Add a shapes with colour changing that appears when the cursor gets closer
-        _customizationPoint = gameObject.AddComponent<Sphere>();
-        _customizationPoint.Radius = 0.1f;
+        _customizationPoint = gameObject.AddComponent<Rectangle>();
+        _customizationPoint.Type = Rectangle.RectangleType.HardBorder;
+        _customizationPoint.Width = 0.3f;
+        _customizationPoint.Height = 0.3f;
+        _customizationPoint.Thickness = 0.07f;
+        _customizationPoint.Dashed = false;
 
         _colorPicker.ColorSwitch += UpdateMaterials;
 
-        UpdateMaterials(_defaultColor);
+        //UpdateMaterials(_defaultColor);
+        UpdateMaterials(Color.white);
         RemoveSelectedState();
     }
 
