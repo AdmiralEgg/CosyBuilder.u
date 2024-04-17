@@ -48,7 +48,7 @@ Material:
     - _MetallicValue: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SmoothnessValue: 0.109
+    - _SmoothnessValue: 0.107
     m_Colors:
     - _FromColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
     - _ToColor: {r: 0.2285066, g: 0.47218537, b: 0.745283, a: 1}
