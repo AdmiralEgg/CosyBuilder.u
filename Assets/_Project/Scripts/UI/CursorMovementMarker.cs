@@ -1,15 +1,23 @@
 using Shapes;
+using System;
 using UnityEngine;
 
 public class CursorMovementMarker : MonoBehaviour
 {
+    enum MarkerState { Default, OutOfBounds }
+    
     [SerializeField]
     CbObjectMovementController _selectedObjectMoveController;
 
     [SerializeField]
-    Color _markerColor = Color.white;
+    Color _defaultColor = Color.white;
+
+    [SerializeField]
+    Color _outOfBoundsColor = Color.red;
 
     Disc _markerComponent;
+
+    private MarkerState _currentState;
     
     public void Awake()
     {
@@ -18,19 +26,34 @@ public class CursorMovementMarker : MonoBehaviour
         marker.transform.parent = this.transform;
 
         _markerComponent = marker.AddComponent<Disc>();
-        ConfigureMarkerComponent();
+        ConfigureMarkerComponent(MarkerState.Default);
+        _markerComponent.enabled = false;
 
         CbObjectStateMachine.OnStateChange += HandleStateChange;
     }
 
-    private void ConfigureMarkerComponent()
+    private void ConfigureMarkerComponent(MarkerState newState)
     {
-        _markerComponent.Radius = 0.3f;
-        _markerComponent.Thickness = 0.075f;
-        _markerComponent.Type = DiscType.Ring;
-        _markerComponent.Dashed = true;
-        
-        _markerComponent.enabled = false;
+        switch (newState)
+        {
+            case MarkerState.Default:
+                _markerComponent.Radius = 0.3f;
+                _markerComponent.Thickness = 0.075f;
+                _markerComponent.Type = DiscType.Ring;
+                _markerComponent.Color = _defaultColor;
+                _markerComponent.Dashed = true;
+                break;
+
+            case MarkerState.OutOfBounds:
+                _markerComponent.Radius = 0.1f;
+                _markerComponent.Thickness = 0.075f;
+                _markerComponent.Type = DiscType.Ring;
+                _markerComponent.Color = _outOfBoundsColor;
+                _markerComponent.Dashed = false;
+                break;
+        }
+
+        _currentState = newState;
     }
 
     private void Update()
@@ -44,13 +67,15 @@ public class CursorMovementMarker : MonoBehaviour
 
     private void CheckSnapPoint()
     {
+        Color currentColor = _markerComponent.Color;
+
         if (_selectedObjectMoveController.IsInsideFreeSnapPoint == true)
         {
-            _markerComponent.Color = new Color(_markerColor.r, _markerColor.g, _markerColor.b, 0);
+            _markerComponent.Color = new Color(currentColor.r, currentColor.g, currentColor.b, 0);
         }
         else
         {
-            _markerComponent.Color = new Color(_markerColor.r, _markerColor.g, _markerColor.b, 1);
+            _markerComponent.Color = new Color(currentColor.r, currentColor.g, currentColor.b, 1);
         }
     }
 
@@ -58,7 +83,7 @@ public class CursorMovementMarker : MonoBehaviour
     {
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
-        this.transform.position = hit.point + (hit.normal * 0.01f);
+        this.transform.position = hit.point + (hit.normal * 0.05f);
 
         // get the normal of the hit point
         transform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);

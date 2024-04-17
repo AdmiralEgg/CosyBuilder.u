@@ -37,7 +37,6 @@ public class CbObjectMovementController : MonoBehaviour
 
     private void Update()
     {
-        //CbObjectBoundsCheck();
         if (_objectData.PlacedPosition == CbObjectScriptableData.PlacedPosition.SnapPoint)
         {
             SnapPointRadiusCheck();
@@ -99,8 +98,6 @@ public class CbObjectMovementController : MonoBehaviour
 
     private void MoveObject(Vector3 placeableSurfaceNormal)
     {
-        if (CursorData.GetRaycastHit(CursorData.LayerMaskType.OutOfBounds).collider != null) return;
-        
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
         // We've hit nothing
@@ -155,18 +152,5 @@ public class CbObjectMovementController : MonoBehaviour
         {
             Gizmos.DrawWireSphere(_objectMovePosition, 0.1f);
         }
-    }
-
-    private static void CbObjectBoundsCheck()
-    {
-        //// Check we're within bounds.
-        //// If the cursor is NOT hitting our bounds, don't move.
-        //CursorData.GetRaycastBoundsHits().ForEach(hit =>
-        //{
-        //    if (hit.collider.gameObject == CurrentBounds)
-        //    {
-        //        canMove = true;
-        //    }
-        //});
     }
 }

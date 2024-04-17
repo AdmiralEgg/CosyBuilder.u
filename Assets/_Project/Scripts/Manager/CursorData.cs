@@ -7,7 +7,7 @@ using static DictionarySerialization;
 
 public class CursorData : MonoBehaviour
 {
-    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface, OnInteraction, OutOfBounds }
+    public enum LayerMaskType { CbObjectMovementMask, CbObjectOnlyMask, WithinSnapPoint, CbObjectOutlineCheck, OnPlaceableSurface, OnInteraction, OutOfBounds, CbObjectExcludedMask }
 
     public static CursorData Instance;
 
@@ -23,6 +23,9 @@ public class CursorData : MonoBehaviour
 
     [SerializeField, ReadOnly]
     private SerializableDictionary<LayerMaskType, string> _raycastColliderHitDebug = new SerializableDictionary<LayerMaskType, string>();
+
+    [SerializeField, ReadOnly]
+    private List<string> _allHits;
 
     private CbObjectParameters _lastCbObjectHit;
 
@@ -50,7 +53,18 @@ public class CursorData : MonoBehaviour
                 LayerAndTagValidator.CbLayer.CbObjectBounds,
                 LayerAndTagValidator.CbLayer.PlaceableSurface,
                 LayerAndTagValidator.CbLayer.CustomisationPoint,
-                LayerAndTagValidator.CbLayer.InteractionPoint
+                LayerAndTagValidator.CbLayer.InteractionPoint,
+            },
+            LayerAndTagValidator.MaskInclusionType.Exclude
+        ));
+
+        Instance._layerMaskTypeLookup.Add(new LayerMaskTypeData
+        (
+            LayerMaskType.CbObjectExcludedMask,
+            "Anything that isn't a CbObject layer",
+            new LayerAndTagValidator.CbLayer[] 
+            {
+                LayerAndTagValidator.CbLayer.CbObject
             },
             LayerAndTagValidator.MaskInclusionType.Exclude
         ));
@@ -103,7 +117,7 @@ public class CursorData : MonoBehaviour
         Instance._layerMaskTypeLookup.Add(new LayerMaskTypeData
         (
             LayerMaskType.OutOfBounds,
-            "Check whether we are hovering on a placable surface",
+            "Check if we have hit an OutOfBounds layer",
             new LayerAndTagValidator.CbLayer[]
             {
                 LayerAndTagValidator.CbLayer.OutOfBounds
@@ -158,6 +172,13 @@ public class CursorData : MonoBehaviour
     {
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectOutlineCheck);
 
+        _allHits.Clear();
+
+        foreach (RaycastHit allHit in Physics.RaycastAll(Instance._rayFromMouseCursor))
+        {
+            _allHits.Add(allHit.collider.ToString());
+        }
+
         if (hit.collider == null && _lastCbObjectHit == null) return;
 
         if (hit.collider == null && _lastCbObjectHit != null)
@@ -175,11 +196,25 @@ public class CursorData : MonoBehaviour
         }
     }
 
+    public static bool IsOutOfBounds()
+    {
+        RaycastHit[] allHits = Physics.RaycastAll(Instance._rayFromMouseCursor);
+
+        if (allHits[0].collider.gameObject.layer == LayerAndTagValidator.ValidatedLayerDataLookup[LayerAndTagValidator.CbLayer.OutOfBounds])
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public static RaycastHit GetRaycastHit(LayerMaskType type)
     {
         int layerMask = 0;
         RaycastHit raycastHit = new RaycastHit();
-        
+
         LayerMaskTypeData data = Instance._layerMaskTypeLookup.FirstOrDefault<LayerMaskTypeData>(x => x.Type == type);
 
         // if there was not match, exit early
@@ -215,7 +250,7 @@ public class CursorData : MonoBehaviour
         RaycastHit hit;
         
         Physics.Raycast(Instance._rayFromMouseCursor, out hit, float.PositiveInfinity, layerMask, QueryTriggerInteraction.Collide);
-
+        
         return hit;
     }
 

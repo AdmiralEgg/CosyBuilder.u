@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7483493244923465602}
   - component: {fileID: 8105255845464970105}
   - component: {fileID: 5213611784853549085}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8751080653081464304}
   - component: {fileID: 5697081709187066305}
   - component: {fileID: 2686472829485499610}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 191048622898718136}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbFrontDoor
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 2047771291422944893}
   - component: {fileID: 8436690852203641351}
   - component: {fileID: 3771558133314500640}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbFrontDoor_Frame_Mesh
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 3707148593991393824}
   - component: {fileID: 6777108265205719796}
   - component: {fileID: 6891043386163314053}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 3597918768916779205}
   - component: {fileID: 7285205671730798747}
   - component: {fileID: 8178546684704954093}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 1740864429083306251}
   - component: {fileID: 1100217369518861051}
   - component: {fileID: 1424156439204641342}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 991714092590812646}
   - component: {fileID: 505706702547136009}
   - component: {fileID: 1889875712669327790}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Glass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 1642795926693937687}
   - component: {fileID: 1619612087336644667}
   - component: {fileID: 231765062204474228}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: cbFrontDoor_Door_Mesh
   m_TagString: Wall
   m_Icon: {fileID: 0}
