@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using static UnityEditor.AddressableAssets.Build.Layout.BuildLayout;
 
 public class CbObjectSpawnedState : BaseState<CbObjectStateMachine.CbObjectState>
 {
@@ -14,8 +15,7 @@ public class CbObjectSpawnedState : BaseState<CbObjectStateMachine.CbObjectState
 
     public override void EnterState(CbObjectStateMachine.CbObjectState lastState)
     {
-        // get cursor and move to it.
-        RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
+        // Move to the cursor
         _movementController.MoveSpawnedObject();
     }
 

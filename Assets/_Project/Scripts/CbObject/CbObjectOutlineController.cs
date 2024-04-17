@@ -79,8 +79,6 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
         if (_currentState != cbObjectState)
         {
-            Debug.Log($"State change. Last: {_currentState} Current: {cbObjectState}");
-
             UpdateOutlineState(cbObjectState);
         }
     }
@@ -112,7 +110,6 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
     private void RefreshOutlineOnGameStateChange(GameModeStateMachine.GameModeState newState)
     {
-        Debug.Log("State change, update the outline width");
         _currentWidthMultiplyer = newState == GameModeStateMachine.GameModeState.Focus ? _focusStateOutlineSizeMultiplyer : 1;
 
         UpdateOutlineState(_currentState);
@@ -120,8 +117,6 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
     private void UpdateOutlineState(CbObjectStateMachine.CbObjectState newState)
     {
-        Debug.Log($"CbObject Outline New State: {newState}");
-
         switch (newState)
         {
             case CbObjectStateMachine.CbObjectState.Free:
@@ -156,7 +151,6 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
     private void SetDetatchStartedOutline()
     {
-        Debug.Log("Outline got detatch started");
         _outline.OutlineWidth = _outlineSizeFree;
         _outline.OutlineColor = _outlineColorDetatchStarted;
     }

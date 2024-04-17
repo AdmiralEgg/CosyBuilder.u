@@ -93,7 +93,16 @@ public class CbObjectMovementController : MonoBehaviour
     {
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
-        this.transform.position = new Vector3(hit.point.x, _objectData.GroundOffset, hit.point.z);
+        //Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (hit.collider != null) 
+        { 
+            Debug.Log("Spawn hit: " + hit.collider.name);
+            this.transform.position = new Vector3(hit.point.x, _objectData.GroundOffset, hit.point.z);
+        }
+        else
+        {
+            Debug.LogWarning("No MovementMask hit on initial spawn");
+        }
     }
 
     private void MoveObject(Vector3 placeableSurfaceNormal)

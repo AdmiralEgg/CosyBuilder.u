@@ -237,7 +237,7 @@ Transform:
   m_GameObject: {fileID: 5708871136335036232}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15073146, y: 0.7345204, z: -0.17339674, w: 0.6385088}
-  m_LocalPosition: {x: -2.970804, y: 2.613, z: 0.41751945}
+  m_LocalPosition: {x: -3.3008935, y: 2.7796667, z: 0.46391052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -425,8 +425,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7481924673356255332}
   - {fileID: 3694362142088130515}
@@ -488,7 +488,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 1
+  _initialState: 0
 --- !u!114 &3567852309842419850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
   _highlightPauseForSeconds: 0.4
   _pauseHighlighting: 0
-  _lastCheckedState: 0
+  _currentState: 0
 --- !u!54 &5454152671239004877
 Rigidbody:
   m_ObjectHideFlags: 0

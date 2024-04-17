@@ -25,4 +25,9 @@ MonoBehaviour:
   SurfaceHeightOffset: 0.05
   PlacablePosition: 0
   FocusType: 0
-  IsCustomisable: 0
+  StaticColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  RandomColorList:
+  - {r: 0.74509805, g: 0.5568628, b: 0.227451, a: 0}
+  - {r: 0.22352943, g: 0.49411768, b: 0.80392164, a: 0}
+  - {r: 0.40000004, g: 0.5019608, b: 0.22352943, a: 0}
+  IsCustomisable: 1

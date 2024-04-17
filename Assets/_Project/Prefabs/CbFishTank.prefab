@@ -301,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141946853960250131}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.26377213, y: -0.36734325, z: 0.10946654, w: 0.88515556}
+  m_LocalRotation: {x: 0.2637721, y: -0.36734322, z: 0.109466545, w: 0.88515556}
   m_LocalPosition: {x: 1.7241806, y: 3.0003002, z: -1.7841429}
   m_LocalScale: {x: 3.0002997, y: 3.0003002, z: 3.0003002}
   m_ConstrainProportionsScale: 0
@@ -384,7 +384,7 @@ Transform:
   m_GameObject: {fileID: 2239969447966173507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.217, y: 0, z: 2.408}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3333, y: 0.3333, z: 0.3333}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -542,7 +542,7 @@ MonoBehaviour:
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
   _highlightPauseForSeconds: 0.4
   _pauseHighlighting: 0
-  _lastCheckedState: 0
+  _currentState: 0
 --- !u!114 &7775707504320442149
 MonoBehaviour:
   m_ObjectHideFlags: 0
