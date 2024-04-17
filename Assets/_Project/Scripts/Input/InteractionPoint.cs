@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InteractionPoint : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
+public class InteractionPoint : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     private GameObject[] _toggleActive;
@@ -9,15 +9,14 @@ public class InteractionPoint : MonoBehaviour, IPointerEnterHandler, IPointerDow
     [SerializeField]
     private string[] _runAnimation;
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Hovering over an interaction point - highlight!");
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
-        ToggleActive();
-        RunAnimations();
+        // Only left click
+        if (eventData.button == 0)
+        {
+            ToggleActive();
+            RunAnimations();
+        }
     }
 
     private void ToggleActive()

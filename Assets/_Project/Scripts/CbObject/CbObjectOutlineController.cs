@@ -61,7 +61,8 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
     {
         _currentWidthMultiplyer = TempSelectedStateManager.GetGameModeState() == GameModeStateMachine.GameModeState.Focus ? _focusStateOutlineSizeMultiplyer : 1;
 
-        UpdateOutlineState(CbObjectState.Free);
+        UpdateOutlineState(_stateMachine.GetCurrentState()); 
+
         _outline.enabled = false;
     }
 
@@ -125,6 +126,11 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
                 _outline.OutlineMode = Outline.Mode.OutlineAll;
                 StartCoroutine(DeactivateAndPauseHighlighting(_highlightPauseForSeconds));
                 break;
+            case CbObjectStateMachine.CbObjectState.Spawned:
+                _outline.OutlineWidth = (_outlineSizeFree * _currentWidthMultiplyer);
+                _outline.OutlineColor = _outlineColorFree;
+                _outline.OutlineMode = Outline.Mode.OutlineAll;
+                break;
             case CbObjectStateMachine.CbObjectState.Selected:
                 _outline.OutlineWidth = (_outlineSizeSelected * _currentWidthMultiplyer);
                 _outline.OutlineColor = _outlineColorSelected;
@@ -132,6 +138,11 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
                 _outline.enabled = true;
                 break;
             case CbObjectStateMachine.CbObjectState.Placed:
+                _outline.OutlineWidth = (_outlineSizePlaced * _currentWidthMultiplyer);
+                _outline.OutlineColor = _outlineColorPlaced;
+                _outline.OutlineMode = Outline.Mode.OutlineVisible;
+                break;
+            case CbObjectStateMachine.CbObjectState.SpawnPlaced:
                 _outline.OutlineWidth = (_outlineSizePlaced * _currentWidthMultiplyer);
                 _outline.OutlineColor = _outlineColorPlaced;
                 _outline.OutlineMode = Outline.Mode.OutlineVisible;

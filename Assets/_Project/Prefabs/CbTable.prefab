@@ -488,7 +488,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 0
+  _initialState: 2
 --- !u!114 &3567852309842419850
 MonoBehaviour:
   m_ObjectHideFlags: 0

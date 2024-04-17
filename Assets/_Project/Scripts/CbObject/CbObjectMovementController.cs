@@ -93,7 +93,6 @@ public class CbObjectMovementController : MonoBehaviour
     {
         RaycastHit hit = CursorData.GetRaycastHit(CursorData.LayerMaskType.CbObjectMovementMask);
 
-        //Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (hit.collider != null) 
         { 
             Debug.Log("Spawn hit: " + hit.collider.name);

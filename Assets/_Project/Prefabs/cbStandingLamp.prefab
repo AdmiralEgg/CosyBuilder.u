@@ -514,7 +514,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 1
+  _initialState: 2
 --- !u!114 &7668078466866689360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
   _outlineColorDetatchCompleted: {r: 0.1, g: 0.66, b: 0, a: 0.5}
   _highlightPauseForSeconds: 0.4
   _pauseHighlighting: 0
-  _lastCheckedState: 0
+  _currentState: 0
 --- !u!114 &1641673673406756346
 MonoBehaviour:
   m_ObjectHideFlags: 0

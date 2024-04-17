@@ -5014,7 +5014,7 @@ MonoBehaviour:
   _currentState: 
   _queuedState: 
   _lastState: 
-  _initialState: 1
+  _initialState: 2
 --- !u!114 &3928327049013070593
 MonoBehaviour:
   m_ObjectHideFlags: 0
