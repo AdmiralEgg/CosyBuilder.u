@@ -94,9 +94,11 @@ public class CbObjectOutlineController : MonoBehaviour, IPointerEnterHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // If anything is selected, don't highlight
+        if (TempSelectedStateManager.IsObjectSelected() == true) return;
+
         if (_pauseHighlighting == true) return;
         if (_placedSubStateMachine.GetCurrentState() == CbObjectPlacedSubStateMachine.CbObjectPlacedSubState.Focused) return;
-        if (_currentState == CbObjectStateMachine.CbObjectState.Selected) return;
 
         _outline.enabled = true;
     }

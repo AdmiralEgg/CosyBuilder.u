@@ -5,7 +5,7 @@ using UnityEngine;
 public class TempSelectedStateManager : MonoBehaviour
 {
     private TempSelectedStateManager Instance;
-    
+
     private static CbObjectParameters _selectedObject;
 
     public static CbObjectParameters SelectedObject

@@ -360,9 +360,9 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.9811321, g: 0.8067103, b: 0.42114633, a: 1}
   m_Intensity: 0.7
-  m_Range: 2
-  m_SpotAngle: 156.40424
-  m_InnerSpotAngle: 17.892876
+  m_Range: 0.32
+  m_SpotAngle: 84.01453
+  m_InnerSpotAngle: 57.37817
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 0
+  m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -449,7 +449,7 @@ GameObject:
   m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4886393996621908298
 Transform:
@@ -555,7 +555,7 @@ GameObject:
   m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &214613505322823123
 Transform:
