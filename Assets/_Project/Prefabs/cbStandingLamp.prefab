@@ -51,7 +51,7 @@ Light:
   m_InnerSpotAngle: 74.55397
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggleActive:
-  - {fileID: 0}
   - {fileID: 5215425136250078}
   - {fileID: 6477572047757460656}
   _runAnimation: []
