@@ -41,6 +41,9 @@ public class CbObjectScriptableData : ScriptableObject
     [Tooltip("Can the object hang on a SnapPoint on a wall?")]
     public PlacedPosition PlacablePosition = PlacedPosition.None;
 
+    [Tooltip("Radius of the marker for object when selected")]
+    public float MarkerRadius = 0.3f;
+
     [Header("Interaction Data")]
     [Tooltip("If the object has a focus camera, what type of camera is it.")]
     public FocusCameraType FocusType = CbObjectScriptableData.FocusCameraType.None;

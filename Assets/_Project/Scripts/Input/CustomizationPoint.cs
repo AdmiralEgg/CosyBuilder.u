@@ -16,17 +16,12 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
     bool _isSelected = false;
 
     [SerializeField]
-    private Color _defaultColor;
+    private Color _defaultPickerColor;
 
-    private Coroutine _colorChangeOverTime;
+    [SerializeField]
+    private Color _defaultMaterialColor;
 
     private Rectangle _customizationPoint;
-
-    private const int SATURATION = 70;
-    private const int VALUE = 50;
-    private const int ALPHA = 255;
-
-    private int _currentHue = 0;
 
     void Awake()
     {
@@ -37,24 +32,12 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
         _customizationPoint.Height = 0.3f;
         _customizationPoint.Thickness = 0.07f;
         _customizationPoint.Dashed = false;
+        _customizationPoint.Color = _defaultPickerColor;
 
         _colorPicker.ColorSwitch += UpdateMaterials;
 
-        //UpdateMaterials(_defaultColor);
-        UpdateMaterials(Color.white);
+        UpdateMaterials(_defaultMaterialColor);
         RemoveSelectedState();
-    }
-
-    private IEnumerator ColorChangeOverTime()
-    {
-        _currentHue = ((_currentHue + 1) % 300);
-
-        Color newColor = Color.HSVToRGB(_currentHue / 300f, SATURATION / 100f, VALUE / 100f);
-        newColor.a = ALPHA / 255f;
-
-        _customizationPoint.Color = newColor;
-
-        yield return new WaitForSeconds(0.05f);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -74,11 +57,7 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
         _isSelected = true;
 
         // hightlight the customisation point
-        StopCoroutine(_colorChangeOverTime);
         _customizationPoint.Color = Color.white;
-
-        // Get the current material colour
-        Color currentMaterialColor = _materialCustomizationController.GetCurrentMaterialColor();
 
         // enable the colorpicker
         _colorPicker.ShowColorPicker(true);
@@ -87,9 +66,10 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
     private void RemoveSelectedState()
     {
         _isSelected = false;
-        _colorPicker.ShowColorPicker(false);
 
-        _colorChangeOverTime = StartCoroutine(ColorChangeOverTime());
+        _customizationPoint.Color = _defaultPickerColor;
+
+        _colorPicker.ShowColorPicker(false);
     }
 
     private void UpdateMaterials(Color color)

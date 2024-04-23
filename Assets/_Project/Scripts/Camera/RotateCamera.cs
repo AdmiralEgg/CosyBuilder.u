@@ -74,7 +74,11 @@ public class RotateCamera : MonoBehaviour
         {
             // If we haven't performed the hold, don't do anything.
             //if (_flickRotateStartIndicator.activeSelf == false) return;
-            if (_flickRotationState != FlickRotationState.FlickHeld) return;
+            if (_flickRotationState != FlickRotationState.FlickHeld)
+            {
+                _flickRotationState = FlickRotationState.Idle;
+                return;
+            }
 
             _flickRotateEndScreenPointY = Input.mousePosition.y;
             _flickEndTime = Time.time;

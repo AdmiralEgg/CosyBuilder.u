@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: cbCushionSmall
   m_EditorClassIdentifier: 
   UIName: Small Cushion
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 2223018777079849592, guid: d81c4cb4946ffc74bade87ea8022d6b4, type: 3}
   InventoryIcon: {fileID: 2800000, guid: 97762e30384a1624193d37a3820053c9, type: 3}
   AvailableInInventory: 1
   AvailableAtRoot: 0
-  ParentObjects: []
+  ParentObjects:
+  - {fileID: 11400000, guid: ae24c7dddee050a4b8c1a2a8a5e1d7ad, type: 2}
   GroundHeightOffset: 0.5
   WallHeightOffset: 0.25
-  SurfaceHeightOffset: 0.05
+  SurfaceHeightOffset: 0.3
   PlacablePosition: 0
   FocusType: 0
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
+  RandomColorList: []
   IsCustomisable: 0

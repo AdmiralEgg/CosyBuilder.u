@@ -33,6 +33,9 @@ public class CbObjectParameters : MonoBehaviour
     [SerializeField, ReadOnly]
     public float SurfaceOffset = 0.05f;
 
+    [SerializeField, ReadOnly]
+    public float MarkerRadius;
+
     [Header("Focus Data")]
     [SerializeField, ReadOnly]
     public CbObjectScriptableData.FocusCameraType FocusCameraType;
@@ -78,6 +81,7 @@ public class CbObjectParameters : MonoBehaviour
         SurfaceOffset = _runTimeCbObjectData.SurfaceHeightOffset;
         StaticColor = _runTimeCbObjectData.StaticColor;
         RandomColorList = _runTimeCbObjectData.RandomColorList;
+        MarkerRadius = _runTimeCbObjectData.MarkerRadius;
 
         _nameInUI = _runTimeCbObjectData.name;
         _isCustomisable = _runTimeCbObjectData.IsCustomisable;

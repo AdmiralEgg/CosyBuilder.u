@@ -1,8 +1,11 @@
 using Cinemachine;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class TitleManager : MonoBehaviour
@@ -13,22 +16,106 @@ public class TitleManager : MonoBehaviour
     [SerializeField, Required, Tooltip("Game UI")]
     private UIDocument _gameUI;
 
+    [SerializeField, Required, Tooltip("Options UI")]
+    private UIDocument _optionsModalUI;
+
+    [SerializeField, Required, Tooltip("Quit UI")]
+    private UIDocument _quitModalUI;
+
     [SerializeField, Required, Tooltip("Camera to activate when Title Screen is shown")]
     private CinemachineVirtualCamera _titleCamera;
     
     [SerializeField]
     private bool _skipTitleScreen = false;
 
-    void Start()
+    private void Awake()
     {
+        // Configure quit button
+        ConfigureQuitModal();
+
+        PlayerInput.GetPlayerByIndex(0).actions["Quit"].canceled += (callback) =>
+        {
+            ToggleQuitModal();
+        };
+
+        _quitModalUI.rootVisualElement.AddToClassList("hidden");
+
+        // Toggle title screen
         if (_skipTitleScreen == false)
         {
             ConfigureTitleScreen();
-            RegisterTitleButtonCallbacks();
+            RegisterTitleScreenCallbacks();
         }
         else
         {
             DisableTitleScreen();
+        }
+
+        // Toggle options button
+        ConfigureOptionsModal();
+
+        _optionsModalUI.rootVisualElement.AddToClassList("hidden");
+    }
+
+    private void ConfigureQuitModal()
+    {
+        VisualElement rootElement = _quitModalUI.rootVisualElement;
+        Button confirmButton = rootElement.Q<Button>("Confirm");
+        Button cancelButton = rootElement.Q<Button>("Cancel");
+
+        confirmButton.clicked += () =>
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        };
+
+        cancelButton.clicked += () =>
+        {
+            ToggleQuitModal();
+        };
+    }
+
+    private void ToggleQuitModal()
+    {
+        if (_quitModalUI.rootVisualElement.ClassListContains("hidden"))
+        {
+            _quitModalUI.rootVisualElement.RemoveFromClassList("hidden");
+        }
+        else
+        {
+            _quitModalUI.rootVisualElement.AddToClassList("hidden");
+        }
+
+        // Hide the Options Menu (if it's visible)
+        if (_optionsModalUI.rootVisualElement.ClassListContains("hidden") == false)
+        {
+            _optionsModalUI.rootVisualElement.AddToClassList("hidden");
+        }
+    }
+
+    private void ConfigureOptionsModal()
+    {
+        VisualElement rootElement = _optionsModalUI.rootVisualElement;
+        Button backButton = rootElement.Q<Button>("Back");
+
+        backButton.clicked += () =>
+        {
+            OptionsMenuToggle();
+        };
+    }
+
+    private void OptionsMenuToggle()
+    {
+        if (_optionsModalUI.rootVisualElement.ClassListContains("hidden"))
+        {
+            _optionsModalUI.rootVisualElement.RemoveFromClassList("hidden");
+        }
+        else
+        {
+            _optionsModalUI.rootVisualElement.AddToClassList("hidden");
         }
     }
 
@@ -55,14 +142,13 @@ public class TitleManager : MonoBehaviour
         _gameUI.rootVisualElement.RemoveFromClassList("hidden");
     }
 
-    private void RegisterTitleButtonCallbacks()
+    private void RegisterTitleScreenCallbacks()
     {
         // TODO: Move this to the TitleScreenUI GameObject so we can use OnActivate
         // Register the Start and Options buttons
 
         VisualElement rootElement = _titleUI.rootVisualElement;
         Button startButton = rootElement.Q<Button>("StartButton");
-        Button optionsButton = rootElement.Q<Button>("OptionsButton");
 
         startButton.RegisterCallback<MouseDownEvent>(e =>
         {
@@ -80,5 +166,14 @@ public class TitleManager : MonoBehaviour
         {
             Debug.Log("Mouse over start button!");
         });
+
+        // Options Button
+        Button optionsButton = rootElement.Q<Button>("OptionsButton");
+
+        optionsButton.clicked += () =>
+        {
+            Debug.Log("Options button clicked down!");
+            OptionsMenuToggle();
+        };
     }
 }

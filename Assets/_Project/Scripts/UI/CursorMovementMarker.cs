@@ -94,6 +94,9 @@ public class CursorMovementMarker : MonoBehaviour
         if (state == CbObjectStateMachine.CbObjectState.Selected)
         {
             _selectedObjectMoveController = TempSelectedStateManager.SelectedObject.GetComponent<CbObjectMovementController>();
+            float _selectedObjectMarkerRadius = TempSelectedStateManager.SelectedObject.GetComponent<CbObjectParameters>().MarkerRadius;
+
+            _markerComponent.Radius = _selectedObjectMarkerRadius;
 
             _markerComponent.enabled = true;
             return;

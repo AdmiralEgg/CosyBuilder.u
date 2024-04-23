@@ -23,6 +23,7 @@ MonoBehaviour:
   WallHeightOffset: 1
   SurfaceHeightOffset: 0.05
   PlacablePosition: 2
+  MarkerRadius: 0.7
   FocusType: 3
   StaticColor: {r: 0, g: 0, b: 0, a: 0}
   RandomColorList: []
