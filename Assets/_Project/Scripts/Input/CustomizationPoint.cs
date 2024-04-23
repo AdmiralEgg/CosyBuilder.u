@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using Shapes;
 using UnityEngine.EventSystems;
-using UnityEditor.SceneManagement;
 
 public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
 {
