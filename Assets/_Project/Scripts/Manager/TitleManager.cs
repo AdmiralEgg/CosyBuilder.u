@@ -43,6 +43,8 @@ public class TitleManager : MonoBehaviour
         // Toggle title screen
         if (_skipTitleScreen == false)
         {
+            // Disable player input?
+            
             ConfigureTitleScreen();
             RegisterTitleScreenCallbacks();
         }

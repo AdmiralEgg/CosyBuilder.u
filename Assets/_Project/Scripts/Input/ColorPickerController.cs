@@ -25,6 +25,8 @@ public class ColorPickerController : MonoBehaviour
 
         _colorSliderElement = _colorPickerElement.Q<Slider>("CBSlider");
         _colorSliderElement.RegisterCallback<ChangeEvent<float>>(OnSliderChangeEvent);
+
+        ShowColorPicker(false);
     }
 
     private void OnSliderChangeEvent(ChangeEvent<float> selectorValueChange)
@@ -37,9 +39,9 @@ public class ColorPickerController : MonoBehaviour
         ColorSwitch?.Invoke(colorValue);
     }
 
-    public void ShowColorPicker(bool isVisible)
+    public void ShowColorPicker(bool showPicker)
     {
-        if (isVisible == false)
+        if (showPicker == false)
         {
             // add the hide class
             _colorPickerElement.AddToClassList("colorpicker-hidden");
