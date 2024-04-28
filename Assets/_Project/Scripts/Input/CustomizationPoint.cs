@@ -26,7 +26,7 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
     {
         // Add a shapes with colour changing that appears when the cursor gets closer
         _customizationPoint = gameObject.AddComponent<Rectangle>();
-        _customizationPoint.Type = Rectangle.RectangleType.HardBorder;
+        _customizationPoint.Type = Rectangle.RectangleType.HardSolid;
         _customizationPoint.Width = 0.3f;
         _customizationPoint.Height = 0.3f;
         _customizationPoint.Thickness = 0.07f;
@@ -36,6 +36,10 @@ public class CustomizationPoint : MonoBehaviour, IPointerClickHandler
         _colorPicker.ColorSwitch += UpdateMaterials;
 
         UpdateMaterials(_defaultMaterialColor);
+    }
+
+    private void Start()
+    {
         RemoveSelectedState();
     }
 

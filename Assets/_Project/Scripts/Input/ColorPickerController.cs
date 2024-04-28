@@ -25,7 +25,10 @@ public class ColorPickerController : MonoBehaviour
 
         _colorSliderElement = _colorPickerElement.Q<Slider>("CBSlider");
         _colorSliderElement.RegisterCallback<ChangeEvent<float>>(OnSliderChangeEvent);
+    }
 
+    private void Start()
+    {
         ShowColorPicker(false);
     }
 
