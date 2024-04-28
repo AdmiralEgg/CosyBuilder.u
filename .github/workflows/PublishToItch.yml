@@ -23,8 +23,8 @@ on:
 
 env:
   ITCH_USERNAME: admiralegg
-  ITCH_GAME_ID: cosybuilderu
-  PROJECT_PAGE_URL: https://admiralegg.itch.io/cosybuilderu
+  ITCH_GAME_ID: cosybuilder
+  PROJECT_PAGE_URL: https://admiralegg.itch.io/cosybuilder
 
 jobs:
   publish:
