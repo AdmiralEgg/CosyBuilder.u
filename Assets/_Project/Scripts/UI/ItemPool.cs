@@ -43,10 +43,12 @@ public class ItemPool: MonoBehaviour
 
     public event Action<int> ItemCountUpdate;
 
-    public void SetupItemPool(GameObject cbObjectPrefab, bool prewarmPool = false)
+    public void SetupItemPool(GameObject cbObjectPrefab, int availableInInventory, bool prewarmPool = false)
     {
         ItemPrefab = cbObjectPrefab;
         
+        _maxItems = availableInInventory;
+
         // do some object pooling
         Pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, _collectionChecks, 10, 20);
 

@@ -14,14 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: Fish Tank
   Prefab: {fileID: 2239969447966173507, guid: ef8267e917886e447b441bcc282a9a04, type: 3}
-  InventoryIcon: {fileID: 2800000, guid: 27f094890f8d575418402c3694b8ce94, type: 3}
-  AvailableInInventory: 1
-  AvailableAtRoot: 0
   ParentObjects:
   - {fileID: 11400000, guid: abaf1525511b4634ca967d1c5b20ae03, type: 2}
+  InventoryIcon: {fileID: 2800000, guid: 27f094890f8d575418402c3694b8ce94, type: 3}
+  AvailableInInventory: 1
+  NumberAvailable: 4
+  AvailableAtRoot: 0
   GroundHeightOffset: 0.2
   WallHeightOffset: 0.5
   SurfaceHeightOffset: 0.05
   PlacablePosition: 2
+  MarkerRadius: 0.3
   FocusType: 3
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
+  RandomColorList: []
   IsCustomisable: 0

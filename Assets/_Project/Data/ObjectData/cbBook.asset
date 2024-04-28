@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: Book
   Prefab: {fileID: 8698045013528468025, guid: e4e74f718b9c28b4ead64d5fdfb0e071, type: 3}
-  InventoryIcon: {fileID: 2800000, guid: 1313b6d11b79dff448ae10d2363c069e, type: 3}
-  AvailableInInventory: 1
-  AvailableAtRoot: 0
   ParentObjects:
   - {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
   - {fileID: 11400000, guid: bf4f8b5c39e60b140b01e90cb20a409b, type: 2}
+  InventoryIcon: {fileID: 2800000, guid: 1313b6d11b79dff448ae10d2363c069e, type: 3}
+  AvailableInInventory: 1
+  NumberAvailable: 50
+  AvailableAtRoot: 0
   GroundHeightOffset: 0.2
   WallHeightOffset: 0.5
   SurfaceHeightOffset: 0.05

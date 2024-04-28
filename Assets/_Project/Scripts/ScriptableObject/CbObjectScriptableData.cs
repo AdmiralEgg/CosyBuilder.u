@@ -16,17 +16,21 @@ public class CbObjectScriptableData : ScriptableObject
     [Required, Tooltip("Prefab created on object spawn")]
     public GameObject Prefab;
 
+    [Tooltip("Which object must be focused for this to appear in the inventory?")]
+    public CbObjectScriptableData[] ParentObjects;
+
+    [Header("Inventory Data")]
     [Required, Tooltip("Set an icon which will appear in the inventory")]
     public Texture2D InventoryIcon;
 
     [Tooltip("If fixed, the object can't be selected")]
     public bool AvailableInInventory = true;
 
+    [Tooltip("How many are available")]
+    public int NumberAvailable = 3;
+
     [Tooltip("Is the object available when zoomed out.")]
     public bool AvailableAtRoot = true;
-
-    [Tooltip("Which object must be focused for this to appear in the inventory?")]
-    public CbObjectScriptableData[] ParentObjects;
 
     [Header("Movement Data")]
     [Tooltip("Height off the ground where the center of the gameobject can't be lower than")]

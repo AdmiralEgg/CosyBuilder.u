@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: Book Shelf
   Prefab: {fileID: 2223018777079849592, guid: 7e17a26b73600b14ab50997ace12f5d2, type: 3}
+  ParentObjects: []
   InventoryIcon: {fileID: 2800000, guid: c003c079f3f10c5498ea13f88fcb3ace, type: 3}
   AvailableInInventory: 1
+  NumberAvailable: 4
   AvailableAtRoot: 1
-  ParentObjects: []
   GroundHeightOffset: 0.1
   WallHeightOffset: 0.5
   SurfaceHeightOffset: 0.05

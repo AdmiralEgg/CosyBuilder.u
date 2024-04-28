@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: Standing Lamp
   Prefab: {fileID: 5274501496573935582, guid: 4bd19b3ff55b790478b14cc594ac370e, type: 3}
+  ParentObjects: []
   InventoryIcon: {fileID: 2800000, guid: 5b208128f4824fe4dabb20ade07aac22, type: 3}
   AvailableInInventory: 1
+  NumberAvailable: 4
   AvailableAtRoot: 1
-  ParentObjects: []
   GroundHeightOffset: 0.5
   WallHeightOffset: 0.25
   SurfaceHeightOffset: 0.05
   PlacablePosition: 0
+  MarkerRadius: 0.3
   FocusType: 0
+  StaticColor: {r: 0, g: 0, b: 0, a: 0}
+  RandomColorList: []
   IsCustomisable: 0

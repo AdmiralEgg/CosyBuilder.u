@@ -9,7 +9,7 @@ public class InventoryObjectPoolController : MonoBehaviour
         poolObject.name = $"{cbObjectData.UIName}_CbObjectPool";
 
         var itemPool = poolObject.AddComponent<ItemPool>();
-        itemPool.SetupItemPool(cbObjectData.Prefab, prewarmPool: true);
+        itemPool.SetupItemPool(cbObjectData.Prefab, cbObjectData.NumberAvailable, prewarmPool: true);
 
         return itemPool;
     }

@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: Small Candle
   Prefab: {fileID: 7143950202515071904, guid: 4b2433424c0b9e742a7bf314303b226c, type: 3}
-  InventoryIcon: {fileID: 2800000, guid: 1f9753b841b12924bad2b89c1a71b310, type: 3}
-  AvailableInInventory: 1
-  AvailableAtRoot: 0
   ParentObjects:
   - {fileID: 11400000, guid: abaf1525511b4634ca967d1c5b20ae03, type: 2}
   - {fileID: 11400000, guid: 289aa69d6eba5304b98559f2687c7de5, type: 2}
   - {fileID: 11400000, guid: bf4f8b5c39e60b140b01e90cb20a409b, type: 2}
+  InventoryIcon: {fileID: 2800000, guid: 1f9753b841b12924bad2b89c1a71b310, type: 3}
+  AvailableInInventory: 1
+  NumberAvailable: 12
+  AvailableAtRoot: 0
   GroundHeightOffset: 0.5
   WallHeightOffset: 0.25
   SurfaceHeightOffset: 0.05
