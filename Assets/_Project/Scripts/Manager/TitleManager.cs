@@ -33,7 +33,7 @@ public class TitleManager : MonoBehaviour
         // Configure quit button
         ConfigureQuitModal();
 
-        PlayerInput.GetPlayerByIndex(0).actions["Quit"].canceled += (callback) =>
+        PlayerInput.GetPlayerByIndex(0).actions["Quit"].performed += (callback) =>
         {
             ToggleQuitModal();
         };

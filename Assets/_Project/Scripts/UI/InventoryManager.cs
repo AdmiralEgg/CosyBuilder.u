@@ -15,6 +15,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField, Required]
     private VisualTreeAsset _itemTileAsset;
 
+    [SerializeField, Required]
+    private CbObjectScriptableData[] _availableInventoryItems;
+
     [Header("Inventory Lookups")]
     [SerializeField, ReadOnly]
     private SerializableDictionary<CbObjectScriptableData, List<CbObjectScriptableData>> _inventorySetLookup = new SerializableDictionary<CbObjectScriptableData, List<CbObjectScriptableData>>();
@@ -103,27 +106,23 @@ public class InventoryManager : MonoBehaviour
 
     private void BuildInventorySets()
     {
-        // Get all scriptable objects
-        Addressables.LoadAssetsAsync<CbObjectScriptableData>(_cbObjectDataLabel, null).Completed += (cbObjectData) =>
+        // Put them into sets of objects with a PARENT and CHILDREN
+        foreach (CbObjectScriptableData cbObject in _availableInventoryItems)
         {
-            // Put them into sets of objects with a PARENT and CHILDREN
-            foreach (CbObjectScriptableData cbObject in cbObjectData.Result)
-            {
-                if (CanObjectSpawn(cbObject) == false) continue;
-                
-                VisualElement itemTile = InstantiateItemTile(cbObject);
+            if (CanObjectSpawn(cbObject) == false) continue;
 
-                _itemTileLookup.Add(cbObject, itemTile);
+            VisualElement itemTile = InstantiateItemTile(cbObject);
 
-                // Initialize InventoryPool
-                InstantiateInventoryPool(cbObject, itemTile);
+            _itemTileLookup.Add(cbObject, itemTile);
 
-                // Set callbacks
-                SetInventoryTileCallbacks(_itemTileLookup[cbObject], _inventoryPoolLookup[cbObject]);
-            }
+            // Initialize InventoryPool
+            InstantiateInventoryPool(cbObject, itemTile);
 
-            RefreshInventoryList();
-        };
+            // Set callbacks
+            SetInventoryTileCallbacks(_itemTileLookup[cbObject], _inventoryPoolLookup[cbObject]);
+        }
+
+        RefreshInventoryList();
     }
 
     private bool CanObjectSpawn(CbObjectScriptableData cbObject)
