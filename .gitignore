@@ -74,7 +74,6 @@ crashlytics-build.properties
 Assets/FullScreen/*
 Assets/_AssetPacks/*
 Assets/Scenes/SampleScene/LightingData.asset
-Assets/LMHPoly/*
 
 # Never ignore DLLs in the FMOD subfolder.
 !/[Aa]ssets/Plugins/FMOD/**/lib/*
