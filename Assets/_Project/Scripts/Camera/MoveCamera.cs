@@ -227,8 +227,6 @@ public class MoveCamera : MonoBehaviour
 
         if (_readGrabAndDragMovement)
         {
-            //Vector3 currentPosition = GetMousePointOnMovementPlane();
-            //Vector3 currentPosition = GetMousePointOnScreen();
             Vector3 currentPosition = GetMousePointOnMovementPlane(Input.mousePosition);
 
             Vector3 grabPositionDelta = currentPosition - GetMousePointOnMovementPlane(_grabStartPoint);
@@ -237,9 +235,6 @@ public class MoveCamera : MonoBehaviour
             _grabPositionDeltaClamped = Vector3.ClampMagnitude(grabPositionDelta, _grabClampMaxLength);
 
             _newPosition = transform.position + new Vector3 (_grabPositionDeltaClamped.x * _grabMovementSpeed * _currentMovementMultiplyer, 0, _grabPositionDeltaClamped.z * _grabMovementSpeed * _currentMovementMultiplyer);
-            //_newPosition = transform.position + new Vector3(_grabPositionDeltaClamped.x * _grabMovementSpeed * _currentMovementMultiplyer, 0, _grabPositionDeltaClamped.y * _grabMovementSpeed * _currentMovementMultiplyer);
-
-            //transform.Translate(new Vector3(_grabPositionDeltaClamped.x * _grabMovementSpeed * _currentMovementMultiplyer, 0, _grabPositionDeltaClamped.y * _grabMovementSpeed * _currentMovementMultiplyer), Space.World);
         }
 
         _moveLerpValue = Vector3.Lerp(transform.position, _newPosition, _movementTime * Time.deltaTime);

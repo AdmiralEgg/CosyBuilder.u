@@ -140,6 +140,7 @@
     -unity-font-style: bold;
     -unity-text-outline-color: rgb(0, 0, 0);
     background-color: rgb(253, 118, 107);
+    -unity-font: url('project://database/Assets/_Project/Fonts/BIG%20JOHN.otf?fileID=12800000&guid=9b24fec2f26a74f4d9916337b4a8ef33&type=3#BIG JOHN');
 }
 
 .CbLabel {
@@ -155,4 +156,7 @@
     padding-right: 0;
     padding-left: 0;
     margin-top: 5px;
+}
+
+.CBDropdown {
 }

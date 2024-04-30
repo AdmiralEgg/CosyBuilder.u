@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Working/FMOD/CosyBuilderFMOD/Build/Desktop/CoreSounds.bank
   Name: CoreSounds
   StudioPath: bank:/CoreSounds
-  lastModified: 638498453244660195
+  lastModified: 638489948026592303
   FileSizes:
   - Name: Desktop
     Value: 3476
@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: Assets/Working/FMOD/CosyBuilderFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638498453244660195
+  lastModified: 638489929448293411
   FileSizes:
   - Name: Desktop
     Value: 968
@@ -82,7 +82,7 @@ MonoBehaviour:
   Path: Assets/Working/FMOD/CosyBuilderFMOD/Build/Desktop/Master.assets.bank
   Name: Master.assets
   StudioPath: bank:/Master.assets
-  lastModified: 638498453244660195
+  lastModified: 638489929448263235
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -140,7 +140,7 @@ MonoBehaviour:
   - {fileID: 2900359045176754727}
   StringsBanks:
   - {fileID: -7306529015460521220}
-  cacheTime: 638498453244660195
+  cacheTime: 638489948026793457
   cacheVersion: 131617
 --- !u!114 &2900359045176754727
 MonoBehaviour:
@@ -157,7 +157,7 @@ MonoBehaviour:
   Path: Assets/Working/FMOD/CosyBuilderFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638498453244660195
+  lastModified: 638489929448242817
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -177,7 +177,7 @@ MonoBehaviour:
   Path: Assets/Working/FMOD/CosyBuilderFMOD/Build/Desktop/CoreSounds.assets.bank
   Name: CoreSounds.assets
   StudioPath: bank:/CoreSounds.assets
-  lastModified: 638498453244660195
+  lastModified: 638489948026793457
   FileSizes:
   - Name: Desktop
     Value: 103104

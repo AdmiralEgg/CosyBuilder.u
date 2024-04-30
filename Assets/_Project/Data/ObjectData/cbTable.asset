@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIName: Table
   Prefab: {fileID: 8966535618353275937, guid: bd75b4d30ffadac4f986a50151a93487, type: 3}
-  ParentObjects:
-  - {fileID: 11400000, guid: 18375f3129ca2b94fa0225210d14218e, type: 2}
+  ParentObjects: []
   InventoryIcon: {fileID: 2800000, guid: 9febeef07dabe7c44b4cc26e27fc97e7, type: 3}
   AvailableInInventory: 1
   NumberAvailable: 4

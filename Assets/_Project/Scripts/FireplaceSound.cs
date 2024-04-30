@@ -34,7 +34,7 @@ public class FireplaceSound : MonoBehaviour
 
     private void OnDisable()
     {
-        _instance.stop(STOP_MODE.ALLOWFADEOUT);
+        _instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     private void OnDestroy()

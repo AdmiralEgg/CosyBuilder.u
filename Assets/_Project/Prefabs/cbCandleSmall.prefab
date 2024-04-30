@@ -5220,7 +5220,7 @@ Transform:
   m_GameObject: {fileID: 3219366250765042016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.26, z: 0}
+  m_LocalPosition: {x: 0, y: 0.232, z: 0}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5460,6 +5460,7 @@ MonoBehaviour:
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
+  MarkerRadius: 0
   FocusCameraType: 0
   _isFocusable: 0
   _isCustomisable: 0

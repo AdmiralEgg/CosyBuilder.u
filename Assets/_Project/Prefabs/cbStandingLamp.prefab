@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5215425136250078}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70709217, y: 0.004553951, z: 0.004553951, w: 0.70709217}
-  m_LocalPosition: {x: -0.049, y: 2.186, z: -0.064}
+  m_LocalPosition: {x: -0.049, y: 2.131, z: -0.064}
   m_LocalScale: {x: 0.33333007, y: 0.33332995, z: 0.33332995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,7 +46,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.7924528, g: 0.72898304, b: 0.26539695, a: 1}
   m_Intensity: 1
-  m_Range: 3.88
+  m_Range: 1.5
   m_SpotAngle: 116.96934
   m_InnerSpotAngle: 74.55397
   m_CookieSize: 10
@@ -359,6 +359,7 @@ MonoBehaviour:
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
+  MarkerRadius: 0
   FocusCameraType: 0
   _isFocusable: 0
   _isCustomisable: 0
@@ -573,7 +574,7 @@ Transform:
   m_GameObject: {fileID: 6477572047757460656}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70709217, y: -0.004553951, z: 0.004553951, w: 0.70709217}
-  m_LocalPosition: {x: 0.34, y: 1.81, z: 0.01}
+  m_LocalPosition: {x: -0.049, y: 1.929, z: -0.049}
   m_LocalScale: {x: 0.33333007, y: 0.33332995, z: 0.33332995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -591,19 +592,19 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.93012285, b: 0.7688679, a: 1}
-  m_Intensity: 6.11
-  m_Range: 4.22
-  m_SpotAngle: 144.03912
-  m_InnerSpotAngle: 97.71339
+  m_Intensity: 6
+  m_Range: 4.5
+  m_SpotAngle: 129.84877
+  m_InnerSpotAngle: 100.344444
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.4
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.88
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -633,7 +634,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 4.33
+  m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}

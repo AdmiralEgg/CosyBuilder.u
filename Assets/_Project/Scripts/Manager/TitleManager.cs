@@ -40,6 +40,16 @@ public class TitleManager : MonoBehaviour
 
         _quitModalUI.rootVisualElement.AddToClassList("hidden");
 
+        // Toggle options button
+        ConfigureOptionsModal();
+        
+        PlayerInput.GetPlayerByIndex(0).actions["Settings"].performed += (callback) =>
+        {
+            OptionsMenuToggle();
+        };
+
+        _optionsModalUI.rootVisualElement.AddToClassList("hidden");
+
         // Toggle title screen
         if (_skipTitleScreen == false)
         {
@@ -52,11 +62,6 @@ public class TitleManager : MonoBehaviour
         {
             DisableTitleScreen();
         }
-
-        // Toggle options button
-        ConfigureOptionsModal();
-
-        _optionsModalUI.rootVisualElement.AddToClassList("hidden");
     }
 
     private void ConfigureQuitModal()
@@ -107,10 +112,31 @@ public class TitleManager : MonoBehaviour
         {
             OptionsMenuToggle();
         };
+
+        // Get all the available quality options and put them into the fields
+        string[] allSettings = QualitySettings.names;
+        
+        DropdownField qualityDropdown = rootElement.Q<DropdownField>("QualityDropdown");
+        qualityDropdown.choices.Clear();
+        
+        foreach (var setting in allSettings)
+        {
+            qualityDropdown.choices.Add(setting);
+            qualityDropdown.value = allSettings[QualitySettings.GetQualityLevel()];
+        }
+
+        // subscribe to changes
+        qualityDropdown.RegisterValueChangedCallback(newValue =>
+        {
+            Debug.Log("new value " + newValue);
+            QualitySettings.SetQualityLevel(qualityDropdown.index);
+        });
     }
 
     private void OptionsMenuToggle()
     {
+        Debug.Log("Clicked options toggle");
+        
         if (_optionsModalUI.rootVisualElement.ClassListContains("hidden"))
         {
             _optionsModalUI.rootVisualElement.RemoveFromClassList("hidden");
