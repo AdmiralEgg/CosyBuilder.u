@@ -204,6 +204,7 @@ Transform:
   m_Children:
   - {fileID: 5749621862258193822}
   - {fileID: 8670257174007748848}
+  - {fileID: 6880592049909085378}
   m_Father: {fileID: 5933189446298033744}
   m_LocalEulerAnglesHint: {x: 0, y: 0.2, z: 0}
 --- !u!33 &3674526028400750328
@@ -510,6 +511,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000005, y: 1.0000005, z: 1.0000043}
   m_Center: {x: 0.000000059604645, y: 0.00000023841858, z: 0.00000047683716}
+--- !u!1 &8495898872942222086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6880592049909085378}
+  - component: {fileID: 6711335985521485680}
+  m_Layer: 12
+  m_Name: Birdsong
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6880592049909085378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495898872942222086}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8468698443541190279}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6711335985521485680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495898872942222086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3732edce5a3ac674da9dcf13852790da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _birdsongRef:
+    Guid:
+      Data1: 1418511984
+      Data2: 1215062354
+      Data3: -660474444
+      Data4: -571721741
+    Path: event:/SFX/bird_song
 --- !u!1 &8887979831858608694
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e739dd8de1da94c4ea446e574d543188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleActive: []
+  _toggleActive:
+  - {fileID: 8495898872942222086}
   _runAnimation:
   - OpenWindow
   _interactionSound:

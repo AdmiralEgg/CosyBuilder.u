@@ -5,7 +5,7 @@
 			<value>bird_song</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{759d726d-38af-4fa2-8719-34f254a615f7}</destination>
@@ -42,9 +42,6 @@
 		</relationship>
 	</object>
 	<object class="MasterTrack" id="{70d2f932-56ba-4786-b431-14913210c665}">
-		<property name="uiTrackHeight">
-			<value>28</value>
-		</property>
 		<relationship name="mixerGroup">
 			<destination>{d1ecd3cf-3f8f-4f21-b215-69cf88274938}</destination>
 		</relationship>
@@ -61,15 +58,8 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{1a6d20e4-0258-4090-8165-bc4ca65f65db}" />
-	<object class="MarkerTrack" id="{8b5c7c7a-200c-493e-a5e0-aa8908cf3ae2}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
-	</object>
+	<object class="MarkerTrack" id="{8b5c7c7a-200c-493e-a5e0-aa8908cf3ae2}" />
 	<object class="GroupTrack" id="{e3bbb026-6a6f-473e-b4a8-5089096f482d}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
 		<relationship name="modules">
 			<destination>{62aa2c3a-3820-44f8-9015-ce1dc55fd99b}</destination>
 		</relationship>
@@ -78,9 +68,6 @@
 		</relationship>
 	</object>
 	<object class="GroupTrack" id="{c22f67c0-45a5-4899-989e-9f8b273d36c2}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
 		<relationship name="modules">
 			<destination>{9f625a61-3d94-4c6b-a118-a7f049a0eaf4}</destination>
 		</relationship>
@@ -98,6 +85,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{d1ecd3cf-3f8f-4f21-b215-69cf88274938}">
+		<relationship name="modulators">
+			<destination>{feb0b86f-e811-4a50-9ef2-125072c05db2}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{4356eda1-17ea-4210-aa58-00e0b4f58f05}</destination>
 		</relationship>
@@ -178,9 +168,21 @@
 			<destination>{8b5c7c7a-200c-493e-a5e0-aa8908cf3ae2}</destination>
 		</relationship>
 	</object>
+	<object class="ADSRModulator" id="{feb0b86f-e811-4a50-9ef2-125072c05db2}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{4356eda1-17ea-4210-aa58-00e0b4f58f05}">
 		<relationship name="effects">
 			<destination>{001c9411-ff12-4143-a186-3eca39b2b47f}</destination>
+			<destination>{52f5d28d-49c3-4bf3-b9fb-9204387c7a8a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c2bd2c26-511e-4711-90ce-5c73bccc7fd4}" />
@@ -198,6 +200,7 @@
 	</object>
 	<object class="MixerBusPanner" id="{0a2ded12-97d2-491e-b0c4-b12b417d7cfd}" />
 	<object class="MixerBusFader" id="{001c9411-ff12-4143-a186-3eca39b2b47f}" />
+	<object class="SpatialiserEffect" id="{52f5d28d-49c3-4bf3-b9fb-9204387c7a8a}" />
 	<object class="MixerBusFader" id="{ecb00f2a-e778-41d7-bc01-280303df4b7e}" />
 	<object class="MixerBusFader" id="{3bea7ea3-5afe-47ab-be7c-d63acc2b9b74}" />
 </objects>

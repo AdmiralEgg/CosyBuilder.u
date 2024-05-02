@@ -301,7 +301,7 @@ MonoBehaviour:
   - {fileID: 6908188566491311207}
   StringsBanks:
   - {fileID: -2542841046473309491}
-  cacheTime: 638502442156110224
+  cacheTime: 638502526963928245
   cacheVersion: 131617
 --- !u!114 &331705107589893006
 MonoBehaviour:
@@ -445,7 +445,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 8277144865670687127}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
@@ -486,10 +486,10 @@ MonoBehaviour:
   Path: Assets/Working/FMOD/CosyBuilder_u_01/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638501986359229718
+  lastModified: 638502526963928245
   FileSizes:
   - Name: Desktop
-    Value: 1539040
+    Value: 1539616
   Exists: 1
 --- !u!114 &9078545359269274329
 MonoBehaviour:
