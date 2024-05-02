@@ -8,7 +8,7 @@ public class CbObjectAudioController : MonoBehaviour
     // FMOD Sounds
     [Header("Audio Data")]
     [SerializeField]
-    private EventReference _objectSpawn;
+    private EventReference _objectSpawn, _objectDetatch, _objectDrop;
 
     private void Awake() { }
 

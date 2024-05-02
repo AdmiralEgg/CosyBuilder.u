@@ -69,6 +69,13 @@ MonoBehaviour:
   _toggleActive:
   - {fileID: 0}
   _runAnimation: []
+  _interactionSound:
+    Guid:
+      Data1: 130839129
+      Data2: 1127573939
+      Data3: -117115201
+      Data4: 678722772
+    Path: event:/SFX/light_switch
 --- !u!1 &2223018777079849592
 GameObject:
   m_ObjectHideFlags: 0

@@ -168,6 +168,7 @@ MonoBehaviour:
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
+  MarkerRadius: 0
   FocusCameraType: 0
   _isFocusable: 0
   _isCustomisable: 0
@@ -310,11 +311,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectSpawn:
     Guid:
-      Data1: 1873058798
-      Data2: 1292823057
-      Data3: 857128379
-      Data4: -772507559
-    Path: event:/ObjectSpawn
+      Data1: -15891318
+      Data2: 1104702232
+      Data3: -584804478
+      Data4: -1526328355
+    Path: event:/SFX/spawn
+  _objectDetatch:
+    Guid:
+      Data1: -1028583237
+      Data2: 1128382000
+      Data3: -1243569497
+      Data4: 749343935
+    Path: event:/SFX/object_detach
+  _objectDrop:
+    Guid:
+      Data1: -920287416
+      Data2: 1098034972
+      Data3: -767087711
+      Data4: -1693472099
+    Path: event:/SFX/object_drop
 --- !u!54 &3374980920705485741
 Rigidbody:
   m_ObjectHideFlags: 0

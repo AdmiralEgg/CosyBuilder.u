@@ -340,11 +340,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectSpawn:
     Guid:
-      Data1: 1873058798
-      Data2: 1292823057
-      Data3: 857128379
-      Data4: -772507559
-    Path: event:/ObjectSpawn
+      Data1: -15891318
+      Data2: 1104702232
+      Data3: -584804478
+      Data4: -1526328355
+    Path: event:/SFX/spawn
+  _objectDetatch:
+    Guid:
+      Data1: -1028583237
+      Data2: 1128382000
+      Data3: -1243569497
+      Data4: 749343935
+    Path: event:/SFX/object_detach
+  _objectDrop:
+    Guid:
+      Data1: -920287416
+      Data2: 1098034972
+      Data3: -767087711
+      Data4: -1693472099
+    Path: event:/SFX/object_drop
 --- !u!54 &-8872006458397177251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1250,7 +1264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9051327064862330324}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0125728985, y: -0.98702306, z: 0.09808933, w: -0.1265147}
+  m_LocalRotation: {x: -0.012666761, y: -0.98692554, z: 0.09844012, w: -0.1269924}
   m_LocalPosition: {x: -1.96, y: 8.6, z: 8.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

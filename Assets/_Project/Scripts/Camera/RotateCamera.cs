@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
+using FMOD.Studio;
+using FMODUnity;
 
 public class RotateCamera : MonoBehaviour
 {
@@ -37,6 +39,9 @@ public class RotateCamera : MonoBehaviour
     
     [SerializeField, Tooltip("Distance As Screen Percentage that a 90 degree rotation will be performed."), Range(0.02f, 0.2f)]
     float _minimumFlickScreenPercentage = 0.05f;
+
+    [SerializeField]
+    private EventReference _rotateSound;
 
     private float _flickStartTime, _flickEndTime;
     private float _flickDuration;
@@ -112,6 +117,7 @@ public class RotateCamera : MonoBehaviour
         _isRotating = true;
 
         StartCoroutine(RotateSlerp(rotationAmount, _slerpRatio));
+        RuntimeManager.PlayOneShot(_rotateSound);
     }
 
     private IEnumerator MultiRotateSlerp(float rotationInDegrees, int amountOfRotations, float ratio = 0.02f)
@@ -120,6 +126,7 @@ public class RotateCamera : MonoBehaviour
 
         for (int i = 0; i < amountOfRotations; i++)
         {
+            RuntimeManager.PlayOneShot(_rotateSound);
             Quaternion _flickTargetRotation = transform.rotation * Quaternion.Euler(0f, rotationInDegrees, 0f);
 
             while (Quaternion.Angle(transform.rotation, _flickTargetRotation) > 1f)

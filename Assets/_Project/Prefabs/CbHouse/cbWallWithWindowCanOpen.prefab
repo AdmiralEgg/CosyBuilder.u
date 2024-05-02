@@ -579,3 +579,10 @@ MonoBehaviour:
   _toggleActive: []
   _runAnimation:
   - OpenWindow
+  _interactionSound:
+    Guid:
+      Data1: -1367806478
+      Data2: 1235461459
+      Data3: 226047888
+      Data4: 741596477
+    Path: event:/SFX/window_open

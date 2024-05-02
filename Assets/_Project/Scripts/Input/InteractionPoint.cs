@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,6 +11,9 @@ public class InteractionPoint : MonoBehaviour, IPointerDownHandler
     [SerializeField]
     private string[] _runAnimation;
 
+    [SerializeField]
+    private EventReference _interactionSound;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         // Only left click
@@ -16,6 +21,11 @@ public class InteractionPoint : MonoBehaviour, IPointerDownHandler
         {
             ToggleActive();
             RunAnimations();
+            
+            if (_interactionSound.IsNull == false)
+            {
+                RuntimeManager.PlayOneShotAttached(_interactionSound, this.gameObject);
+            }
         }
     }
 

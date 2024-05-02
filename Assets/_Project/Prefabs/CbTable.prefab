@@ -236,7 +236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5708871136335036232}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15073147, y: 0.7345204, z: -0.17339672, w: 0.6385088}
+  m_LocalRotation: {x: 0.15073146, y: 0.7345203, z: -0.17339672, w: 0.6385088}
   m_LocalPosition: {x: -3.3008935, y: 2.7796667, z: 0.46391052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -453,6 +453,7 @@ MonoBehaviour:
   GroundOffset: 0.5
   WallOffset: 0.5
   SurfaceOffset: 0.05
+  MarkerRadius: 0
   FocusCameraType: 0
   _isFocusable: 0
   _isCustomisable: 0
@@ -521,11 +522,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectSpawn:
     Guid:
-      Data1: 1873058798
-      Data2: 1292823057
-      Data3: 857128379
-      Data4: -772507559
-    Path: event:/ObjectSpawn
+      Data1: -15891318
+      Data2: 1104702232
+      Data3: -584804478
+      Data4: -1526328355
+    Path: event:/SFX/spawn
+  _objectDetatch:
+    Guid:
+      Data1: -1028583237
+      Data2: 1128382000
+      Data3: -1243569497
+      Data4: 749343935
+    Path: event:/SFX/object_detach
+  _objectDrop:
+    Guid:
+      Data1: -920287416
+      Data2: 1098034972
+      Data3: -767087711
+      Data4: -1693472099
+    Path: event:/SFX/object_drop
 --- !u!114 &6121220676804442466
 MonoBehaviour:
   m_ObjectHideFlags: 0

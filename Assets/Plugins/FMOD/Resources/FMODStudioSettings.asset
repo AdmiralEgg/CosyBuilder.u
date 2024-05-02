@@ -609,8 +609,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Assets/Working/FMOD/CosyBuilderFMOD/CosyBuilderFMOD.fspro
-  sourceBankPath: Assets/Working/FMOD/CosyBuilderFMOD/Build
+  sourceProjectPath: Assets/Working/FMOD/CosyBuilder_u_01/CosyBuilder_u_01.fspro
+  sourceBankPath: Assets/Working/FMOD/CosyBuilder_u_01/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -632,11 +632,11 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Master
+  - Master Bank
   Banks:
-  - CoreSounds
-  - CoreSounds.assets
-  - Master.assets
+  - MUSIC
+  - SFX
+  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

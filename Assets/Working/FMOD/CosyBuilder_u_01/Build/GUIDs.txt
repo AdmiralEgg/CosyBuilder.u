@@ -1,0 +1,20 @@
+{a6daa0f0-724c-4dd3-8b90-89fe9d15502e} event:/UI/ui_click
+{498dc973-5521-40ed-9727-24d58c968c80} event:/MUSIC/music_main
+{aa2da6b5-8361-47d3-aa8a-36572e603e70} event:/MUSIC/music_play
+{548cc670-6152-486c-b4f5-a1d8f337ecdd} event:/SFX/bird_song
+{22609f34-1fb4-4a0b-a1e4-bc96e74f120c} event:/SFX/fire_side
+{62bcfd61-a6ae-47d1-9620-91ee7b378acb} event:/SFX/camera_focus
+{e0fa3b97-a878-4a23-a53c-c9919b7a5cd8} event:/SFX/camera_move
+{ae78edf2-a553-49a3-9037-790d3ddd332c} event:/SFX/window_open
+{1acd7abb-41e9-46e8-abc2-12039d07206b} event:/SFX/window_close
+{ff0d848a-6b18-41d8-8297-24dddd1306a5} event:/SFX/spawn
+{03a6a698-d2d9-4585-9c4d-448781bc5626} event:/SFX/river
+{07cc7259-69b3-4335-bff6-04f9d47c7428} event:/SFX/light_switch
+{c9258748-af1c-4172-a12b-47d29daa0f9b} event:/SFX/object_drop
+{c2b110bb-be30-4341-a7a2-e0b5bf14aa2c} event:/SFX/object_detach
+{3efe8f24-1d5f-4cbf-802d-aa75daa9c3b9} bus:/
+{caec0247-5624-496d-9195-92ae54e5393f} bus:/Reverb
+{03362197-f70a-4b11-9879-8dde37c2b5ce} bank:/Master Bank
+{2ee95c41-077a-4c89-b40d-0bd0ac8ffe01} bank:/SFX
+{9c67f7d7-a188-49d9-997c-febea23f99f4} bank:/MUSIC
+{c5e76396-fbda-43eb-8f96-72ff982ada59} bank:/UI

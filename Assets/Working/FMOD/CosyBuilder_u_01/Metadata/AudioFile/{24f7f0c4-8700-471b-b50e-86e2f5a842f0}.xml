@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{24f7f0c4-8700-471b-b50e-86e2f5a842f0}">
+        <property name="assetPath">
+            <value>SFX/sfx_camera_focus_01.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.5</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{c15c8157-056a-43d5-ac05-17d3e5ac639f}</destination>
+        </relationship>
+    </object>
+</objects>
