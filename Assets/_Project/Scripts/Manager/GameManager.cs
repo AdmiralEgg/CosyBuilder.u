@@ -177,7 +177,6 @@ public class GameManager : MonoBehaviour
         // subscribe to changes
         qualityDropdown.RegisterValueChangedCallback(newValue =>
         {
-            Debug.Log("new value " + newValue);
             QualitySettings.SetQualityLevel(qualityDropdown.index);
             RuntimeManager.PlayOneShot(_uiClick);
         });
