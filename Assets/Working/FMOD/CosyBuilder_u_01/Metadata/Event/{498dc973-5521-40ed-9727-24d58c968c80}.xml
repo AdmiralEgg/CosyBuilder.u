@@ -41,9 +41,6 @@
 		</relationship>
 	</object>
 	<object class="MasterTrack" id="{ddf963ad-7d29-45da-bd2c-18aead854602}">
-		<property name="uiTrackHeight">
-			<value>28</value>
-		</property>
 		<relationship name="mixerGroup">
 			<destination>{5f3de1ce-0c94-40be-8298-611421de9dd2}</destination>
 		</relationship>
@@ -60,15 +57,8 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{8f33e5ae-7ea7-443c-91a6-c3f4ab039a37}" />
-	<object class="MarkerTrack" id="{3f4ce8cb-7dbe-495e-b039-6269413819ff}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
-	</object>
+	<object class="MarkerTrack" id="{3f4ce8cb-7dbe-495e-b039-6269413819ff}" />
 	<object class="GroupTrack" id="{28eaaf79-8aba-4b23-b677-c62caabb6467}">
-		<property name="uiTrackHeight">
-			<value>100</value>
-		</property>
 		<relationship name="modules">
 			<destination>{cce3b9c7-6db4-41f0-9b53-bdc950c4f6b1}</destination>
 		</relationship>
@@ -85,6 +75,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{5f3de1ce-0c94-40be-8298-611421de9dd2}">
+		<relationship name="modulators">
+			<destination>{bf1c5557-f1b9-4a60-b47d-d8f9371981df}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{cafd645b-0f89-4692-8cc8-b6bd58e21a2b}</destination>
 		</relationship>
@@ -139,6 +132,23 @@
 		<relationship name="markerTrack">
 			<destination>{3f4ce8cb-7dbe-495e-b039-6269413819ff}</destination>
 		</relationship>
+	</object>
+	<object class="ADSRModulator" id="{bf1c5557-f1b9-4a60-b47d-d8f9371981df}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>2615.38501</value>
+		</property>
+		<property name="releaseTime">
+			<value>4230.77002</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
 	</object>
 	<object class="MixerBusEffectChain" id="{cafd645b-0f89-4692-8cc8-b6bd58e21a2b}">
 		<relationship name="effects">
