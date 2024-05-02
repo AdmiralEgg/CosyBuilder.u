@@ -27,6 +27,12 @@ public class CbObjectFreeState : BaseState<CbObjectStateMachine.CbObjectState>
 
         _stateMachine.UpdateRotationComponent(isActive: false);
         _stateMachine.UpdateMovementComponent(isActive: false);
+
+        // if last state was selected, play the drop sound
+        if (lastState == CbObjectStateMachine.CbObjectState.Selected)
+        {
+            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.Drop);
+        }
     }
 
     private void OnPointerUp(PointerEventData data)

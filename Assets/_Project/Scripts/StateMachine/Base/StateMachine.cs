@@ -34,7 +34,7 @@ public abstract class StateMachine<EState> : MonoBehaviour where EState : Enum
             LastState = CurrentState;
             CurrentState.ExitState();
             CurrentState = QueuedState;
-            CurrentState.EnterState(lastState: QueuedState.StateKey);
+            CurrentState.EnterState(lastState: LastState.StateKey);
             OnStateChange?.Invoke(CurrentState.StateKey);
         }
 

@@ -171,7 +171,6 @@ public class CbObjectRotationController : MonoBehaviour
 
     public void ResetToDefaultRotation()
     {
-        Debug.Log("Resetting rotation");
         //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
         SnapRotation(Quaternion.Euler(0, transform.eulerAngles.y, 0), _snapRotationDuration, SnapRotationType.Reset);

@@ -35,7 +35,19 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
 
         _stateMachine.ResetRotation();
 
-        PlayStateChangeAudio(lastState);
+        Debug.Log("Into Selected State. Last state was: " + lastState);
+
+        if (lastState == CbObjectStateMachine.CbObjectState.Placed)
+        {
+            // Detatch Audio (Placed -> Selected)
+            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.Detatched);
+        }
+
+        if (lastState == CbObjectStateMachine.CbObjectState.Free)
+        {
+            // Select Audio (Free -> Selected)
+            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.NotImplemented);
+        }
     }
 
     private void OnDropOrPlace(InputAction.CallbackContext data)
@@ -72,22 +84,6 @@ public class CbObjectSelectedState : BaseState<CbObjectStateMachine.CbObjectStat
             default:
                 _stateMachine.QueueNextState(CbObjectStateMachine.CbObjectState.Free);
                 break;
-        }
-    }
-
-    private void PlayStateChangeAudio(CbObjectStateMachine.CbObjectState lastState)
-    {
-        // If previous state was hanging, this has been detatched. Play an audio cue.
-        if (lastState == CbObjectStateMachine.CbObjectState.Placed)
-        {
-            // Detatch Audio (Placed -> Selected)
-            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.NotImplemented);
-        }
-
-        if (lastState == CbObjectStateMachine.CbObjectState.Free)
-        {
-            // Select Audio (Free -> Selected)
-            _stateMachine.PlayOneShotAudio(CbObjectAudioController.ObjectAudio.NotImplemented);
         }
     }
 

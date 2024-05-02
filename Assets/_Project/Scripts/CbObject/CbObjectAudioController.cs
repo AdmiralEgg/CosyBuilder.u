@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CbObjectAudioController : MonoBehaviour
 {
-    public enum ObjectAudio { NotImplemented, Spawn }
+    public enum ObjectAudio { NotImplemented, Spawn, Detatched, Drop }
     
     // FMOD Sounds
     [Header("Audio Data")]
@@ -17,8 +17,13 @@ public class CbObjectAudioController : MonoBehaviour
         switch (audioName)
         {
             case ObjectAudio.Spawn:
-                Debug.Log("Playing spawned sound");
                 FMODUnity.RuntimeManager.PlayOneShotAttached(_objectSpawn, this.gameObject);
+                break;
+            case ObjectAudio.Detatched:
+                FMODUnity.RuntimeManager.PlayOneShotAttached(_objectDetatch, this.gameObject);
+                break;
+            case ObjectAudio.Drop:
+                FMODUnity.RuntimeManager.PlayOneShotAttached(_objectDrop, this.gameObject);
                 break;
             case ObjectAudio.NotImplemented:
                 Debug.Log($"Sound not implemented.");
