@@ -221,8 +221,8 @@ public class MoveCamera : MonoBehaviour
         if (_readKeysMovement)
         {
             Vector2 movementInput = _moveAction.ReadValue<Vector2>();
-            _newPosition += ((transform.forward * movementInput.y) * _keysMovementSpeed * _currentMovementMultiplyer);
-            _newPosition += ((transform.right * movementInput.x) * _keysMovementSpeed * _currentMovementMultiplyer);
+            _newPosition += ((transform.forward * movementInput.y) * _keysMovementSpeed * _currentMovementMultiplyer * Time.deltaTime);
+            _newPosition += ((transform.right * movementInput.x) * _keysMovementSpeed * _currentMovementMultiplyer * Time.deltaTime);
         }
 
         if (_readGrabAndDragMovement)
