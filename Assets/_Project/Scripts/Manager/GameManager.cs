@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
         cancelButton.clicked += () =>
         {
             ToggleQuitModal();
+            
         };
     }
 
@@ -147,6 +148,8 @@ public class GameManager : MonoBehaviour
         {
             _optionsModalUI.rootVisualElement.AddToClassList("hidden");
         }
+
+        RuntimeManager.PlayOneShot(_uiClick);
     }
 
     private void ConfigureOptionsModal()
@@ -176,6 +179,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("new value " + newValue);
             QualitySettings.SetQualityLevel(qualityDropdown.index);
+            RuntimeManager.PlayOneShot(_uiClick);
         });
     }
 
@@ -191,6 +195,8 @@ public class GameManager : MonoBehaviour
         {
             _optionsModalUI.rootVisualElement.AddToClassList("hidden");
         }
+
+        RuntimeManager.PlayOneShot(_uiClick);
     }
 
     private void ConfigureTitleScreen()
