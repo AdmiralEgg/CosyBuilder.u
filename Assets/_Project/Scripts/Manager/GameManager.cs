@@ -4,6 +4,9 @@ using FMODUnity;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -40,6 +43,14 @@ public class GameManager : MonoBehaviour
 
     public static Action<GameManager.GameState> GameStateChange;
 
+    private Dictionary<FullScreenMode, string> _windowModeDictionary = new Dictionary<FullScreenMode, string>
+    {
+        { FullScreenMode.Windowed, "Classic" },
+        { FullScreenMode.MaximizedWindow, "Modern" },
+    };
+
+    private Dictionary<string, Resolution> _resolutionOptions = new Dictionary<string, Resolution>();
+
     private void Awake()
     {
         // Configure quit button
@@ -53,7 +64,10 @@ public class GameManager : MonoBehaviour
         _quitModalUI.rootVisualElement.AddToClassList("hidden");
 
         // Toggle options button
-        ConfigureOptionsModal();
+        ConfigureQualityOptions();
+        ConfigureModeOptions();
+        //ConfigureResolutionOptions();
+        ConfigureBackButton();
         
         PlayerInput.GetPlayerByIndex(0).actions["Settings"].performed += (callback) =>
         {
@@ -128,7 +142,6 @@ public class GameManager : MonoBehaviour
         cancelButton.clicked += () =>
         {
             ToggleQuitModal();
-            
         };
     }
 
@@ -152,22 +165,16 @@ public class GameManager : MonoBehaviour
         RuntimeManager.PlayOneShot(_uiClick);
     }
 
-    private void ConfigureOptionsModal()
+    private void ConfigureQualityOptions()
     {
         VisualElement rootElement = _optionsModalUI.rootVisualElement;
-        Button backButton = rootElement.Q<Button>("Back");
-
-        backButton.clicked += () =>
-        {
-            OptionsMenuToggle();
-        };
 
         // Get all the available quality options and put them into the fields
         string[] allSettings = QualitySettings.names;
-        
+
         DropdownField qualityDropdown = rootElement.Q<DropdownField>("QualityDropdown");
         qualityDropdown.choices.Clear();
-        
+
         foreach (var setting in allSettings)
         {
             qualityDropdown.choices.Add(setting);
@@ -180,6 +187,115 @@ public class GameManager : MonoBehaviour
             QualitySettings.SetQualityLevel(qualityDropdown.index);
             RuntimeManager.PlayOneShot(_uiClick);
         });
+    }
+
+    // TODO: Test this!
+    private void ConfigureModeOptions()
+    {
+        // Switch between Classic and Modern modes
+        VisualElement rootElement = _optionsModalUI.rootVisualElement;
+
+        FullScreenMode currentMode = Screen.fullScreenMode;
+
+        Debug.Log($"Current FullScreenMode: {currentMode}");
+
+        DropdownField modeDropdown = rootElement.Q<DropdownField>("ScreenModeDropdown");
+        modeDropdown.choices.Clear();
+
+        foreach (var windowMode in _windowModeDictionary)
+        {
+            modeDropdown.choices.Add(windowMode.Value);
+        }
+
+        // Set the default value
+
+        // This is the bit that's breaking! Why?
+        modeDropdown.value = _windowModeDictionary[Screen.fullScreenMode];
+
+        modeDropdown.RegisterValueChangedCallback(newValue =>
+        {
+            Debug.Log("New value" + newValue.newValue);
+
+            FullScreenMode selectedMode = _windowModeDictionary.FirstOrDefault(x => x.Value == newValue.newValue).Key;
+
+            Debug.Log("Setting fullscreen mode to: " + selectedMode.ToString());
+
+            Screen.fullScreenMode = selectedMode;
+
+            RuntimeManager.PlayOneShot(_uiClick);
+        });
+    }
+
+    private void ConfigureResolutionOptions()
+    {
+        // Switch between Classic and Modern modes
+        VisualElement rootElement = _optionsModalUI.rootVisualElement;
+
+        Resolution currentRes = Screen.currentResolution;
+        RefreshRate currentRefreshRate = Screen.currentResolution.refreshRateRatio;
+        
+        DropdownField resolutionDropdown = rootElement.Q<DropdownField>("ResolutionDropdown");
+        resolutionDropdown.choices.Clear();
+
+        foreach (Resolution res in Screen.resolutions)
+        {
+            Debug.Log("found res: " + res);
+
+            if (CheckFourThreeResolution(res) == false) continue;
+
+            string resolutionString = $"{res.width} x {res.height}";
+
+            resolutionDropdown.choices.Add(resolutionString);
+            _resolutionOptions.Add(resolutionString, res);
+
+            // Find the current resolution in the list and set as current
+            if ((res.width == currentRes.width) && (res.height == currentRes.height))
+            {
+                Debug.Log("Found current res setting dropdown");
+                resolutionDropdown.value = resolutionString;
+            }
+        }
+
+        resolutionDropdown.RegisterValueChangedCallback(newValue =>
+        {
+            Debug.Log("New value" + newValue.newValue);
+
+            Resolution foundRes = _resolutionOptions[newValue.newValue];
+
+            Screen.SetResolution(foundRes.width, foundRes.height, Screen.fullScreen);
+            
+            //FullScreenMode selectedMode = _windowModeDictionary.FirstOrDefault(x => x.Value == newValue.newValue).Key;
+
+            //Debug.Log("Setting fullscreen mode to: " + selectedMode.ToString());
+
+            //Screen.fullScreenMode = selectedMode;
+
+            RuntimeManager.PlayOneShot(_uiClick);
+        });
+    }
+
+    private bool CheckFourThreeResolution(Resolution res)
+    {
+        float div = ((float)res.height) / ((float)res.width);
+        Debug.Log("Res check: " + div);
+        
+        if (div == 0.75f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void ConfigureBackButton()
+    {
+        VisualElement rootElement = _optionsModalUI.rootVisualElement;
+        Button backButton = rootElement.Q<Button>("Back");
+
+        backButton.clicked += () =>
+        {
+            OptionsMenuToggle();
+        };
     }
 
     private void OptionsMenuToggle()

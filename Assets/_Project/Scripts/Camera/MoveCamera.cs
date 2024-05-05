@@ -68,6 +68,9 @@ public class MoveCamera : MonoBehaviour
     GameObject _grabStartIndicator;
     GameObject _newPositionIndicator;
 
+    [SerializeField]
+    private bool _disableVisualIndicators = false;
+
     void Start()
     {
         _newPosition = transform.position;
@@ -84,6 +87,12 @@ public class MoveCamera : MonoBehaviour
         Sphere grabStartSphere = _grabStartIndicator.AddComponent<Sphere>();
         grabStartSphere.Radius = 0.1f;
         grabStartSphere.Color = Color.green;
+
+        if (_disableVisualIndicators)
+        {
+            newPositionSphere.gameObject.SetActive(false);
+            grabStartSphere.gameObject.SetActive(false);
+        }
 
         PlayerInput playerInput = PlayerInput.GetPlayerByIndex(0);
 
