@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
         SetDefaultModeAndResolution();
 
         ConfigureModeOptions();
-        //ConfigureResolutionOptions();
+        ConfigureResolutionOptions();
         ConfigureBackButton();
         
         PlayerInput.GetPlayerByIndex(0).actions["Settings"].performed += (callback) =>
@@ -206,7 +207,6 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    // TODO: Test this!
     private void ConfigureModeOptions()
     {
         // Switch between Classic and Modern modes
@@ -237,32 +237,31 @@ public class GameManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// Gets all resolutions, picks out the 4x3 ones (and ones under 60hz), add them to the list.
+    /// Sets up callback on change of resolution.
+    /// </summary>
     private void ConfigureResolutionOptions()
     {
-        // Switch between Classic and Modern modes
         VisualElement rootElement = _optionsModalUI.rootVisualElement;
-
-        Resolution currentRes = Screen.currentResolution;
-        RefreshRate currentRefreshRate = Screen.currentResolution.refreshRateRatio;
         
         DropdownField resolutionDropdown = rootElement.Q<DropdownField>("ResolutionDropdown");
         resolutionDropdown.choices.Clear();
+        _resolutionOptions.Clear();
 
+        // Iterate through all available resolutions
         foreach (Resolution res in Screen.resolutions)
         {
-            Debug.Log("found res: " + res);
+            if (IsAllowedResolutionAndRefreshrate(res) == false) continue;
 
-            if (CheckFourThreeResolution(res) == false) continue;
-
-            string resolutionString = $"{res.width} x {res.height}";
+            string resolutionString = $"{res.width} x {res.height} ({res.refreshRateRatio} Hz)";
 
             resolutionDropdown.choices.Add(resolutionString);
             _resolutionOptions.Add(resolutionString, res);
 
-            // Find the current resolution in the list and set as current
-            if ((res.width == currentRes.width) && (res.height == currentRes.height))
+            // if one has the same width and height, set as standard
+            if (res.height == _defaultScreenHeight && res.width == _defaultScreenWidth)
             {
-                Debug.Log("Found current res setting dropdown");
                 resolutionDropdown.value = resolutionString;
             }
         }
@@ -274,28 +273,28 @@ public class GameManager : MonoBehaviour
             Resolution foundRes = _resolutionOptions[newValue.newValue];
 
             Screen.SetResolution(foundRes.width, foundRes.height, Screen.fullScreen);
-            
-            //FullScreenMode selectedMode = _windowModeDictionary.FirstOrDefault(x => x.Value == newValue.newValue).Key;
-
-            //Debug.Log("Setting fullscreen mode to: " + selectedMode.ToString());
-
-            //Screen.fullScreenMode = selectedMode;
 
             RuntimeManager.PlayOneShot(_uiClick);
         });
     }
 
-    private bool CheckFourThreeResolution(Resolution res)
+    private bool IsAllowedResolutionAndRefreshrate(Resolution res)
     {
-        float div = ((float)res.height) / ((float)res.width);
-        Debug.Log("Res check: " + div);
-        
-        if (div == 0.75f)
+        // Is refresh rate over 60
+        if (res.refreshRateRatio.value > 60)
         {
-            return true;
+            return false;
         }
 
-        return false;
+        // Is resolution 4x3
+        float div = ((float)res.height) / ((float)res.width);
+        
+        if (div != 0.75f)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private void ConfigureBackButton()
