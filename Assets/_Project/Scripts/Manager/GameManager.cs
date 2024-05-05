@@ -43,10 +43,14 @@ public class GameManager : MonoBehaviour
 
     public static Action<GameManager.GameState> GameStateChange;
 
+    private int _defaultScreenWidth = 1024;
+    private int _defaultScreenHeight = 768;
+    private FullScreenMode _defaultScreenMode = FullScreenMode.Windowed;
+
     private Dictionary<FullScreenMode, string> _windowModeDictionary = new Dictionary<FullScreenMode, string>
     {
         { FullScreenMode.Windowed, "Classic" },
-        { FullScreenMode.MaximizedWindow, "Modern" },
+        { FullScreenMode.FullScreenWindow, "Modern" }
     };
 
     private Dictionary<string, Resolution> _resolutionOptions = new Dictionary<string, Resolution>();
@@ -65,6 +69,10 @@ public class GameManager : MonoBehaviour
 
         // Toggle options button
         ConfigureQualityOptions();
+        
+        // Configure defaults
+        SetDefaultModeAndResolution();
+
         ConfigureModeOptions();
         //ConfigureResolutionOptions();
         ConfigureBackButton();
@@ -88,6 +96,15 @@ public class GameManager : MonoBehaviour
         {
             SetGameState(GameState.Play);
         }
+    }
+
+    private void SetDefaultModeAndResolution()
+    {
+        // Sets the default screen mode
+        Screen.fullScreenMode = _defaultScreenMode;
+
+        // Sets default res
+        Screen.SetResolution(_defaultScreenWidth, _defaultScreenHeight, Screen.fullScreen);
     }
 
     private void OnDestroy()
@@ -195,10 +212,6 @@ public class GameManager : MonoBehaviour
         // Switch between Classic and Modern modes
         VisualElement rootElement = _optionsModalUI.rootVisualElement;
 
-        FullScreenMode currentMode = Screen.fullScreenMode;
-
-        Debug.Log($"Current FullScreenMode: {currentMode}");
-
         DropdownField modeDropdown = rootElement.Q<DropdownField>("ScreenModeDropdown");
         modeDropdown.choices.Clear();
 
@@ -208,9 +221,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Set the default value
-
-        // This is the bit that's breaking! Why?
-        modeDropdown.value = _windowModeDictionary[Screen.fullScreenMode];
+        modeDropdown.value = _windowModeDictionary[_defaultScreenMode];
 
         modeDropdown.RegisterValueChangedCallback(newValue =>
         {
