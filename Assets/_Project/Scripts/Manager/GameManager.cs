@@ -6,8 +6,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -43,6 +41,9 @@ public class GameManager : MonoBehaviour
     private EventInstance _titleMusicInstance;
 
     public static Action<GameManager.GameState> GameStateChange;
+
+    [SerializeField]
+    private GameObject _buildCamera;
 
     private int _defaultScreenWidth = 1024;
     private int _defaultScreenHeight = 768;
@@ -167,11 +168,14 @@ public class GameManager : MonoBehaviour
     {
         if (_quitModalUI.rootVisualElement.ClassListContains("hidden"))
         {
+            // Display, and unlock cursor.
             _quitModalUI.rootVisualElement.RemoveFromClassList("hidden");
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             _quitModalUI.rootVisualElement.AddToClassList("hidden");
+            UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         }
 
         // Hide the Options Menu (if it's visible)
@@ -266,6 +270,24 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // If not options are found, just display them all.
+        if (_resolutionOptions.Count == 0)
+        {
+            foreach (Resolution res in Screen.resolutions)
+            {
+                string resolutionString = $"{res.width} x {res.height} ({res.refreshRateRatio} Hz)";
+                
+                resolutionDropdown.choices.Add(resolutionString);
+                _resolutionOptions.Add(resolutionString, res);
+
+                // if one has the same width and height, set as standard
+                if (res.height == _defaultScreenHeight && res.width == _defaultScreenWidth)
+                {
+                    resolutionDropdown.value = resolutionString;
+                }
+            }
+        }
+
         resolutionDropdown.RegisterValueChangedCallback(newValue =>
         {
             Debug.Log("New value" + newValue.newValue);
@@ -315,10 +337,12 @@ public class GameManager : MonoBehaviour
         if (_optionsModalUI.rootVisualElement.ClassListContains("hidden"))
         {
             _optionsModalUI.rootVisualElement.RemoveFromClassList("hidden");
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             _optionsModalUI.rootVisualElement.AddToClassList("hidden");
+            UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         }
 
         RuntimeManager.PlayOneShot(_uiClick);
@@ -336,6 +360,7 @@ public class GameManager : MonoBehaviour
     {
         _titleUI.rootVisualElement.AddToClassList("hidden");
         _titleCamera.enabled = false;
+        _buildCamera.SetActive(true);
 
         StartCoroutine(WaitForBlend());
     }

@@ -33,15 +33,15 @@ public class EdgeOfScreenMoveCamera : MonoBehaviour
         
         // TODO: This should be in game mode, when Exit modal appears cursor should unlock.
         Cursor.lockState = CursorLockMode.Confined;
-
-        _upperBoundsX = Screen.width * _edgePercentage;
-        _lowerBoundsX = Screen.width * (1 - _edgePercentage);
-        _upperBoundsY = Screen.height * _edgePercentage;
-        _lowerBoundsY = Screen.height * (1 - _edgePercentage);
     }
 
     private void Update()
     {
+        _upperBoundsX = Screen.width * _edgePercentage;
+        _lowerBoundsX = Screen.width * (1 - _edgePercentage);
+        _upperBoundsY = Screen.height * _edgePercentage;
+        _lowerBoundsY = Screen.height * (1 - _edgePercentage);
+
         CheckScreenEdge();
     }
 
